@@ -1,0 +1,27 @@
+extends ../../layout/main.pug
+
+block modules
+  include ../../modules/inputArea/inputArea
+  include ../../modules/button/button
+
+block stylesheet
+  link(rel="stylesheet", href="Registration.scss") 
+  link(rel="stylesheet", href="../../modules/button/button.scss") 
+  link(rel="stylesheet", href="../../modules/inputArea/inputArea.scss") 
+
+block content
+  main
+    .registrationBlock
+      .registrationBlockTitle
+        h1 Регистрация
+      .inputArea 
+        +inputArea("text","Ваше имя","name", "Имя")
+        +inputArea("text","Ваша фамилия","lastname", "Фамилия")
+        +inputArea("tel","Ваш номер телефона","tel", "Телефон")
+        +inputArea("text","Адрес вашей почты","mail", "Почта")
+        +inputArea("text","Введите логин","login", "Логин")
+        +inputArea("password","Введите пароль","password", "Пароль")
+        +inputArea("password","Повторите пароль ещё раз","repeatPassword", "Повторите пароль")
+
+        +button("/src/pages/Authorization/Authorization.pug", "Зарегистрироваться")
+        +button("/src/pages/Error500/Error500.pug", "Войти")

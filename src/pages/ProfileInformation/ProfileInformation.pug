@@ -1,0 +1,34 @@
+extends ../../layout/main.pug
+
+block modules
+  include ../../modules/inputArea/inputArea
+  include ../../modules/button/button
+
+mixin profileInformationItem(textConst, textProfile)
+  .profileInformationItem
+    span.profileInformationItemConst= textConst
+    span.profileInformationItemChange= textProfile
+
+block stylesheet
+  link(rel="stylesheet", href="ProfileInformation.scss") 
+  link(rel="stylesheet", href="../../modules/button/button.scss") 
+
+block content
+  main
+    .profileInformationBlock
+      .profileInformationBlockAvatar
+        img(src="../../../static/img/avatar.jpg")
+
+      .profileInformationBlockTitle
+        h1 Павел
+
+      .inputArea
+        +profileInformationItem("Имя","Павел")
+        +profileInformationItem("Фамилия","Постников")
+        +profileInformationItem("Телефон","+79541171175")
+        +profileInformationItem("Почта","Xroniks25@gmail.com")
+        +profileInformationItem("Логин","Xroniks")
+
+        +button("/src/pages/ChangingUserInformation/ChangingUserInformation.pug", "Изменить информацию")
+        +button("/src/pages/ChangingPassword/ChangingPassword.pug", "Изменить пароль")
+        +button("/src/pages/Chat/index.pug", "Выйти")

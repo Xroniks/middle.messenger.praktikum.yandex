@@ -1,0 +1,23 @@
+extends ../../layout/main.pug
+
+block modules
+  include ../../modules/inputArea/inputArea
+  include ../../modules/button/button
+
+block stylesheet
+  link(rel="stylesheet", href="Authorization.scss") 
+  link(rel="stylesheet", href="../../modules/button/button.scss") 
+  link(rel="stylesheet", href="../../modules/inputArea/inputArea.scss") 
+
+block content
+  main
+    .authorizationBlock
+      .authorizationBlockTitle
+        h1 МОЙ ЧАТ
+
+      .inputArea
+        +inputArea("text","Введите логин","login", "Логин")
+        +inputArea("password","Введите пароль","password", "Пароль") 
+
+        +button("/src/pages/Chat/index.pug", "Войти") 
+        +button("/src/pages/Registration/Registration.pug", "Зарегистрироваться")

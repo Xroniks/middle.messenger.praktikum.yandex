@@ -1,0 +1,47 @@
+body {
+  background-color: azure;
+
+  .changingUserInformationBlock {
+    position: absolute;
+    width: 400px;
+    height: 650px;
+    margin: auto;
+    padding-top: 40px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #afd8ff;
+    border-radius: 20px;
+
+    .changingUserInformationBlockAvatar {
+      display: block;
+      text-align: center;
+      img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+    }
+
+    .changingUserInformationBlockTitle h1 {
+      font-size: 2.25rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    .inputArea {
+      width: 100%;
+      padding: 10px 30px;
+      margin-bottom: 1rem;
+    }
+  }
+}

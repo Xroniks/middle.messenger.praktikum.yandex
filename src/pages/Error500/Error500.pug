@@ -1,0 +1,20 @@
+extends ../../layout/main.pug
+
+block modules
+  include ../../modules/inputArea/inputArea
+  include ../../modules/button/button
+
+block stylesheet
+  link(rel="stylesheet", href="Error500.scss") 
+  link(rel="stylesheet", href="../../modules/button/button.scss") 
+
+block content
+  main
+    .error500Block
+      .error500BlockTitle
+        h1 Ошибка 500
+
+      .error500BlockText
+        p Наш сервер временно сломан. Мы уже активно устроняем проблему. Скоро всё заработает! Приносим наши извинения(
+
+      +button("/src/pages/Chat/index.pug", "Перейти обратно в ЧАТ")

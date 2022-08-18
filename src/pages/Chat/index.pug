@@ -1,0 +1,25 @@
+extends ../../layout/main.pug
+
+block modules
+  include ../../modules/inputArea/inputArea
+  include ../../modules/button/button
+
+block stylesheet
+  link(rel="stylesheet", href="index.scss") 
+  link(rel="stylesheet", href="../../modules/button/button.scss") 
+
+block content
+  main
+    .chatWindow
+      .dialogsBlockHeader
+        +button("/src/pages/ProfileInformation/ProfileInformation.pug", "Мой профиль")
+
+      .messagesBlockHeader Header messages
+
+      .dialogsBlockItems Dialogs
+
+      .messagesBlockWindowChat
+        +button("/src/pages/Authorization/Authorization.pug", "Войти")
+        +button("/src/pages/Registration/Registration.pug", "Зарегистрироваться")
+        +button("/src/pages/Error404/Error404.pug", "Ошибка 404")
+        +button("/src/pages/Error500/Error500.pug", "Ошибка 500")

@@ -1,0 +1,41 @@
+body {
+  background-color: #57f18a;
+  margin: 0;
+
+  .chatWindow {
+    display: grid;
+    grid-template-rows: 1fr 15fr;
+    grid-template-columns: 3fr 10fr;
+    background-color: aquamarine;
+
+    .dialogsBlockHeader {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #186bb9;
+    }
+
+    .dialogsBlockItems {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(141, 245, 141);
+    }
+
+    .messagesBlockHeader {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #2acbd6;
+    }
+
+    .messagesBlockWindowChat {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #cca4a4;
+    }
+  }
+}
