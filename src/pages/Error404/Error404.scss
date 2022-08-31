@@ -20,5 +20,12 @@ body {
     p {
       font-size: 20px;
     }
+
+    .buttomBlock {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }

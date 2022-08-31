@@ -13,7 +13,7 @@ block content
   main
     .changingUserInformationBlock
       .changingUserInformationBlockAvatar
-        img(src="../../../static/img/avatar.jpg")
+        img(src="../../../static/img/avatar.jpg" alt="avatar")
 
       .changingUserInformationBlockTitle
         h1 Павел
@@ -24,5 +24,5 @@ block content
         +inputArea("tel","Ваш номер телефона","tel", "Телефон")
         +inputArea("text","Адрес вашей почты","mail", "Почта")
         +inputArea("text","Введите логин","login", "Логин")
-
+      .buttomBlock
         +button("/src/pages/ProfileInformation/ProfileInformation.pug", "Сохранить")

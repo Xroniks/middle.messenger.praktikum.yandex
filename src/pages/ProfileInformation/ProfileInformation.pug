@@ -17,7 +17,7 @@ block content
   main
     .profileInformationBlock
       .profileInformationBlockAvatar
-        img(src="../../../static/img/avatar.jpg")
+        img(src="../../../static/img/avatar.jpg" alt="avatar")
 
       .profileInformationBlockTitle
         h1 Павел
@@ -28,7 +28,7 @@ block content
         +profileInformationItem("Телефон","+79541171175")
         +profileInformationItem("Почта","Xroniks25@gmail.com")
         +profileInformationItem("Логин","Xroniks")
-
+      .buttomBlock
         +button("/src/pages/ChangingUserInformation/ChangingUserInformation.pug", "Изменить информацию")
         +button("/src/pages/ChangingPassword/ChangingPassword.pug", "Изменить пароль")
         +button("/src/pages/Chat/index.pug", "Выйти")
