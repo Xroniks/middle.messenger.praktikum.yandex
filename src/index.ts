@@ -1,4 +1,3 @@
-import { HomePage } from './pages/Home';
 import { AuthorizationPage } from './pages/Authorization';
 import { ChangingPasswordPage } from './pages/ChangingPassword';
 import { ChangingUserInformationPage } from './pages/ChangingUserInformation';
@@ -17,9 +16,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     switch (path) {
         case '/': {
-            const homePage = new HomePage({ title: 'Home page2' });
-            root.append(homePage.getContent()!);
-            homePage.dispatchComponentDidMount();
+            const authorizationPage = new AuthorizationPage({ title: 'МОЙ ЧАТ' });
+            root.append(authorizationPage.getContent()!);
+            authorizationPage.dispatchComponentDidMount();
             break
         }
         case '/src/pages/Error500/Error500.pug': {

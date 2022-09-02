@@ -1,25 +1,10 @@
-extends ../../layout/main.pug
+main
+  .authorizationBlock
+    .authorizationBlockTitle
+      h1 !{title}
 
-block modules
-  include ../../modules/inputArea/inputArea
-  include ../../modules/button/button
-
-block stylesheet
-  link(rel="stylesheet", href="Authorization.scss") 
-  link(rel="stylesheet", href="../../modules/button/button.scss") 
-  link(rel="stylesheet", href="../../modules/inputArea/inputArea.scss") 
-
-block content
-  main
-    .authorizationBlock
-      .authorizationBlockTitle
-        h1 !{title}
-
-      .inputArea
-        //- +inputArea("text","Введите логин","login", "Логин")
-        //- +inputArea("password","Введите пароль","password", "Пароль") 
-        | !{inputArea} 
-      .buttomBlock
-        //- +button("/src/pages/Chat/Chat.pug", "Войти") 
-        //- +button("/src/pages/Registration/Registration.pug", "Зарегистрироваться")
-        | !{button} 
+    .inputArea
+      | !{inputArea} 
+      
+    .buttomBlock
+      | !{button} 

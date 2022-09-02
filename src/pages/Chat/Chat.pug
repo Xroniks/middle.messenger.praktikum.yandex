@@ -1,25 +1,11 @@
-extends ../../layout/main.pug
+main
+  .chatWindow
+    .dialogsBlockHeader
+      | !{buttonBlockProfile}
 
-block modules
-  include ../../modules/inputArea/inputArea
-  include ../../modules/button/button
+    .messagesBlockHeader Header messages
 
-block stylesheet
-  link(rel="stylesheet", href="Chat.scss") 
-  link(rel="stylesheet", href="../../modules/button/button.scss") 
+    .dialogsBlockItems Dialogs
 
-block content
-  main
-    .chatWindow
-      .dialogsBlockHeader
-        +button("/src/pages/ProfileInformation/ProfileInformation.pug", "Мой профиль")
-
-      .messagesBlockHeader Header messages
-
-      .dialogsBlockItems Dialogs
-
-      .messagesBlockWindowChat
-        +button("/src/pages/Authorization/Authorization.pug", "Войти")
-        +button("/src/pages/Registration/Registration.pug", "Зарегистрироваться")
-        +button("/src/pages/Error404/Error404.pug", "Ошибка 404")
-        +button("/src/pages/Error500/Error500.pug", "Ошибка 500")
+    .messagesBlockWindowChat
+      | !{buttonBlockMenu}

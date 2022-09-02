@@ -4,9 +4,6 @@ import { InputArea } from '../../components/InputArea';
 import template from './Authorization.pug';
 import styles from './Authorization.scss';
 
-
-
-
 interface AuthorizationPageProps {
     title: string;
 }
@@ -33,6 +30,7 @@ export class AuthorizationPage extends Block {
                 },
             })
         ];
+
         this.children.inputArea = [
             new InputArea({
                 nameInputText: 'Логин',
@@ -48,7 +46,6 @@ export class AuthorizationPage extends Block {
             })
         ];
     }
-
 
     render() {
         return this.compile(template, { ...this.props, styles });
