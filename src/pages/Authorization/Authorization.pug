@@ -13,11 +13,13 @@ block content
   main
     .authorizationBlock
       .authorizationBlockTitle
-        h1 МОЙ ЧАТ
+        h1 !{title}
 
       .inputArea
-        +inputArea("text","Введите логин","login", "Логин")
-        +inputArea("password","Введите пароль","password", "Пароль") 
+        //- +inputArea("text","Введите логин","login", "Логин")
+        //- +inputArea("password","Введите пароль","password", "Пароль") 
+        | !{inputArea} 
       .buttomBlock
-        +button("/src/pages/Chat/index.pug", "Войти") 
-        +button("/src/pages/Registration/Registration.pug", "Зарегистрироваться")
+        //- +button("/src/pages/Chat/Chat.pug", "Войти") 
+        //- +button("/src/pages/Registration/Registration.pug", "Зарегистрироваться")
+        | !{button} 
