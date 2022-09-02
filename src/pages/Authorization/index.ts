@@ -27,7 +27,7 @@ export class AuthorizationPage extends Block {
             }),
             new Button({
                 label: 'Зарегистрироваться',
-                href: 'https://vk.com/ads?act=office&union_id=1600191398',
+                href: '/src/pages/Registration/Registration.pug',
                 events: {
                     click: () => console.log('clicked'),
                 },
