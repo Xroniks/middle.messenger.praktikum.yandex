@@ -13,7 +13,7 @@ export class InputArea extends Block {
     constructor(props: InputAreaProps) {
         super('label', props);
         this.element!.classList.add('inputAreaLabel');
-        this.element!.setAttribute('for', props.nameInput)
+        this.element!.setAttribute('for', props.nameInput);
     }
 
 

@@ -1,8 +1,9 @@
 import Block from '../../utils/Block';
 import { Button } from '../../components/Button';
-import { InputArea } from '../../components/InputArea';
+import { InputAreaBlock } from '../../components/InputAreaBlock';
 import template from './ChangingPassword.pug';
 import styles from './ChangingPassword.scss';
+import img from './avatar.jpg'
 
 interface ChangingPasswordPageProps {
     title: string;
@@ -24,14 +25,14 @@ export class ChangingPasswordPage extends Block {
             })
         ];
 
-        this.children.inputArea = [
-            new InputArea({
+        this.children.inputAreaBlock = [
+            new InputAreaBlock({
                 nameInputText: 'Старый пароль',
                 nameInput: 'passwordOld',
                 type: 'password',
                 placeholderText: 'Введите ваш старый пароль',
             }),
-            new InputArea({
+            new InputAreaBlock({
                 nameInputText: 'Новый пароль',
                 nameInput: 'passwordNew',
                 type: 'password',
@@ -41,6 +42,6 @@ export class ChangingPasswordPage extends Block {
     }
 
     render() {
-        return this.compile(template, { ...this.props, styles });
+        return this.compile(template({ img: img }), { ...this.props, styles });
     }
 }

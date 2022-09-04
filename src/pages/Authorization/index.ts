@@ -1,8 +1,9 @@
 import Block from '../../utils/Block';
 import { Button } from '../../components/Button';
-import { InputArea } from '../../components/InputArea';
+import { InputAreaBlock } from '../../components/InputAreaBlock';
 import template from './Authorization.pug';
 import styles from './Authorization.scss';
+
 
 interface AuthorizationPageProps {
     title: string;
@@ -31,14 +32,14 @@ export class AuthorizationPage extends Block {
             })
         ];
 
-        this.children.inputArea = [
-            new InputArea({
+        this.children.inputAreaBlock = [
+            new InputAreaBlock({
                 nameInputText: 'Логин',
                 nameInput: 'login',
                 type: 'text',
                 placeholderText: 'Введите логин',
             }),
-            new InputArea({
+            new InputAreaBlock({
                 nameInputText: 'Пароль',
                 nameInput: 'password',
                 type: 'password',

@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import { Button } from '../../components/Button';
-import { InputArea } from '../../components/InputArea';
+import { InputAreaBlock } from '../../components/InputAreaBlock';
 import template from './ChangingUserInformation.pug';
 import styles from './ChangingUserInformation.scss';
 
@@ -24,32 +24,32 @@ export class ChangingUserInformationPage extends Block {
             })
         ];
 
-        this.children.inputArea = [
-            new InputArea({
+        this.children.inputAreaBlock = [
+            new InputAreaBlock({
                 nameInputText: 'Имя',
                 nameInput: 'name',
                 type: 'text',
                 placeholderText: 'Ваше имя',
             }),
-            new InputArea({
+            new InputAreaBlock({
                 nameInputText: 'Фамилия',
                 nameInput: 'lastname',
                 type: 'text',
                 placeholderText: 'Ваша фамилия',
             }),
-            new InputArea({
+            new InputAreaBlock({
                 nameInputText: 'Телефон',
                 nameInput: 'tel',
                 type: 'text',
                 placeholderText: 'Ваш номер телефона',
             }),
-            new InputArea({
+            new InputAreaBlock({
                 nameInputText: 'Почта',
                 nameInput: 'mail',
                 type: 'text',
                 placeholderText: 'Адрес вашей почты',
             }),
-            new InputArea({
+            new InputAreaBlock({
                 nameInputText: 'Логин',
                 nameInput: 'password',
                 type: 'text',

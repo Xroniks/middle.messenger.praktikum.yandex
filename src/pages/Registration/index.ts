@@ -1,6 +1,9 @@
 import Block from '../../utils/Block';
 import { Button } from '../../components/Button';
 import { InputArea } from '../../components/InputArea';
+import { Input } from '../../components/Input';
+import { InputAreaBlock } from '../../components/InputAreaBlock';
+
 import template from './Registration.pug';
 import styles from './Registration.scss';
 
@@ -33,44 +36,44 @@ export class RegistrationPage extends Block {
             })
         ];
 
-        this.children.inputArea = [
-            new InputArea({
+        this.children.inputAreaBlock = [
+            new InputAreaBlock({
                 nameInputText: 'Ваше имя',
                 nameInput: 'name',
                 type: 'text',
                 placeholderText: 'Имя',
             }),
-            new InputArea({
+            new InputAreaBlock({
                 nameInputText: 'Ваша фамилия',
                 nameInput: 'lastname',
                 type: 'text',
                 placeholderText: 'Фамилия',
             }),
-            new InputArea({
+            new InputAreaBlock({
                 nameInputText: 'Ваш номер телефона',
                 nameInput: 'tel',
                 type: 'tel',
                 placeholderText: 'Телефон',
             }),
-            new InputArea({
+            new InputAreaBlock({
                 nameInputText: 'Адрес вашей почты',
                 nameInput: 'mail',
                 type: 'text',
                 placeholderText: 'Почта',
             }),
-            new InputArea({
+            new InputAreaBlock({
                 nameInputText: 'Введите логин',
                 nameInput: 'login',
                 type: 'text',
                 placeholderText: 'Логин',
             }),
-            new InputArea({
+            new InputAreaBlock({
                 nameInputText: 'Введите пароль',
                 nameInput: 'password',
                 type: 'password',
                 placeholderText: 'Пароль',
             }),
-            new InputArea({
+            new InputAreaBlock({
                 nameInputText: 'Повторите пароль ещё раз',
                 nameInput: 'repeatPassword',
                 type: 'password',
