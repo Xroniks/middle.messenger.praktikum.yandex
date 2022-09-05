@@ -38,12 +38,14 @@ export class AuthorizationPage extends Block {
                 nameInput: 'login',
                 type: 'text',
                 placeholderText: 'Введите логин',
+                validation: '^[0-9\+][0-9]{9,15}'
             }),
             new InputAreaBlock({
                 nameInputText: 'Пароль',
                 nameInput: 'password',
                 type: 'password',
                 placeholderText: 'Введите пароль',
+                validation: '^[0-9\+][0-9]{9,15}'
             })
         ];
     }

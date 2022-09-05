@@ -8,25 +8,41 @@ interface InputAreaBlockProps {
     nameInput: string;
     type: string;
     placeholderText: string;
+    validation: string
 }
 
 export class InputAreaBlock extends Block {
+
+    private error: string;
+
     constructor(props: InputAreaBlockProps) {
         super('div', props);
+        this.error = '';
     }
+
     init() {
-        this.children.inputArea1 = new Input({
+        this.children.input = new Input({
             nameInputText: this.props.nameInputText,
             nameInput: this.props.nameInput,
             type: this.props.type,
             placeholderText: this.props.placeholderText,
             id: this.props.id,
+            validation: this.props.validation,
             events: {
                 click: () => console.log('clicked'),
+            },
+            onError: (error) => {
+                debugger;
+                this.error = error;
+                this.dispatchComponentDidMount();
             }
         })
     }
+
+
+
     render() {
-        return this.compile(template, { ...this.props, styles });
+        return this.compile(template, { ...this.props, styles, error: this.error });
     }
+
 }

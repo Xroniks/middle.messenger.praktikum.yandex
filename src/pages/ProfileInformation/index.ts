@@ -3,6 +3,7 @@ import { Button } from '../../components/Button';
 import { ProfileInformationItem } from '../../components/ProfileInformationItem';
 import template from './ProfileInformation.pug';
 import styles from './ProfileInformation.scss';
+import img from '../../../static/img/avatar.jpg'
 
 interface ProfileInformationPageProps {
     title: string;
@@ -64,6 +65,6 @@ export class ProfileInformationPage extends Block {
     }
 
     render() {
-        return this.compile(template, { ...this.props, styles });
+        return this.compile(template, { ...this.props, img: img, styles });
     }
 }

@@ -8,9 +8,11 @@ interface InputProps {
     type: string;
     placeholderText: string;
     id: string;
+    validation: string;
     events: {
-        click: () => void;
+        click: () => void,
     };
+    onError?: (error: string) => void;
 }
 
 export class Input extends Block {
@@ -27,18 +29,20 @@ export class Input extends Block {
                 console.log('asdasd123123');
             },
             blur: () => {
-
-                const regex = new RegExp("^[0-9\+][0-9]{9,15}");
+                debugger;
+                const regex = new RegExp(props.validation);
 
                 if (regex.test((this.element as HTMLInputElement).value)) {
                     console.log('done')
                 } else {
                     console.log('not :(')
                 }
-                if ((this.element as HTMLInputElement).value) {
+                if (!regex.test((this.element as HTMLInputElement).value)) {
                     (this.element as HTMLInputElement).classList.add('invalid');
+
+                    this.props.onError && this.props.onError('Ошибка')
                 }
-                if (!(this.element as HTMLInputElement).value && this.element!.classList.contains('invalid')) {
+                if (regex.test((this.element as HTMLInputElement).value) && this.element!.classList.contains('invalid')) {
                     this.element!.classList.remove('invalid');
                 }
             },

@@ -3,7 +3,7 @@ import { Button } from '../../components/Button';
 import { InputAreaBlock } from '../../components/InputAreaBlock';
 import template from './ChangingPassword.pug';
 import styles from './ChangingPassword.scss';
-import img from './avatar.jpg'
+import img from '../../../static/img/avatar.jpg'
 
 interface ChangingPasswordPageProps {
     title: string;
@@ -31,17 +31,19 @@ export class ChangingPasswordPage extends Block {
                 nameInput: 'passwordOld',
                 type: 'password',
                 placeholderText: 'Введите ваш старый пароль',
+                validation: '^[0-9\+][0-9]{9,15}'
             }),
             new InputAreaBlock({
                 nameInputText: 'Новый пароль',
                 nameInput: 'passwordNew',
                 type: 'password',
                 placeholderText: 'Введите новый пароль',
+                validation: '^[0-9\+][0-9]{9,15}'
             })
         ];
     }
 
     render() {
-        return this.compile(template({ img: img }), { ...this.props, styles });
+        return this.compile(template, { ...this.props, img: img, styles });
     }
 }
