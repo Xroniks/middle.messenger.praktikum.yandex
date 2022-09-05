@@ -10,9 +10,10 @@ interface InputProps {
     id: string;
     validation: string;
     events: {
-        click: () => void,
+        change: () => void,
     };
     onError?: (error: string) => void;
+    setValueInput?: (value: string) => void;
 }
 
 export class Input extends Block {
@@ -24,19 +25,16 @@ export class Input extends Block {
         this.element!.setAttribute('placeholder', props.placeholderText);
         this.element!.setAttribute('id', props.nameInput);
         this.props.events = {
+            change: () => {
+                this.props.setValueInput && this.props.setValueInput((this.element as HTMLInputElement).value);
+            },
             focus: () => {
                 console.log((this.element as HTMLInputElement).value);
                 console.log('asdasd123123');
             },
             blur: () => {
-                debugger;
                 const regex = new RegExp(props.validation);
 
-                if (regex.test((this.element as HTMLInputElement).value)) {
-                    console.log('done')
-                } else {
-                    console.log('not :(')
-                }
                 if (!regex.test((this.element as HTMLInputElement).value)) {
                     (this.element as HTMLInputElement).classList.add('invalid');
 
@@ -44,6 +42,7 @@ export class Input extends Block {
                 }
                 if (regex.test((this.element as HTMLInputElement).value) && this.element!.classList.contains('invalid')) {
                     this.element!.classList.remove('invalid');
+                    this.props.onError && this.props.onError('')
                 }
             },
         }

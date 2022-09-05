@@ -1,7 +1,7 @@
 import Block from '../../utils/Block';
 import { Button } from '../../components/Button';
-import { InputArea } from '../../components/InputArea';
 import { Input } from '../../components/Input';
+import HTTPTransport from '../../utils/HTTPTransport'
 import { InputAreaBlock } from '../../components/InputAreaBlock';
 
 import template from './Registration.pug';
@@ -32,6 +32,24 @@ export class RegistrationPage extends Block {
                 href: '/src/pages/Error500/Error500.pug',
                 events: {
                     click: () => console.log('clicked'),
+                },
+            }),
+            new Button({
+                label: 'Проверка',
+                href: '',
+                events: {
+                    click: () => {
+                        const inputs = this.children.inputAreaBlock as InputAreaBlock[]
+                        let form: Record<string, any> = {};
+                        inputs.forEach(element => {
+                            form[element.getName()] = element.getValue();
+                        });
+
+                        HTTPTransport.post('/api/form/save', { data: form })
+                        console.log(form);
+                        console.log(this.children.inputAreaBlock)
+
+                    },
                 },
             })
         ];

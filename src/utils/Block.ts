@@ -1,7 +1,6 @@
 import { EventBus } from "./EventBus";
 import { nanoid } from 'nanoid';
 
-// Нельзя создавать экземпляр данного класса
 class Block {
     static EVENTS = {
         INIT: "init",
@@ -58,15 +57,6 @@ class Block {
                 props[key] = value;
             }
         })
-
-        // Object.entries(childrenAndProps).forEach(([key, value]) => {
-
-        //     if (value instanceof Block) {
-        //         children[key] = value;
-        //     } else {
-        //         props[key] = value;
-        //     }
-        // });
 
         return { props, children };
     }
@@ -160,18 +150,6 @@ class Block {
             }
         });
 
-        // Object.entries(this.children).forEach(([name, component]) => {
-        //     if (Array.isArray(component) && component.every(v => v instanceof Block)) {
-        //         contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
-        //     } else if (component instanceof Block) {
-        //         contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
-        //     }
-        // })
-
-        // Object.entries(this.children).forEach(([name, component]) => {
-        //     contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
-        // });
-
         const html = template(contextAndStubs);
 
         const temp = document.createElement('template');
@@ -197,44 +175,6 @@ class Block {
             }
         });
 
-        // Object.entries(this.children).forEach(([_, component]) => {
-        //     if (Array.isArray(component) && component.every(v => v instanceof Block)) {
-        //         const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
-
-        //         if (!stub) {
-        //             return;
-        //         }
-
-        //         component.getContent()?.append(...Array.from(stub.childNodes));
-
-        //         stub.replaceWith(component.getContent()!);
-        //     } else if (component instanceof Block) {
-        //         const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
-
-        //         if (!stub) {
-        //             return;
-        //         }
-
-        //         component.getContent()?.append(...Array.from(stub.childNodes));
-
-        //         stub.replaceWith(component.getContent()!);
-        //     }
-        // })
-
-        // Object.entries(this.children).forEach(([_, component]) => {
-        //     const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
-
-        //     if (!stub) {
-        //         return;
-        //     }
-
-        //     component.getContent()?.append(...Array.from(stub.childNodes));
-
-        //     stub.replaceWith(component.getContent()!);
-
-
-        // });
-
         return temp.content;
     }
 
@@ -247,7 +187,6 @@ class Block {
     }
 
     _makePropsProxy(props: any) {
-        // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
         const self = this;
 
         return new Proxy(props, {
@@ -260,8 +199,6 @@ class Block {
 
                 target[prop] = value;
 
-                // Запускаем обновление компоненты
-                // Плохой cloneDeep, в следующей итерации нужно заставлять добавлять cloneDeep им самим
                 self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
                 return true;
             },
@@ -272,7 +209,6 @@ class Block {
     }
 
     _createDocumentElement(tagName: string) {
-        // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
         return document.createElement(tagName);
     }
 

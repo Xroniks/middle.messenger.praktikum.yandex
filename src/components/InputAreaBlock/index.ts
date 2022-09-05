@@ -9,15 +9,24 @@ interface InputAreaBlockProps {
     type: string;
     placeholderText: string;
     validation: string
+    error?: string;
+    value?: string;
 }
 
 export class InputAreaBlock extends Block {
 
-    private error: string;
+    //private error: string;
+    getValue() {
+        return this.props.value;
+    }
+
+    getName() {
+        return this.props.nameInputText
+    }
 
     constructor(props: InputAreaBlockProps) {
         super('div', props);
-        this.error = '';
+        this.props.error = '';
     }
 
     init() {
@@ -29,20 +38,22 @@ export class InputAreaBlock extends Block {
             id: this.props.id,
             validation: this.props.validation,
             events: {
-                click: () => console.log('clicked'),
+                change: () => console.log('clicked'),
+            },
+            setValueInput: (value) => {
+                this.props.value = value;
+                console.log(value + 'GEG')
             },
             onError: (error) => {
-                debugger;
-                this.error = error;
+                this.props.error = error;
                 this.dispatchComponentDidMount();
             }
         })
     }
 
 
-
     render() {
-        return this.compile(template, { ...this.props, styles, error: this.error });
+        return this.compile(template, { ...this.props, styles, error: this.props.error });
     }
 
 }
