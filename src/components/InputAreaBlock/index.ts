@@ -8,7 +8,8 @@ interface InputAreaBlockProps {
     nameInput: string;
     type: string;
     placeholderText: string;
-    validation: string
+    validation: string;
+    validationCheck?: boolean;
     error?: string;
     value?: string;
 }
@@ -21,12 +22,17 @@ export class InputAreaBlock extends Block {
     }
 
     getName() {
-        return this.props.nameInputText
+        return this.props.nameInputText;
+    }
+
+    getValidationCheck() {
+        return this.props.validationCheck;
     }
 
     constructor(props: InputAreaBlockProps) {
         super('div', props);
-        this.props.error = '';
+        this.props.validationCheck = false;
+        //this.props.error = '';
     }
 
     init() {
@@ -37,12 +43,15 @@ export class InputAreaBlock extends Block {
             placeholderText: this.props.placeholderText,
             id: this.props.id,
             validation: this.props.validation,
+            validationCheck: this.props.validationCheck,
             events: {
-                change: () => console.log('clicked'),
+                change: () => console.log('Было изменение в поле'),
             },
             setValueInput: (value) => {
                 this.props.value = value;
-                console.log(value + 'GEG')
+            },
+            setValidationCheck: (validationCheck) => {
+                this.props.validationCheck = validationCheck
             },
             onError: (error) => {
                 this.props.error = error;

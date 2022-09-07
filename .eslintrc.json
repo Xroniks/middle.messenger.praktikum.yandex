@@ -1,0 +1,34 @@
+{
+    "extends": [
+        "airbnb-base",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parserOptions": {
+        "project": [
+            "./tsconfig.json"
+        ]
+    },
+    "ignorePatterns": [
+        "temp.js",
+        "**/vendor/*.js",
+        "/dist",
+        "/node_modules",
+        "/parcel-cache"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint/eslint-plugin"
+    ],
+    "rules": {
+        "no-unused-vars": 2,
+        "max-len": [
+            1,
+            100
+        ],
+        "max-params": [
+            2,
+            3
+        ]
+    }
+}

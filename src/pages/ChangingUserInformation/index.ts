@@ -18,9 +18,36 @@ export class ChangingUserInformationPage extends Block {
         this.children.button = [
             new Button({
                 label: 'Сохранить',
-                href: '/src/pages/ProfileInformation/ProfileInformation.pug',
+                href: '#',
                 events: {
-                    click: () => console.log('clicked'),
+                    click: () => {
+                        const inputs = this.children.inputAreaBlock as InputAreaBlock[]
+
+                        //собирает все значения в полях в форму (которую потом будет выводить)
+                        let form: Record<string, any> = {};
+                        inputs.forEach(element => {
+                            form[element.getName()] = element.getValue();
+                        });
+
+                        //ещё раз проверяет у всех полей была ли пройдена валидация
+                        let chek = true;
+                        inputs.forEach(element => {
+                            if (!element.getValidationCheck()) {
+                                chek = false
+                            }
+                            console.log(element.getValidationCheck());
+                        });
+
+                        //если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
+                        if (chek) {
+                            document.location.pathname = '/src/pages/ProfileInformation/ProfileInformation.pug'
+                        } else {
+                            this.props.errorForm = 'Какое-то поле введено не верно!'
+                        }
+
+                        //выводит в консоль форму типа ключ значение (Имя поля и его значение)
+                        console.log(form);
+                    },
                 },
             })
         ];
@@ -31,14 +58,14 @@ export class ChangingUserInformationPage extends Block {
                 nameInput: 'name',
                 type: 'text',
                 placeholderText: 'Ваше имя',
-                validation: '^[0-9\+][0-9]{9,15}'
+                validation: '^[А-ЯЁA-Z][а-яА-ЯёЁa-zA-Z\-]+$'
             }),
             new InputAreaBlock({
                 nameInputText: 'Фамилия',
                 nameInput: 'lastname',
                 type: 'text',
                 placeholderText: 'Ваша фамилия',
-                validation: '^[0-9\+][0-9]{9,15}'
+                validation: '^[А-ЯЁA-Z][а-яА-ЯёЁa-zA-Z\-]+$'
             }),
             new InputAreaBlock({
                 nameInputText: 'Телефон',
@@ -52,14 +79,14 @@ export class ChangingUserInformationPage extends Block {
                 nameInput: 'mail',
                 type: 'text',
                 placeholderText: 'Адрес вашей почты',
-                validation: '^[0-9\+][0-9]{9,15}'
+                validation: '[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])'
             }),
             new InputAreaBlock({
                 nameInputText: 'Логин',
                 nameInput: 'password',
                 type: 'text',
                 placeholderText: 'Введите логин',
-                validation: '^[0-9\+][0-9]{9,15}'
+                validation: '^[a-zA-Z][a-zA-Z0-9\-\_]{2,20}$'
             })
         ];
     }

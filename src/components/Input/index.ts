@@ -9,11 +9,13 @@ interface InputProps {
     placeholderText: string;
     id: string;
     validation: string;
+    validationCheck: boolean;
     events: {
         change: () => void,
     };
     onError?: (error: string) => void;
     setValueInput?: (value: string) => void;
+    setValidationCheck?: (value: boolean) => void;
 }
 
 export class Input extends Block {
@@ -29,8 +31,13 @@ export class Input extends Block {
                 this.props.setValueInput && this.props.setValueInput((this.element as HTMLInputElement).value);
             },
             focus: () => {
-                console.log((this.element as HTMLInputElement).value);
-                console.log('asdasd123123');
+
+
+
+                if (this.element!.classList.contains('invalid')) {
+                    this.element!.classList.remove('invalid');
+                    //this.props.onError && this.props.onError('');
+                }
             },
             blur: () => {
                 const regex = new RegExp(props.validation);
@@ -38,11 +45,18 @@ export class Input extends Block {
                 if (!regex.test((this.element as HTMLInputElement).value)) {
                     (this.element as HTMLInputElement).classList.add('invalid');
 
-                    this.props.onError && this.props.onError('Ошибка')
+                    this.props.onError && this.props.onError('В поле выше есть ошибка');
+                    this.props.validationCheck = false;
+                    this.props.setValidationCheck && this.props.setValidationCheck(this.props.validationCheck);
                 }
-                if (regex.test((this.element as HTMLInputElement).value) && this.element!.classList.contains('invalid')) {
-                    this.element!.classList.remove('invalid');
-                    this.props.onError && this.props.onError('')
+                if (regex.test((this.element as HTMLInputElement).value)) {
+                    if (this.element!.classList.contains('invalid')) {
+                        this.element!.classList.remove('invalid');
+                    }
+                    this.props.onError && this.props.onError('');
+
+                    this.props.validationCheck = true;
+                    this.props.setValidationCheck && this.props.setValidationCheck(this.props.validationCheck);
                 }
             },
         }

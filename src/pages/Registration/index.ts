@@ -11,6 +11,7 @@ import styles from './Registration.scss';
 
 interface RegistrationPageProps {
     title: string;
+    errorForm?: string;
 }
 
 export class RegistrationPage extends Block {
@@ -29,25 +30,38 @@ export class RegistrationPage extends Block {
             }),
             new Button({
                 label: 'Войти',
-                href: '/src/pages/Error500/Error500.pug',
-                events: {
-                    click: () => console.log('clicked'),
-                },
-            }),
-            new Button({
-                label: 'Проверка',
-                href: '',
+                href: '#',
                 events: {
                     click: () => {
                         const inputs = this.children.inputAreaBlock as InputAreaBlock[]
+
+                        //собирает все значения в полях в форму (которую потом будет выводить)
                         let form: Record<string, any> = {};
                         inputs.forEach(element => {
                             form[element.getName()] = element.getValue();
                         });
 
-                        HTTPTransport.post('/api/form/save', { data: form })
+                        //ещё раз проверяет у всех полей была ли пройдена валидация
+                        let chek = true;
+                        inputs.forEach(element => {
+                            if (!element.getValidationCheck()) {
+                                chek = false
+                            }
+                            console.log(element.getValidationCheck());
+                        });
+
+                        //если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
+                        if (chek) {
+                            document.location.pathname = '/src/pages/Chat/Chat.pug'
+                        } else {
+                            this.props.errorForm = 'Какое-то поле введено не верно!'
+                        }
+
+                        //выводит в консоль форму типа ключ значение (Имя поля и его значение)
                         console.log(form);
-                        console.log(this.children.inputAreaBlock)
+
+                        //пробую отправить форму постзапросом
+                        HTTPTransport.post('/api/form/save', { data: form })
 
                     },
                 },
@@ -60,14 +74,14 @@ export class RegistrationPage extends Block {
                 nameInput: 'name',
                 type: 'text',
                 placeholderText: 'Имя',
-                validation: '^[0-9\+][0-9]{9,15}'
+                validation: '^[А-ЯЁA-Z][а-яА-ЯёЁa-zA-Z\-]+$'
             }),
             new InputAreaBlock({
                 nameInputText: 'Ваша фамилия',
                 nameInput: 'lastname',
                 type: 'text',
                 placeholderText: 'Фамилия',
-                validation: '^[0-9\+][0-9]{9,15}'
+                validation: '^[А-ЯЁA-Z][а-яА-ЯёЁa-zA-Z\-]+$'
             }),
             new InputAreaBlock({
                 nameInputText: 'Ваш номер телефона',
@@ -81,33 +95,33 @@ export class RegistrationPage extends Block {
                 nameInput: 'mail',
                 type: 'text',
                 placeholderText: 'Почта',
-                validation: '^[0-9\+][0-9]{9,15}'
+                validation: '[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])'
             }),
             new InputAreaBlock({
                 nameInputText: 'Введите логин',
                 nameInput: 'login',
                 type: 'text',
                 placeholderText: 'Логин',
-                validation: '^[0-9\+][0-9]{9,15}'
+                validation: '^[a-zA-Z][a-zA-Z0-9\-\_]{2,20}$'
             }),
             new InputAreaBlock({
                 nameInputText: 'Введите пароль',
                 nameInput: 'password',
                 type: 'password',
                 placeholderText: 'Пароль',
-                validation: '^[0-9\+][0-9]{9,15}'
+                validation: '(?=.*[0-9])(?=.*[A-ZА-ЯЁ])[0-9a-zа-яёA-ZА-ЯЁ!@#$%^&*]{8,40}'
             }),
             new InputAreaBlock({
                 nameInputText: 'Повторите пароль ещё раз',
                 nameInput: 'repeatPassword',
                 type: 'password',
                 placeholderText: 'Повторите пароль',
-                validation: '^[0-9\+][0-9]{9,15}'
+                validation: '(?=.*[0-9])(?=.*[A-ZА-ЯЁ])[0-9a-zа-яёA-ZА-ЯЁ!@#$%^&*]{8,40}'
             })
         ];
     }
 
     render() {
-        return this.compile(template, { ...this.props, styles });
+        return this.compile(template, { ...this.props, styles, errorForm: this.props.errorForm });
     }
 }
