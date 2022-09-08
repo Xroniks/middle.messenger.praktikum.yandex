@@ -1,15 +1,15 @@
 .profileInformationItem {
   display: flex;
   justify-content: space-between;
-  list-style-type: none;
-  padding-left: 10px;
-  padding-right: 10px;
   margin: 20px;
+  border-bottom: 2px solid rgb(0 0 0 / 20%);
+  padding-right: 10px;
+  padding-left: 10px;
   color: #212529;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  list-style-type: none;
 }
 
 .profileInformationItemChange {
-  color: #212529;
   opacity: 0.5;
+  color: #212529;
 }

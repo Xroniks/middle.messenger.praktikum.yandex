@@ -3,50 +3,50 @@ body {
 
   .profileInformationBlock {
     position: absolute;
-    width: 400px;
-    height: 650px;
-    margin: auto;
-    padding-top: 40px;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: #afd8ff;
+    margin: auto;
     border-radius: 20px;
+    background-color: #afd8ff;
+    padding-top: 40px;
+    width: 400px;
+    height: 650px;
 
     .profileInformationBlockAvatar {
       display: block;
       text-align: center;
 
       img {
+        border-radius: 50%;
         width: 100px;
         height: 100px;
-        border-radius: 50%;
       }
     }
 
     .profileInformationItem {
       display: flex;
       justify-content: space-between;
-      list-style-type: none;
-      padding-left: 10px;
-      padding-right: 10px;
       margin: 20px;
+      border-bottom: 2px solid rgb(0 0 0 / 20%);
+      padding-right: 10px;
+      padding-left: 10px;
       color: #212529;
-      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+      list-style-type: none;
     }
 
     .profileInformationItemChange {
-      color: #212529;
       opacity: 0.5;
+      color: #212529;
     }
 
     .profileInformationBlockTitle h1 {
-      font-size: 2.25rem;
-      font-weight: bold;
-      text-align: center;
       margin-top: 0;
       margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 2.25rem;
+      text-align: center;
     }
 
     *,
@@ -56,9 +56,9 @@ body {
     }
 
     .inputArea {
-      width: 100%;
-      padding: 10px 30px;
       margin-bottom: 1rem;
+      padding: 10px 30px;
+      width: 100%;
     }
 
     .buttomBlock {

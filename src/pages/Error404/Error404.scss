@@ -3,14 +3,14 @@ body {
 
   .error404Block {
     position: absolute;
-    width: 500px;
-    height: 500px;
-    margin: auto;
-    padding-top: 40px;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    margin: auto;
+    padding-top: 40px;
+    width: 500px;
+    height: 500px;
     text-align: center;
 
     h1 {

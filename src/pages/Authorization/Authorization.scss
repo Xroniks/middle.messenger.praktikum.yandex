@@ -3,20 +3,20 @@ body {
 
   .authorizationBlock {
     position: absolute;
-    width: 400px;
-    height: 400px;
-    margin: auto;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: #afd8ff;
+    margin: auto;
     border-radius: 20px;
+    background-color: #afd8ff;
+    width: 400px;
+    height: 400px;
 
     .authorizationBlockTitle h1 {
-      text-align: center;
-      font-size: 2.25rem;
       font-weight: bold;
+      font-size: 2.25rem;
+      text-align: center;
     }
 
     *,
@@ -26,9 +26,9 @@ body {
     }
 
     .inputArea {
-      width: 100%;
-      padding: 10px 30px;
       margin-bottom: 1rem;
+      padding: 10px 30px;
+      width: 100%;
     }
 
     .buttomBlock {
