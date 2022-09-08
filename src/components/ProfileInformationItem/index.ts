@@ -3,18 +3,17 @@ import template from './profileInformationItem.pug';
 import styles from './profileInformationItem.scss';
 
 interface ProfileInformationItemProps {
-    textConst: string;
-    textProfile: string;
+  textConst: string;
+  textProfile: string;
 }
 
-export class ProfileInformationItem extends Block {
-    constructor(props: ProfileInformationItemProps) {
-        super('div', props);
-        this.element!.classList.add('profileInformationItem');
-    }
+export default class ProfileInformationItem extends Block {
+  constructor(props: ProfileInformationItemProps) {
+    super('div', props);
+    this.element!.classList.add('profileInformationItem');
+  }
 
-
-    render() {
-        return this.compile(template, { ...this.props, styles });
-    }
+  render() {
+    return this.compile(template, { ...this.props, styles });
+  }
 }

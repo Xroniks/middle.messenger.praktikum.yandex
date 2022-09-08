@@ -18,7 +18,7 @@ interface InputProps {
     setValidationCheck?: (value: boolean) => void;
 }
 
-export class Input extends Block {
+export default class Input extends Block {
     constructor(props: InputProps) {
         super('input', props);
         this.element!.classList.add('inputAreaWindow');
@@ -28,15 +28,11 @@ export class Input extends Block {
         this.element!.setAttribute('id', props.nameInput);
         this.props.events = {
             change: () => {
-                this.props.setValueInput && this.props.setValueInput((this.element as HTMLInputElement).value);
+                this.props.setValueInput((this.element as HTMLInputElement).value);
             },
             focus: () => {
-
-
-
                 if (this.element!.classList.contains('invalid')) {
                     this.element!.classList.remove('invalid');
-                    //this.props.onError && this.props.onError('');
                 }
             },
             blur: () => {
@@ -45,21 +41,29 @@ export class Input extends Block {
                 if (!regex.test((this.element as HTMLInputElement).value)) {
                     (this.element as HTMLInputElement).classList.add('invalid');
 
-                    this.props.onError && this.props.onError('В поле выше есть ошибка');
+                    if (this.props.onError) {
+                        this.props.onError('В поле выше есть ошибка');
+                    }
                     this.props.validationCheck = false;
-                    this.props.setValidationCheck && this.props.setValidationCheck(this.props.validationCheck);
+                    if (this.props.setValidationCheck) {
+                        this.props.setValidationCheck(this.props.validationCheck);
+                    }
                 }
                 if (regex.test((this.element as HTMLInputElement).value)) {
                     if (this.element!.classList.contains('invalid')) {
                         this.element!.classList.remove('invalid');
                     }
-                    this.props.onError && this.props.onError('');
+                    if (this.props.onError) {
+                        this.props.onError('');
+                    }
 
                     this.props.validationCheck = true;
-                    this.props.setValidationCheck && this.props.setValidationCheck(this.props.validationCheck);
+                    if (this.props.setValidationCheck) {
+                        this.props.setValidationCheck(this.props.validationCheck);
+                    }
                 }
             },
-        }
+        };
     }
 
     render() {

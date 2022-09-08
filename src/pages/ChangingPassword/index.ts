@@ -1,15 +1,15 @@
 import Block from '../../utils/Block';
-import { Button } from '../../components/Button';
-import { InputAreaBlock } from '../../components/InputAreaBlock';
+import Button from '../../components/Button';
+import InputAreaBlock from '../../components/InputAreaBlock';
 import template from './ChangingPassword.pug';
 import styles from './ChangingPassword.scss';
-import img from '../../../static/img/avatar.jpg'
+import img from '../../../static/img/avatar.jpg';
 
 interface ChangingPasswordPageProps {
     title: string;
 }
 
-export class ChangingPasswordPage extends Block {
+export default class ChangingPasswordPage extends Block {
     constructor(props: ChangingPasswordPageProps) {
         super('div', props);
     }
@@ -21,35 +21,35 @@ export class ChangingPasswordPage extends Block {
                 href: '#',
                 events: {
                     click: () => {
-                        const inputs = this.children.inputAreaBlock as InputAreaBlock[]
+                        const inputs = this.children.inputAreaBlock as InputAreaBlock[];
 
-                        //собирает все значения в полях в форму (которую потом будет выводить)
-                        let form: Record<string, any> = {};
-                        inputs.forEach(element => {
+                        // собирает все значения в полях в форму (которую потом будет выводить)
+                        const form: Record<string, any> = {};
+                        inputs.forEach((element) => {
                             form[element.getName()] = element.getValue();
                         });
 
-                        //ещё раз проверяет у всех полей была ли пройдена валидация
+                        // ещё раз проверяет у всех полей была ли пройдена валидация
                         let chek = true;
-                        inputs.forEach(element => {
+                        inputs.forEach((element) => {
                             if (!element.getValidationCheck()) {
-                                chek = false
+                                chek = false;
                             }
-                            console.log(element.getValidationCheck());
                         });
 
-                        //если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
+                        // если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
                         if (chek) {
-                            document.location.pathname = '/src/pages/ProfileInformation/ProfileInformation.pug'
+                            document.location.pathname = '/src/pages/ProfileInformation/ProfileInformation.pug';
                         } else {
-                            this.props.errorForm = 'Какое-то поле введено не верно!'
+                            this.props.errorForm = 'Какое-то поле введено не верно!';
                         }
 
-                        //выводит в консоль форму типа ключ значение (Имя поля и его значение)
+                        // выводит в консоль форму типа ключ значение (Имя поля и его значение)
+                        // eslint-disable-next-line
                         console.log(form);
                     },
                 },
-            })
+            }),
         ];
 
         this.children.inputAreaBlock = [
@@ -58,19 +58,19 @@ export class ChangingPasswordPage extends Block {
                 nameInput: 'passwordOld',
                 type: 'password',
                 placeholderText: 'Введите ваш старый пароль',
-                validation: '(?=.*[0-9])(?=.*[A-ZА-ЯЁ])[0-9a-zа-яёA-ZА-ЯЁ!@#$%^&*]{8,40}'
+                validation: '(?=.*[0-9])(?=.*[A-ZА-ЯЁ])[0-9a-zа-яёA-ZА-ЯЁ!@#$%^&*]{8,40}',
             }),
             new InputAreaBlock({
                 nameInputText: 'Новый пароль',
                 nameInput: 'passwordNew',
                 type: 'password',
                 placeholderText: 'Введите новый пароль',
-                validation: '(?=.*[0-9])(?=.*[A-ZА-ЯЁ])[0-9a-zа-яёA-ZА-ЯЁ!@#$%^&*]{8,40}'
-            })
+                validation: '(?=.*[0-9])(?=.*[A-ZА-ЯЁ])[0-9a-zа-яёA-ZА-ЯЁ!@#$%^&*]{8,40}',
+            }),
         ];
     }
 
     render() {
-        return this.compile(template, { ...this.props, img: img, styles });
+        return this.compile(template, { ...this.props, img, styles });
     }
 }

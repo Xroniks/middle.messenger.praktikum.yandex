@@ -1,13 +1,14 @@
 import Block from '../../utils/Block';
-import { Button } from '../../components/Button';
+import Button from '../../components/Button';
 import template from './Chat.pug';
 import styles from './Chat.scss';
+import InputAreaBlock from '../../components/InputAreaBlock';
 
 interface ChatPageProps {
     title: string;
 }
 
-export class ChatPage extends Block {
+export default class ChatPage extends Block {
     constructor(props: ChatPageProps) {
         super('div', props);
     }
@@ -18,9 +19,21 @@ export class ChatPage extends Block {
                 label: 'Мой профиль',
                 href: '/src/pages/ProfileInformation/ProfileInformation.pug',
                 events: {
-                    click: () => console.log('clicked'),
+                    // eslint-disable-next-line
+                    click: () => { },
                 },
-            })
+            }),
+        ];
+
+        this.children.inputAreaBlockChat = [
+            new InputAreaBlock({
+                nameInputText: '',
+                nameInput: 'searchChat',
+                type: 'text',
+                placeholderText: 'Название чата',
+                // eslint-disable-next-line no-useless-escape
+                validation: '^[А-ЯЁA-Z][а-яА-ЯёЁa-zA-Z\-]+$',
+            }),
         ];
 
         this.children.buttonBlockMenu = [
@@ -28,30 +41,34 @@ export class ChatPage extends Block {
                 label: 'Войти',
                 href: '/src/pages/Authorization/Authorization.pug',
                 events: {
-                    click: () => console.log('clicked'),
+                    // eslint-disable-next-line
+                    click: () => { },
                 },
             }),
             new Button({
                 label: 'Зарегистрироваться',
                 href: '/src/pages/Registration/Registration.pug',
                 events: {
-                    click: () => console.log('clicked'),
+                    // eslint-disable-next-line
+                    click: () => { },
                 },
             }),
             new Button({
                 label: 'Ошибка 404',
                 href: '/src/pages/Error404/Error404.pug',
                 events: {
-                    click: () => console.log('clicked'),
+                    // eslint-disable-next-line
+                    click: () => { },
                 },
             }),
             new Button({
                 label: 'Ошибка 500',
                 href: '/src/pages/Error500/Error500.pug',
                 events: {
-                    click: () => console.log('clicked'),
+                    // eslint-disable-next-line
+                    click: () => { },
                 },
-            })
+            }),
         ];
     }
 

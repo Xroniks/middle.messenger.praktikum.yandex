@@ -1,16 +1,12 @@
 const fallback = require('express-history-api-fallback');
-const express = require("express");
-
-
-
+const express = require('express');
 
 const app = express();
-const PORT = 3000;
-process.env.PORT || PORT;
+const PORT = process.env.PORT || 3000;
 
-const root = `./dist`
-app.use(express.static(root))
-app.use(fallback('index.html', { root: root }))
+const root = './dist';
+app.use(express.static(root));
+app.use(fallback('index.html', { root }));
 
 // app.post('/api/form/save', function () {
 //   console.log('Запрос принят но не обработан :(');
@@ -21,6 +17,7 @@ app.use(fallback('index.html', { root: root }))
 //   response.json({ name: request.data.name, age: request.body.age });
 // });
 
-app.listen(PORT, function () {
+app.listen(PORT, () => {
+  // eslint-disable-next-line
   console.log(`Example app listening on port ${PORT}!`);
 });

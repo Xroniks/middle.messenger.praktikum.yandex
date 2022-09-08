@@ -10,13 +10,12 @@ interface ButtonProps {
     href: string;
 }
 
-export class Button extends Block {
+export default class Button extends Block {
     constructor(props: ButtonProps) {
         super('a', props);
-        this.element!.classList.add('linkButton');
-        this.element!.setAttribute('href', props.href)
+        this.element?.classList.add('linkButton');
+        this.element?.setAttribute('href', props.href);
     }
-
 
     render() {
         return this.compile(template, { ...this.props, styles });

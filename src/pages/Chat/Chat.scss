@@ -9,8 +9,8 @@ body {
     background-color: aquamarine;
 
     .dialogsBlockHeader {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 5fr 10fr;
       justify-content: center;
       align-items: center;
       background-color: #186bb9;

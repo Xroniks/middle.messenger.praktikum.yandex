@@ -1,7 +1,7 @@
 import Block from '../../utils/Block';
 import template from './InputAreaBlock.pug';
 import styles from './InputAreaBlock.scss';
-import { Input } from '../Input';
+import Input from '../Input';
 
 interface InputAreaBlockProps {
     nameInputText: string;
@@ -14,9 +14,8 @@ interface InputAreaBlockProps {
     value?: string;
 }
 
-export class InputAreaBlock extends Block {
-
-    //private error: string;
+export default class InputAreaBlock extends Block {
+    // private error: string;
     getValue() {
         return this.props.value;
     }
@@ -32,7 +31,7 @@ export class InputAreaBlock extends Block {
     constructor(props: InputAreaBlockProps) {
         super('div', props);
         this.props.validationCheck = false;
-        //this.props.error = '';
+        // this.props.error = '';
     }
 
     init() {
@@ -45,24 +44,23 @@ export class InputAreaBlock extends Block {
             validation: this.props.validation,
             validationCheck: this.props.validationCheck,
             events: {
-                change: () => console.log('Было изменение в поле'),
+                // eslint-disable-next-line no-console
+                change: () => { console.error('Не определена функция change'); },
             },
             setValueInput: (value) => {
                 this.props.value = value;
             },
             setValidationCheck: (validationCheck) => {
-                this.props.validationCheck = validationCheck
+                this.props.validationCheck = validationCheck;
             },
             onError: (error) => {
                 this.props.error = error;
                 this.dispatchComponentDidMount();
-            }
-        })
+            },
+        });
     }
-
 
     render() {
         return this.compile(template, { ...this.props, styles, error: this.props.error });
     }
-
 }
