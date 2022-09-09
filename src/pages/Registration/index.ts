@@ -20,14 +20,6 @@ export default class RegistrationPage extends Block {
         this.children.button = [
             new Button({
                 label: 'Зарегистрироваться',
-                href: '/src/pages/Authorization/Authorization.pug',
-                events: {
-                    // eslint-disable-next-line
-                    click: () => { },
-                },
-            }),
-            new Button({
-                label: 'Войти',
                 href: '#',
                 events: {
                     click: () => {
@@ -61,6 +53,14 @@ export default class RegistrationPage extends Block {
                         // пробую отправить форму постзапросом
                         HTTPTransport.post('/api/form/save', { data: form });
                     },
+                },
+            }),
+            new Button({
+                label: 'Войти',
+                href: '/src/pages/Authorization/Authorization.pug',
+                events: {
+                    // eslint-disable-next-line
+                    click: () => { },
                 },
             }),
         ];
