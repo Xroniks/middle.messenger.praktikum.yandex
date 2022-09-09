@@ -1,28 +1,14 @@
-extends ../../layout/main.pug
+main
+  .changingUserInformationBlock
+    .changingUserInformationBlockAvatar
+      img(src=img alt="avatar")
 
-block modules
-  include ../../modules/inputArea/inputArea
-  include ../../modules/button/button
+    .changingUserInformationBlockTitle
+      h1 !{title}
 
-block stylesheet
-  link(rel="stylesheet", href="ChangingUserInformation.scss") 
-  link(rel="stylesheet", href="../../modules/button/button.scss") 
-  link(rel="stylesheet", href="../../modules/inputArea/inputArea.scss") 
-
-block content
-  main
-    .changingUserInformationBlock
-      .changingUserInformationBlockAvatar
-        img(src="../../../static/img/avatar.jpg")
-
-      .changingUserInformationBlockTitle
-        h1 Павел
-
-      .inputArea
-        +inputArea("text","Ваше имя","name", "Имя")
-        +inputArea("text","Ваша фамилия","lastname", "Фамилия")
-        +inputArea("tel","Ваш номер телефона","tel", "Телефон")
-        +inputArea("text","Адрес вашей почты","mail", "Почта")
-        +inputArea("text","Введите логин","login", "Логин")
-
-        +button("/src/pages/ProfileInformation/ProfileInformation.pug", "Сохранить")
+    .inputArea
+      | !{inputAreaBlock}
+      div
+        | !{errorForm}
+    .buttomBlock
+      | !{button}

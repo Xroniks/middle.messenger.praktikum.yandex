@@ -1,0 +1,23 @@
+$backgroundColorButton: #08c;
+$backgroundColorButtonHover: #0b5d86;
+$textColorButton: white;
+
+.linkButton {
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: $backgroundColorButton;
+  padding: 15px;
+  width: 80%;
+  color: $textColorButton;
+  font-size: 20px;
+  line-height: 0.5;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $backgroundColorButtonHover;
+  }
+}

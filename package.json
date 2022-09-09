@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "parcel src/pages/Chat/index.pug --port 3000",
-    "start": "parcel src/pages/Chat/index.pug --port 3000",
-    "build": "parcel build src/pages/Chat/index.pug",
-    "server": "node ./src/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "parcel src/index.html --port 3000",
+    "start": "node ./src/server.js",
+    "build": "parcel build src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "stylelint": "stylelint \"./src/**/*.{css,scss}\"",
+    "stylelint:fix": "stylelint \"./src/**/*.{css,scss}\" --fix"
   },
   "repository": {
     "type": "git",
@@ -20,21 +23,34 @@
   },
   "homepage": "https://github.com/Xroniks/yandex-education#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "4.18.1",
+    "express-history-api-fallback": "^2.2.1",
+    "nanoid": "^4.0.0"
   },
   "devDependencies": {
-    "@anikin/parcel-transformer-handlebars": "^1.0.9",
-    "@parcel/transformer-pug": "^2.7.0",
-    "@parcel/transformer-sass": "^2.7.0",
-    "@prettier/plugin-pug": "^2.2.0",
-    "engine-version": "^1.0.2",
-    "parcel": "^2.7.0",
-    "prettier": "^2.7.1",
-    "pug": "^3.0.2"
-  },
-  "engines": {
-    "node": "v16.16.0",
-    "npm": "8.11.0"
+    "@parcel/transformer-pug": "2.7.0",
+    "@parcel/transformer-sass": "2.7.0",
+    "@prettier/plugin-pug": "2.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
+    "babel-eslint": "^10.1.0",
+    "engine-version": "1.0.2",
+    "eslint": "^8.23.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.5.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-typescript": "^0.14.0",
+    "parcel": "2.7.0",
+    "parcel-transformer-pug-precompile": "1.0.6",
+    "postcss": "^8.4.16",
+    "prettier": "2.7.1",
+    "pug": "3.0.2",
+    "stylelint": "^14.11.0",
+    "stylelint-config-standard-scss": "^5.0.0",
+    "stylelint-order": "^5.0.0",
+    "ts-node": "10.9.1",
+    "typescript": "^4.8.2"
   }
-  
 }
