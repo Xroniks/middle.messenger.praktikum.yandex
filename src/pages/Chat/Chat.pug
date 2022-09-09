@@ -1,12 +1,29 @@
 main
   .chatWindow
+    .menuChat 
+      | !{buttonBlockMenu}
     .dialogsBlockHeader
       | !{buttonBlockProfile}
       | !{inputAreaBlockChat}
 
-    .messagesBlockHeader Header messages
+    .messagesBlockHeader
+      .namechat
+        | !{buttonNameChat}
+      .settings
+        | !{buttonSettingsChat}
 
-    .dialogsBlockItems Dialogs
+    .dialogsBlockItems
+      | !{dialogItem}  
 
     .messagesBlockWindowChat
-      | !{buttonBlockMenu}
+      .blockMessageItem 
+        .message1 У нас новое мероприятие, приходи!
+          img(src=test alt="test")
+        .message2 Хорошо, обязательно прийду!
+        .message1 Будем ждать!
+
+      .blockMessageChat
+        | !{inputAreaBlocMessageChat}
+        | !{buttonMessageSend}
+    
+      

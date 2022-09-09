@@ -119,7 +119,7 @@ class Block {
     }
 
     // eslint-disable-next-line
-    protected componentDidUpdate(oldProps: any, newProps: any) {
+    protected componentDidUpdate(_oldProps: any, _newProps: any) {
         return true;
     }
 

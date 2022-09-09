@@ -3,38 +3,111 @@ body {
 
   .chatWindow {
     display: grid;
-    grid-template-rows: 1fr 15fr;
-    grid-template-columns: 3fr 10fr;
-    background-color: aquamarine;
+    grid-template-rows: 0.8fr 1fr 15fr;
+    grid-template-columns: 2fr 10fr;
+    /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+    grid-template-areas: "a a""b c""d e";
+    background-color: rgb(201 199 199);
+
+    .menuChat {
+      display: grid;
+      grid-template-columns: 200px 200px 200px 200px;
+      justify-content: space-evenly;
+      grid-area: a;
+    }
 
     .dialogsBlockHeader {
       display: grid;
+      padding-right: 10px;
+      padding-left: 5px;
       grid-template-columns: 5fr 10fr;
+      gap: 10px;
       align-items: center;
-      justify-content: center;
-      background-color: #186bb9;
+      border: 1px solid black;
+      justify-content: space-evenly;
+      background-color: #80bef8;
     }
 
     .dialogsBlockItems {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      background-color: rgb(141 245 141);
+      justify-content: start;
+      background-color: #afd8ff;
+      border-right: 1px solid black;
     }
 
     .messagesBlockHeader {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #2acbd6;
+      display: grid;
+      grid-template-columns: 200px 200px;
+      gap: 10px;
+      border: 1px solid black;
+      border-left: none;
+      justify-content: space-between;
+      background-color: #80bef8;
+
+      .namechat {
+        text-align: center;
+        align-self: center;
+      }
+
+      .settings {
+        text-align: center;
+        align-self: center;
+      }
     }
 
     .messagesBlockWindowChat {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      display: grid;
+      padding-bottom: 25px;
+      align-content: end;
       justify-content: center;
-      background-color: #cca4a4;
+      background-color: #f1cdcd;
+
+      .blockMessageItem {
+        display: grid;
+
+        .message1 {
+          display: grid;
+          gap: 5px;
+          justify-self: end;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          border: none;
+          border-radius: 10px;
+          background-color: #afd8ff;
+          padding: 15px;
+          color: black;
+          font-size: 20px;
+          line-height: 0.5;
+          text-decoration: none;
+        }
+
+        .message2 {
+          display: grid;
+          gap: 5px;
+          justify-self: start;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          border: none;
+          border-radius: 10px;
+          background-color: rgb(221 245 137);
+          padding: 15px;
+          color: black;
+          font-size: 20px;
+          line-height: 0.5;
+          text-decoration: none;
+        }
+      }
+
+      .blockMessageChat {
+        display: grid;
+        grid-template-columns: 10fr 3fr;
+        gap: 10px;
+        justify-content: center;
+        align-content: center;
+        width: 1000px;
+      }
     }
   }
 }
