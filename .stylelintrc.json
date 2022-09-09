@@ -1,15 +1,13 @@
 {
     "extends": [
-        "stylelint-config-standard-scss",
-        "stylelint-config-rational-order",
-        "stylelint-prettier/recommended"
+        "stylelint-config-standard-scss"
     ],
     "plugins": [
-        "stylelint-order",
-        "stylelint-scss"
+        "stylelint-order"
     ],
     "rules": {
+        "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9]+$",
         "selector-class-pattern": "^[a-z][a-zA-Z0-9]+$",
-        "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9]+$"
+        "no-missing-end-of-source-newline": null
     }
 }

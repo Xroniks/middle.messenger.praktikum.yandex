@@ -7,11 +7,11 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    margin: auto;
-    border-radius: 20px;
-    background-color: #afd8ff;
     width: 400px;
     height: 400px;
+    margin: auto;
+    background-color: #afd8ff;
+    border-radius: 20px;
 
     .authorizationBlockTitle h1 {
       font-weight: bold;
@@ -26,16 +26,16 @@ body {
     }
 
     .inputArea {
+      width: 100%;
       margin-bottom: 1rem;
       padding: 10px 30px;
-      width: 100%;
     }
 
     .buttomBlock {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     }
   }
 }

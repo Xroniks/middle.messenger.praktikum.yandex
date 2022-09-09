@@ -7,21 +7,21 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    margin: auto;
-    border-radius: 20px;
-    background-color: #afd8ff;
-    padding-top: 40px;
     width: 400px;
     height: 650px;
+    margin: auto;
+    padding-top: 40px;
+    background-color: #afd8ff;
+    border-radius: 20px;
 
     .profileInformationBlockAvatar {
       display: block;
       text-align: center;
 
       img {
-        border-radius: 50%;
         width: 100px;
         height: 100px;
+        border-radius: 50%;
       }
     }
 
@@ -29,16 +29,16 @@ body {
       display: flex;
       justify-content: space-between;
       margin: 20px;
-      border-bottom: 2px solid rgb(0 0 0 / 20%);
       padding-right: 10px;
       padding-left: 10px;
       color: #212529;
       list-style-type: none;
+      border-bottom: 2px solid rgb(0 0 0 / 20%);
     }
 
     .profileInformationItemChange {
-      opacity: 0.5;
       color: #212529;
+      opacity: 0.5;
     }
 
     .profileInformationBlockTitle h1 {
@@ -56,16 +56,16 @@ body {
     }
 
     .inputArea {
+      width: 100%;
       margin-bottom: 1rem;
       padding: 10px 30px;
-      width: 100%;
     }
 
     .buttomBlock {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     }
   }
 }
