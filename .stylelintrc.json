@@ -5,8 +5,10 @@
     "plugins": [
         "stylelint-order"
     ],
-    "ignoreFiles": [
-        "./dist/**/*.less"
+    "ignorePatterns": [
+        "./dist",
+        "./node_modules",
+        "./parcel-cache"
     ],
     "rules": {
         "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9]+$",
