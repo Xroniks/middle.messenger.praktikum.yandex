@@ -14,5 +14,7 @@
         "/node_modules",
         "/parcel-cache"
     ],
-    "rules": {}
+    "rules": {
+        "block-closing-brace-space-after": 0
+    }
 }
