@@ -5,8 +5,9 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static(`/dist/`));
-app.use(fallback('./dist/index.html', {}));
+const root = './dist';
+app.use(express.static(root));
+app.use(fallback('index.html', { root }));
 
 app.listen(PORT, () => {
   // eslint-disable-next-line
