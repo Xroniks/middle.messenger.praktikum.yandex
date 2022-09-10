@@ -20,7 +20,7 @@ export default class ChatPage extends Block {
         this.children.buttonBlockProfile = [
             new Button({
                 label: 'Мой профиль',
-                href: '/src/pages/ProfileInformation/ProfileInformation.pug',
+                href: 'ProfileInformation',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -118,7 +118,7 @@ export default class ChatPage extends Block {
         this.children.buttonBlockMenu = [
             new Button({
                 label: 'Войти',
-                href: '/src/pages/Authorization/Authorization.pug',
+                href: 'Authorization',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -126,7 +126,7 @@ export default class ChatPage extends Block {
             }),
             new Button({
                 label: 'Зарегистрироваться',
-                href: '/src/pages/Registration/Registration.pug',
+                href: 'Registration',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -134,7 +134,7 @@ export default class ChatPage extends Block {
             }),
             new Button({
                 label: 'Ошибка 404',
-                href: '/src/pages/Error404/Error404.pug',
+                href: 'Error404',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -142,7 +142,7 @@ export default class ChatPage extends Block {
             }),
             new Button({
                 label: 'Ошибка 500',
-                href: '/src/pages/Error500/Error500.pug',
+                href: 'Error500',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },

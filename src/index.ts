@@ -12,69 +12,68 @@ window.addEventListener('DOMContentLoaded', () => {
     const path = document.location.pathname;
     if (root != null) {
         switch (path) {
-            case '/': {
+            case '/':
+            case '/Authorization': {
                 const authorizationPage = new AuthorizationPage({ title: 'МОЙ ЧАТ' });
                 root.append(authorizationPage.getContent() || '');
                 authorizationPage.dispatchComponentDidMount();
                 break;
             }
-            case '/src/pages/Error500/Error500.pug': {
+            case '/Error500': {
                 const error500Page = new Error500Page({ title: 'Ошибка 500' });
                 root.append(error500Page.getContent() || '');
                 error500Page.dispatchComponentDidMount();
                 break;
             }
 
-            case '/src/pages/Error404/Error404.pug': {
+            case '/Error404': {
                 const error404Page = new Error404Page({ title: 'Ошибка 404' });
                 root.append(error404Page.getContent() || '');
                 error404Page.dispatchComponentDidMount();
                 break;
             }
 
-            case '/src/pages/Authorization/Authorization.pug': {
-                const authorizationPage = new AuthorizationPage({ title: 'МОЙ ЧАТ' });
-                root.append(authorizationPage.getContent() || '');
-                authorizationPage.dispatchComponentDidMount();
-                break;
-            }
-
-            case '/src/pages/ChangingPassword/ChangingPassword.pug': {
+            case '/ChangingPassword': {
                 const сhangingPasswordPage = new ChangingPasswordPage({ title: 'Павел' });
                 root.append(сhangingPasswordPage.getContent() || '');
                 сhangingPasswordPage.dispatchComponentDidMount();
                 break;
             }
 
-            case '/src/pages/ChangingUserInformation/ChangingUserInformation.pug': {
+            case '/ChangingUserInformation': {
                 const changingUserInformationPage = new ChangingUserInformationPage({ title: 'Павел' });
                 root.append(changingUserInformationPage.getContent() || '');
                 changingUserInformationPage.dispatchComponentDidMount();
                 break;
             }
 
-            case '/src/pages/ProfileInformation/ProfileInformation.pug': {
+            case '/ProfileInformation': {
                 const profileInformationPage = new ProfileInformationPage({ title: 'Павел' });
                 root.append(profileInformationPage.getContent() || '');
                 profileInformationPage.dispatchComponentDidMount();
                 break;
             }
 
-            case '/src/pages/Chat/Chat.pug': {
+            case '/Chat': {
                 const chatPage = new ChatPage({ title: '' });
                 root.append(chatPage.getContent() || '');
                 chatPage.dispatchComponentDidMount();
                 break;
             }
 
-            case '/src/pages/Registration/Registration.pug': {
+            case '/Registration': {
                 const registrationPage = new RegistrationPage({ title: 'Регистрация' });
                 root.append(registrationPage.getContent() || '');
                 registrationPage.dispatchComponentDidMount();
                 break;
             }
 
-            default:
+            default: {
+                const error404Page = new Error404Page({ title: 'Ошибка 404' });
+                root.append(error404Page.getContent() || '');
+                error404Page.dispatchComponentDidMount();
+                break;
+            }
         }
     }
 });

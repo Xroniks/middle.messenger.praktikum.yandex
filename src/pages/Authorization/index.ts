@@ -38,7 +38,7 @@ export default class AuthorizationPage extends Block {
 
                         // если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
                         if (chek) {
-                            document.location.pathname = '/src/pages/Chat/Chat.pug';
+                            document.location.pathname = 'Chat';
                         } else {
                             this.props.errorForm = 'Какое-то поле введено не верно!';
                         }
@@ -51,7 +51,7 @@ export default class AuthorizationPage extends Block {
             }),
             new Button({
                 label: 'Зарегистрироваться',
-                href: '/src/pages/Registration/Registration.pug',
+                href: 'Registration',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },

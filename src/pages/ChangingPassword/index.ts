@@ -39,7 +39,7 @@ export default class ChangingPasswordPage extends Block {
 
                         // если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
                         if (chek) {
-                            document.location.pathname = '/src/pages/ProfileInformation/ProfileInformation.pug';
+                            document.location.pathname = 'ProfileInformation';
                         } else {
                             this.props.errorForm = 'Какое-то поле введено не верно!';
                         }

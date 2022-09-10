@@ -16,7 +16,7 @@ export default class Error500Page extends Block {
         this.children.button = [
             new Button({
                 label: 'Перейти обратно в ЧАТ',
-                href: '/src/pages/Chat/Chat.pug',
+                href: 'Chat',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
