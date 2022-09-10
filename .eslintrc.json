@@ -10,11 +10,9 @@
         ]
     },
     "ignorePatterns": [
-        "/dist",
-        "/node_modules",
-        "/parcel-cache"
+        "./dist",
+        "./node_modules",
+        "./parcel-cache"
     ],
-    "rules": {
-        "block-closing-brace-space-after": 0
-    }
+    "rules": {}
 }

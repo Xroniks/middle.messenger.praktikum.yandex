@@ -5,6 +5,9 @@
     "plugins": [
         "stylelint-order"
     ],
+    "ignoreFiles": [
+        "./dist/**/*.less"
+    ],
     "rules": {
         "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9]+$",
         "selector-class-pattern": "^[a-z][a-zA-Z0-9]+$",
