@@ -6,7 +6,7 @@
         "stylelint-order"
     ],
     "ignoreFiles": [
-        "./dist/**/*.js"
+        "./dist/**/*.css"
     ],
     "rules": {
         "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9]+$",
