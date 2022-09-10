@@ -6,9 +6,7 @@
         "stylelint-order"
     ],
     "ignorePatterns": [
-        "./dist",
-        "./node_modules",
-        "./parcel-cache"
+        "./dist/**/*.css"
     ],
     "rules": {
         "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9]+$",
