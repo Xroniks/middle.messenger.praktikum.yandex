@@ -1,3 +1,12 @@
+$backgroundColorChatWindow: #c9c7c7;
+$backgroundColorDialogItem: #afd8ff;
+$backgroundColorMessage1: #afd8ff;
+$backgroundColorMessage2: #ddf589;
+$backgroundHeader: #80bef8;
+$borderColor: black;
+$textColorMessage: black;
+$backgroundMessagesBlockWindowChat: #f1cdcd;
+
 body {
   margin: 0;
 
@@ -7,7 +16,7 @@ body {
     grid-template-columns: 2fr 10fr;
     /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
     grid-template-areas: "a a""b c""d e";
-    background-color: rgb(201 199 199);
+    background-color: $backgroundColorChatWindow;
 
     .menuChat {
       display: grid;
@@ -23,9 +32,9 @@ body {
       grid-template-columns: 5fr 10fr;
       gap: 10px;
       align-items: center;
-      border: 1px solid black;
+      border: 1px solid $borderColor;
       justify-content: space-evenly;
-      background-color: #80bef8;
+      background-color: $backgroundHeader;
     }
 
     .dialogsBlockItems {
@@ -33,18 +42,18 @@ body {
       flex-direction: column;
       align-items: center;
       justify-content: start;
-      background-color: #afd8ff;
-      border-right: 1px solid black;
+      background-color: $backgroundColorDialogItem;
+      border-right: 1px solid $borderColor;
     }
 
     .messagesBlockHeader {
       display: grid;
       grid-template-columns: 200px 200px;
       gap: 10px;
-      border: 1px solid black;
+      border: 1px solid $borderColor;
       border-left: none;
       justify-content: space-between;
-      background-color: #80bef8;
+      background-color: $backgroundHeader;
 
       .namechat {
         text-align: center;
@@ -62,7 +71,7 @@ body {
       padding-bottom: 25px;
       align-content: end;
       justify-content: center;
-      background-color: #f1cdcd;
+      background-color: $backgroundMessagesBlockWindowChat;
 
       .blockMessageItem {
         display: grid;
@@ -75,9 +84,9 @@ body {
           margin-bottom: 10px;
           border: none;
           border-radius: 10px;
-          background-color: #afd8ff;
+          background-color: $backgroundColorMessage1;
           padding: 15px;
-          color: black;
+          color: $textColorMessage;
           font-size: 20px;
           line-height: 0.5;
           text-decoration: none;
@@ -91,9 +100,9 @@ body {
           margin-bottom: 10px;
           border: none;
           border-radius: 10px;
-          background-color: rgb(221 245 137);
+          background-color: $backgroundColorMessage2;
           padding: 15px;
-          color: black;
+          color: $textColorMessage;
           font-size: 20px;
           line-height: 0.5;
           text-decoration: none;

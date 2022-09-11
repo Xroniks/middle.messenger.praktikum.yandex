@@ -1,5 +1,5 @@
 import Block from '../../utils/Block';
-import Button from '../../components/Button';
+import Link from '../../components/Link';
 import ProfileInformationItem from '../../components/ProfileInformationItem';
 import template from './ProfileInformation.pug';
 import styles from './ProfileInformation.scss';
@@ -39,7 +39,7 @@ export default class ProfileInformationPage extends Block {
         ];
 
         this.children.button = [
-            new Button({
+            new Link({
                 label: 'Изменить информацию',
                 href: 'ChangingUserInformation',
                 events: {
@@ -47,7 +47,7 @@ export default class ProfileInformationPage extends Block {
                     click: () => { },
                 },
             }),
-            new Button({
+            new Link({
                 label: 'Изменить пароль',
                 href: 'ChangingPassword',
                 events: {
@@ -55,7 +55,7 @@ export default class ProfileInformationPage extends Block {
                     click: () => { },
                 },
             }),
-            new Button({
+            new Link({
                 label: 'Выйти',
                 href: 'Chat',
                 events: {

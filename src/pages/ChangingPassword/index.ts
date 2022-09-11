@@ -1,47 +1,36 @@
 import Block from '../../utils/Block';
-import Button from '../../components/Button';
+import Link from '../../components/Link';
 import InputAreaBlock from '../../components/InputAreaBlock';
 import template from './ChangingPassword.pug';
 import styles from './ChangingPassword.scss';
 import img from '../../../static/img/avatar.jpg';
+import { validate } from '../../utils/forms';
 
 interface ChangingPasswordPageProps {
     title: string;
 }
+const validationPassword: string = '(?=.*[0-9])(?=.*[A-ZА-ЯЁ])[0-9a-zа-яёA-ZА-ЯЁ!@#$%^&*]{8,40}';
 
-export default class ChangingPasswordPage extends Block {
+export default class ChangingPasswordPage extends Block<ChangingPasswordPageProps> {
     constructor(props: ChangingPasswordPageProps) {
         super('div', props);
     }
 
     init() {
+
         this.children.button = [
-            new Button({
+            new Link({
                 label: 'Сохранить',
                 href: '#',
                 events: {
                     click: () => {
-                        const inputs = this.children.inputAreaBlock as InputAreaBlock[];
-
-                        // собирает все значения в полях в форму (которую потом будет выводить)
-                        const form: Record<string, any> = {};
-                        inputs.forEach((element) => {
-                            form[element.getName()] = element.getValue();
-                        });
-
-                        // ещё раз проверяет у всех полей была ли пройдена валидация
-                        let chek = true;
-                        inputs.forEach((element) => {
-                            if (!element.getValidationCheck()) {
-                                chek = false;
-                            }
-                        });
+                        const { isValid, form } = validate(this.children.inputAreaBlock as InputAreaBlock[]);
 
                         // если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
-                        if (chek) {
+                        if (isValid) {
                             document.location.pathname = 'ProfileInformation';
                         } else {
-                            this.props.errorForm = 'Какое-то поле введено не верно!';
+                            this.setProps({ errorForm: 'Какое-то поле введено не верно!' });
                         }
 
                         // выводит в консоль форму типа ключ значение (Имя поля и его значение)
@@ -58,14 +47,14 @@ export default class ChangingPasswordPage extends Block {
                 nameInput: 'passwordOld',
                 type: 'password',
                 placeholderText: 'Введите ваш старый пароль',
-                validation: '(?=.*[0-9])(?=.*[A-ZА-ЯЁ])[0-9a-zа-яёA-ZА-ЯЁ!@#$%^&*]{8,40}',
+                validation: validationPassword,
             }),
             new InputAreaBlock({
                 nameInputText: 'Новый пароль',
                 nameInput: 'passwordNew',
                 type: 'password',
                 placeholderText: 'Введите новый пароль',
-                validation: '(?=.*[0-9])(?=.*[A-ZА-ЯЁ])[0-9a-zа-яёA-ZА-ЯЁ!@#$%^&*]{8,40}',
+                validation: validationPassword,
             }),
         ];
     }

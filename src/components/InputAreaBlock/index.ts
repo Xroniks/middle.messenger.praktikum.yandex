@@ -14,7 +14,7 @@ interface InputAreaBlockProps {
     value?: string;
 }
 
-export default class InputAreaBlock extends Block {
+export default class InputAreaBlock extends Block<InputAreaBlockProps> {
     // private error: string;
     getValue() {
         return this.props.value;
@@ -30,7 +30,8 @@ export default class InputAreaBlock extends Block {
 
     constructor(props: InputAreaBlockProps) {
         super('div', props);
-        this.props.validationCheck = false;
+        this.setProps({ validationCheck: false })
+        // this.props.validationCheck = false;
         // this.props.error = '';
     }
 
@@ -48,13 +49,16 @@ export default class InputAreaBlock extends Block {
                 change: () => { console.error('Не определена функция change'); },
             },
             setValueInput: (value) => {
-                this.props.value = value;
+                this.setProps({ value });
+                // this.props.value = value;
             },
             setValidationCheck: (validationCheck) => {
-                this.props.validationCheck = validationCheck;
+                this.setProps({ validationCheck });
+                // this.props.validationCheck = validationCheck;
             },
             onError: (error) => {
-                this.props.error = error;
+                this.setProps({ error });
+                // this.props.error = error;
                 this.dispatchComponentDidMount();
             },
         });

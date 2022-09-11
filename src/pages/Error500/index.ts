@@ -1,5 +1,5 @@
 import Block from '../../utils/Block';
-import Button from '../../components/Button';
+import Link from '../../components/Link';
 import template from './Error500.pug';
 import styles from './Error500.scss';
 
@@ -14,7 +14,7 @@ export default class Error500Page extends Block {
 
     init() {
         this.children.button = [
-            new Button({
+            new Link({
                 label: 'Перейти обратно в ЧАТ',
                 href: 'Chat',
                 events: {

@@ -2,7 +2,7 @@ import Block from '../../utils/Block';
 import template from './button.pug';
 import styles from './button.scss';
 
-interface ButtonProps {
+interface LinkProps {
     label: string;
     events: {
         click: () => void;
@@ -10,8 +10,8 @@ interface ButtonProps {
     href: string;
 }
 
-export default class Button extends Block {
-    constructor(props: ButtonProps) {
+export default class Link extends Block<LinkProps> {
+    constructor(props: LinkProps) {
         super('a', props);
         this.element?.classList.add('linkButton');
         this.element?.setAttribute('href', props.href);

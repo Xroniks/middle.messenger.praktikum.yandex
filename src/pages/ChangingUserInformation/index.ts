@@ -1,47 +1,44 @@
 import Block from '../../utils/Block';
-import Button from '../../components/Button';
+import Link from '../../components/Link';
 import InputAreaBlock from '../../components/InputAreaBlock';
 import template from './ChangingUserInformation.pug';
 import styles from './ChangingUserInformation.scss';
 import img from '../../../static/img/avatar.jpg';
+import { validate } from '../../utils/forms';
 
 interface ChangingUserInformationPageProps {
     title: string;
 }
 
-export default class ChangingUserInformationPage extends Block {
+// eslint-disable-next-line no-useless-escape
+const validationFirstLastName: string = '^[А-ЯЁA-Z][а-яА-ЯёЁa-zA-Z\-]+$';
+// eslint-disable-next-line no-useless-escape
+const validationPhone: string = '^[0-9\+][0-9]{9,15}';
+// eslint-disable-next-line no-useless-escape
+const validationMail: string = '[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])';
+// eslint-disable-next-line no-useless-escape
+const validationLogin: string = '^[a-zA-Z][a-zA-Z0-9\-\_]{2,20}$';
+
+export default class ChangingUserInformationPage extends Block<ChangingUserInformationPageProps> {
     constructor(props: ChangingUserInformationPageProps) {
         super('div', props);
     }
 
+
     init() {
         this.children.button = [
-            new Button({
+            new Link({
                 label: 'Сохранить',
                 href: '#',
                 events: {
                     click: () => {
-                        const inputs = this.children.inputAreaBlock as InputAreaBlock[];
-
-                        // собирает все значения в полях в форму (которую потом будет выводить)
-                        const form: Record<string, any> = {};
-                        inputs.forEach((element) => {
-                            form[element.getName()] = element.getValue();
-                        });
-
-                        // ещё раз проверяет у всех полей была ли пройдена валидация
-                        let chek = true;
-                        inputs.forEach((element) => {
-                            if (!element.getValidationCheck()) {
-                                chek = false;
-                            }
-                        });
+                        const { isValid, form } = validate(this.children.inputAreaBlock as InputAreaBlock[]);
 
                         // если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
-                        if (chek) {
+                        if (isValid) {
                             document.location.pathname = '/src/pages/ProfileInformation/ProfileInformation.pug';
                         } else {
-                            this.props.errorForm = 'Какое-то поле введено не верно!';
+                            this.setProps({ errorForm: 'Какое-то поле введено не верно!' })
                         }
 
                         // выводит в консоль форму типа ключ значение (Имя поля и его значение)
@@ -58,40 +55,35 @@ export default class ChangingUserInformationPage extends Block {
                 nameInput: 'name',
                 type: 'text',
                 placeholderText: 'Ваше имя',
-                // eslint-disable-next-line no-useless-escape
-                validation: '^[А-ЯЁA-Z][а-яА-ЯёЁa-zA-Z\-]+$',
+                validation: validationFirstLastName,
             }),
             new InputAreaBlock({
                 nameInputText: 'Фамилия',
                 nameInput: 'lastname',
                 type: 'text',
                 placeholderText: 'Ваша фамилия',
-                // eslint-disable-next-line no-useless-escape
-                validation: '^[А-ЯЁA-Z][а-яА-ЯёЁa-zA-Z\-]+$',
+                validation: validationFirstLastName,
             }),
             new InputAreaBlock({
                 nameInputText: 'Телефон',
                 nameInput: 'tel',
                 type: 'text',
                 placeholderText: 'Ваш номер телефона',
-                // eslint-disable-next-line no-useless-escape
-                validation: '^[0-9\+][0-9]{9,15}',
+                validation: validationPhone,
             }),
             new InputAreaBlock({
                 nameInputText: 'Почта',
                 nameInput: 'mail',
                 type: 'text',
                 placeholderText: 'Адрес вашей почты',
-                // eslint-disable-next-line no-useless-escape
-                validation: '[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])',
+                validation: validationMail,
             }),
             new InputAreaBlock({
                 nameInputText: 'Логин',
                 nameInput: 'password',
                 type: 'text',
                 placeholderText: 'Введите логин',
-                // eslint-disable-next-line no-useless-escape
-                validation: '^[a-zA-Z][a-zA-Z0-9\-\_]{2,20}$',
+                validation: validationLogin,
             }),
         ];
     }

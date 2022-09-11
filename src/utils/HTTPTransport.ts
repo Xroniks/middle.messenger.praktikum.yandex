@@ -1,3 +1,5 @@
+import queryStringify from "./QueryStringify"
+
 const METHODS = {
     GET: 'GET',
     POST: 'POST',
@@ -5,16 +7,23 @@ const METHODS = {
     DELETE: 'DELETE',
 };
 
-function queryStringify(url: string, data = {}) {
-    if (!Object.keys(data).length) {
-        return url;
-    }
-    const path = Object.entries(data).map(([key, value]) => `${key}=${value}`).join('&');
+interface IOptions {
+    method: string;
+    data?: any;
+    headers: Record<string, string>;
+    timeOut: number;
+};
 
-    return `?${path}`;
-}
+// function queryStringify(url: string, data = {}) {
+//     if (!Object.keys(data).length) {
+//         return url;
+//     }
+//     const path = Object.entries(data).map(([key, value]) => `${key}=${value}`).join('&');
 
-function request(url: string, options: any, timeOut = 5000) {
+//     return `?${path}`;
+// }
+
+function request(url: string, options: IOptions, timeOut = 5000) {
     const { method, data = {}, headers = {} } = options;
 
     return new Promise((resolve, reject) => {

@@ -1,5 +1,5 @@
 import Block from '../../utils/Block';
-import Button from '../../components/Button';
+import Link from '../../components/Link';
 import DialogItem from '../../components/DialogItem';
 import template from './Chat.pug';
 import styles from './Chat.scss';
@@ -18,7 +18,7 @@ export default class ChatPage extends Block {
 
     init() {
         this.children.buttonBlockProfile = [
-            new Button({
+            new Link({
                 label: 'Мой профиль',
                 href: 'ProfileInformation',
                 events: {
@@ -29,7 +29,7 @@ export default class ChatPage extends Block {
         ];
 
         this.children.buttonNameChat = [
-            new Button({
+            new Link({
                 label: 'Название чата',
                 href: '#',
                 events: {
@@ -39,7 +39,7 @@ export default class ChatPage extends Block {
             }),
         ];
         this.children.buttonSettingsChat = [
-            new Button({
+            new Link({
                 label: 'Настройки',
                 href: '#',
                 events: {
@@ -50,7 +50,7 @@ export default class ChatPage extends Block {
         ];
 
         this.children.buttonMessageSend = [
-            new Button({
+            new Link({
                 label: 'Отправить',
                 href: '#',
                 events: {
@@ -116,7 +116,7 @@ export default class ChatPage extends Block {
         ];
 
         this.children.buttonBlockMenu = [
-            new Button({
+            new Link({
                 label: 'Войти',
                 href: 'Authorization',
                 events: {
@@ -124,7 +124,7 @@ export default class ChatPage extends Block {
                     click: () => { },
                 },
             }),
-            new Button({
+            new Link({
                 label: 'Зарегистрироваться',
                 href: 'Registration',
                 events: {
@@ -132,7 +132,7 @@ export default class ChatPage extends Block {
                     click: () => { },
                 },
             }),
-            new Button({
+            new Link({
                 label: 'Ошибка 404',
                 href: 'Error404',
                 events: {
@@ -140,7 +140,7 @@ export default class ChatPage extends Block {
                     click: () => { },
                 },
             }),
-            new Button({
+            new Link({
                 label: 'Ошибка 500',
                 href: 'Error500',
                 events: {
