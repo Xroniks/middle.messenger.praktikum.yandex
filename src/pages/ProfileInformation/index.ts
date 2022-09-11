@@ -9,7 +9,7 @@ interface ProfileInformationPageProps {
     title: string;
 }
 
-export default class ProfileInformationPage extends Block {
+export default class ProfileInformationPage extends Block<ProfileInformationPageProps> {
     constructor(props: ProfileInformationPageProps) {
         super('div', props);
     }

@@ -7,7 +7,7 @@ interface ProfileInformationItemProps {
   textProfile: string;
 }
 
-export default class ProfileInformationItem extends Block {
+export default class ProfileInformationItem extends Block<ProfileInformationItemProps> {
   constructor(props: ProfileInformationItemProps) {
     super('div', props);
     this.element!.classList.add('profileInformationItem');

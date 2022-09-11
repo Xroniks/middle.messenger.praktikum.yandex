@@ -11,7 +11,7 @@ interface ChatPageProps {
     title: string;
 }
 
-export default class ChatPage extends Block {
+export default class ChatPage extends Block<ChatPageProps> {
     constructor(props: ChatPageProps) {
         super('div', props);
     }

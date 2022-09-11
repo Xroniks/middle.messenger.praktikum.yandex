@@ -7,7 +7,7 @@ interface Error500Props {
     title: string;
 }
 
-export default class Error500Page extends Block {
+export default class Error500Page extends Block<Error500Props> {
     constructor(props: Error500Props) {
         super('div', props);
     }

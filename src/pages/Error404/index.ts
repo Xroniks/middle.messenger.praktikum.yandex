@@ -7,7 +7,7 @@ interface Error404Props {
     title: string;
 }
 
-export default class Error404Page extends Block {
+export default class Error404Page extends Block<Error404Props> {
     constructor(props: Error404Props) {
         super('div', props);
     }

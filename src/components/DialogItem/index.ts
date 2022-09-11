@@ -11,7 +11,7 @@ interface DialogItemProps {
 
 }
 
-export default class DialogItem extends Block {
+export default class DialogItem extends Block<DialogItemProps> {
     constructor(props: DialogItemProps) {
         super('div', props);
         this.element?.classList.add('componentDialogItem');
