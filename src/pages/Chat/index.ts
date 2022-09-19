@@ -20,7 +20,7 @@ export default class ChatPage extends Block<ChatPageProps> {
         this.children.buttonBlockProfile = [
             new Link({
                 label: 'Мой профиль',
-                href: 'ProfileInformation',
+                to: '/ProfileInformation',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -31,7 +31,7 @@ export default class ChatPage extends Block<ChatPageProps> {
         this.children.buttonNameChat = [
             new Link({
                 label: 'Название чата',
-                href: '#',
+                to: '',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -41,7 +41,7 @@ export default class ChatPage extends Block<ChatPageProps> {
         this.children.buttonSettingsChat = [
             new Link({
                 label: 'Настройки',
-                href: '#',
+                to: '',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -52,7 +52,7 @@ export default class ChatPage extends Block<ChatPageProps> {
         this.children.buttonMessageSend = [
             new Link({
                 label: 'Отправить',
-                href: '#',
+                to: '',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -118,7 +118,7 @@ export default class ChatPage extends Block<ChatPageProps> {
         this.children.buttonBlockMenu = [
             new Link({
                 label: 'Войти',
-                href: 'Authorization',
+                to: '/Authorization',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -126,7 +126,7 @@ export default class ChatPage extends Block<ChatPageProps> {
             }),
             new Link({
                 label: 'Зарегистрироваться',
-                href: 'Registration',
+                to: '/Registration',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -134,7 +134,7 @@ export default class ChatPage extends Block<ChatPageProps> {
             }),
             new Link({
                 label: 'Ошибка 404',
-                href: 'Error404',
+                to: '/Error404',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -142,7 +142,7 @@ export default class ChatPage extends Block<ChatPageProps> {
             }),
             new Link({
                 label: 'Ошибка 500',
-                href: 'Error500',
+                to: '/Error500',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },

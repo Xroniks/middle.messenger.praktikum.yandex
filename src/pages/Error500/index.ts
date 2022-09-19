@@ -16,7 +16,7 @@ export default class Error500Page extends Block<Error500Props> {
         this.children.button = [
             new Link({
                 label: 'Перейти обратно в ЧАТ',
-                href: 'Chat',
+                to: '/Chat',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },

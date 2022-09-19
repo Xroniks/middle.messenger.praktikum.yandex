@@ -31,17 +31,34 @@ function request(url: string, options: IOptions, timeOut = 5000) {
         xhr.timeout = timeOut;
         xhr.open(method, url);
 
-        Object.keys(headers).forEach((key) => {
-            xhr.setRequestHeader(key, headers[key]);
-        });
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        xhr.onreadystatechange = (e) => {
+
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status < 400) {
+                    resolve(xhr.response);
+                } else {
+                    reject(xhr.response);
+                }
+            }
+        };
+
 
         xhr.onload = () => {
             resolve(xhr);
         };
 
-        xhr.onabort = reject;
-        xhr.onerror = reject;
-        xhr.ontimeout = reject;
+        xhr.onabort = () => reject;
+        xhr.onerror = () => reject;
+        xhr.ontimeout = () => reject;
+
+        Object.keys(headers).forEach((key) => {
+            xhr.setRequestHeader(key, headers[key]);
+        });
+
+        xhr.withCredentials = true;
+        xhr.responseType = 'json';
 
         if (method === 'GET' || method === 'DELETE') {
             xhr.send();

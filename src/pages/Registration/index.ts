@@ -32,7 +32,7 @@ export default class RegistrationPage extends Block<RegistrationPageProps> {
         this.children.button = [
             new Link({
                 label: 'Зарегистрироваться',
-                href: '#',
+                to: '/Authorization',
                 events: {
                     click: () => {
                         const { isValid, form } = validate(this.children.inputAreaBlock as InputAreaBlock[]);
@@ -40,7 +40,7 @@ export default class RegistrationPage extends Block<RegistrationPageProps> {
                         // если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
                         if (isValid) {
                             // todo Перейти на строчные буквы в url
-                            document.location.pathname = 'Chat';
+                            // document.location.pathname = 'Chat';
                         } else {
                             this.setProps({ errorForm: 'Какое-то поле введено не верно!' })
                         }
@@ -56,7 +56,7 @@ export default class RegistrationPage extends Block<RegistrationPageProps> {
             }),
             new Link({
                 label: 'Войти',
-                href: 'Authorization',
+                to: '/Authorization',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },

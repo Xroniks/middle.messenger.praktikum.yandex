@@ -5,6 +5,7 @@ import template from './Authorization.pug';
 import styles from './Authorization.scss';
 import { validate } from '../../utils/forms';
 
+
 interface AuthorizationPageProps {
     title: string;
 }
@@ -12,6 +13,7 @@ interface AuthorizationPageProps {
 // eslint-disable-next-line no-useless-escape
 const validationLogin: string = '^[a-zA-Z][a-zA-Z0-9\-\_]{2,20}$';
 const validationPassword: string = '(?=.*[0-9])(?=.*[A-ZА-ЯЁ])[0-9a-zа-яёA-ZА-ЯЁ!@#$%^&*]{8,40}';
+
 
 export default class AuthorizationPage extends Block<AuthorizationPageProps> {
     constructor(props: AuthorizationPageProps) {
@@ -22,14 +24,16 @@ export default class AuthorizationPage extends Block<AuthorizationPageProps> {
         this.children.button = [
             new Link({
                 label: 'Войти',
-                href: '#',
+                to: '/Chat',
                 events: {
                     click: () => {
                         const { isValid, form } = validate(this.children.inputAreaBlock as InputAreaBlock[]);
 
                         // если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
                         if (isValid) {
-                            document.location.pathname = 'Chat';
+                            console.log('Ничего не произошло')
+                            // this.props.router.go('Chat');
+                            // document.location.pathname = 'Chat';
                         } else {
                             this.setProps({ errorForm: 'Какое-то поле введено не верно!' })
                         }
@@ -42,7 +46,7 @@ export default class AuthorizationPage extends Block<AuthorizationPageProps> {
             }),
             new Link({
                 label: 'Зарегистрироваться',
-                href: 'Registration',
+                to: '/Registration',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },

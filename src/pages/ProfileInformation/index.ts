@@ -41,7 +41,7 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
         this.children.button = [
             new Link({
                 label: 'Изменить информацию',
-                href: 'ChangingUserInformation',
+                to: '/ChangingUserInformation',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -49,7 +49,7 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
             }),
             new Link({
                 label: 'Изменить пароль',
-                href: 'ChangingPassword',
+                to: '/ChangingPassword',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -57,7 +57,7 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
             }),
             new Link({
                 label: 'Выйти',
-                href: 'Chat',
+                to: '/Chat',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },

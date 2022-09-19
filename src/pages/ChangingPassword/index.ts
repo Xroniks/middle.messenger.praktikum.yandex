@@ -21,14 +21,14 @@ export default class ChangingPasswordPage extends Block<ChangingPasswordPageProp
         this.children.button = [
             new Link({
                 label: 'Сохранить',
-                href: '#',
+                to: '/ProfileInformation',
                 events: {
                     click: () => {
                         const { isValid, form } = validate(this.children.inputAreaBlock as InputAreaBlock[]);
 
                         // если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
                         if (isValid) {
-                            document.location.pathname = 'ProfileInformation';
+                            // document.location.pathname = 'ProfileInformation';
                         } else {
                             this.setProps({ errorForm: 'Какое-то поле введено не верно!' });
                         }

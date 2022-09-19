@@ -29,14 +29,14 @@ export default class ChangingUserInformationPage extends Block<ChangingUserInfor
         this.children.button = [
             new Link({
                 label: 'Сохранить',
-                href: '#',
+                href: '/ProfileInformation',
                 events: {
                     click: () => {
                         const { isValid, form } = validate(this.children.inputAreaBlock as InputAreaBlock[]);
 
                         // если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
                         if (isValid) {
-                            document.location.pathname = '/src/pages/ProfileInformation/ProfileInformation.pug';
+                            // document.location.pathname = '/src/pages/ProfileInformation/ProfileInformation.pug';
                         } else {
                             this.setProps({ errorForm: 'Какое-то поле введено не верно!' })
                         }
