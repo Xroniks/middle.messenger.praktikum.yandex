@@ -4,25 +4,45 @@ import ProfileInformationItem from '../../components/ProfileInformationItem';
 import template from './ProfileInformation.pug';
 import styles from './ProfileInformation.scss';
 import img from '../../../static/img/avatar.jpg';
+import store, { StoreEvents } from '../../utils/store';
 
 interface ProfileInformationPageProps {
     title: string;
 }
 
+
 export default class ProfileInformationPage extends Block<ProfileInformationPageProps> {
-    constructor(props: ProfileInformationPageProps) {
-        super('div', props);
+    constructor() {
+        super('div', store.getState());
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    componentDidUpdate(oldProps: any, newProps: any) {
+        const fieldsOrder = ['firstName', 'lastName'];
+
+        fieldsOrder.forEach((field, index) => {
+            (this.children.profileInformationItem as Block<ProfileInformationPageProps>[])[index].setProps({ textProfile: newProps[field] })
+        });
+
+        return true
     }
 
     init() {
+
+        const { user } = store.getState();
+
+        store.on(StoreEvents.Updated, () => {
+            this.setProps(store.getState().user || {})
+        })
+
         this.children.profileInformationItem = [
             new ProfileInformationItem({
                 textConst: 'Имя',
-                textProfile: 'Павел',
+                textProfile: user.firstName,
             }),
             new ProfileInformationItem({
                 textConst: 'Фамилия',
-                textProfile: 'Постников',
+                textProfile: user.lastName,
             }),
             new ProfileInformationItem({
                 textConst: 'Телефон',

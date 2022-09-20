@@ -7,6 +7,9 @@ import Error500Page from './pages/Error500';
 import ChatPage from './pages/Chat';
 import RegistrationPage from './pages/Registration';
 import Router from './utils/Router';
+import store from './utils/store';
+
+window.store = store
 
 enum Routes {
     Index = '/',

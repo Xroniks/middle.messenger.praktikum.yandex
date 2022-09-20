@@ -1,81 +1,93 @@
-import queryStringify from "./QueryStringify"
-
-const METHODS = {
-    GET: 'GET',
-    POST: 'POST',
-    PUT: 'PUT',
-    DELETE: 'DELETE',
-};
-
-interface IOptions {
-    method: string;
-    data?: any;
-    headers: Record<string, string>;
-    timeOut: number;
-};
-
-// function queryStringify(url: string, data = {}) {
-//     if (!Object.keys(data).length) {
-//         return url;
-//     }
-//     const path = Object.entries(data).map(([key, value]) => `${key}=${value}`).join('&');
-
-//     return `?${path}`;
-// }
-
-function request(url: string, options: IOptions, timeOut = 5000) {
-    const { method, data = {}, headers = {} } = options;
-
-    return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.timeout = timeOut;
-        xhr.open(method, url);
-
-
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        xhr.onreadystatechange = (e) => {
-
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status < 400) {
-                    resolve(xhr.response);
-                } else {
-                    reject(xhr.response);
-                }
-            }
-        };
-
-
-        xhr.onload = () => {
-            resolve(xhr);
-        };
-
-        xhr.onabort = () => reject;
-        xhr.onerror = () => reject;
-        xhr.ontimeout = () => reject;
-
-        Object.keys(headers).forEach((key) => {
-            xhr.setRequestHeader(key, headers[key]);
-        });
-
-        xhr.withCredentials = true;
-        xhr.responseType = 'json';
-
-        if (method === 'GET' || method === 'DELETE') {
-            xhr.send();
-        } else {
-            xhr.send(JSON.stringify(data));
-        }
-    });
+export enum Method {
+    Get = 'Get',
+    Post = 'Post',
+    Put = 'Put',
+    Patch = 'Patch',
+    Delete = 'Delete'
 }
 
-export default {
-    get: (url: string, options: any = {}) => request(queryStringify(url, options.data), { ...options, method: METHODS.GET }, options.timeout),
-
-    delete: (url: string, options: any = {}) => request(queryStringify(url, options.data), { ...options, method: METHODS.DELETE }, options.timeout),
-
-    put: (url: string, options: any = {}) => request(url, { ...options, method: METHODS.PUT }, options.timeout),
-
-    post: (url: string, options: any = {}) => request(url, { ...options, method: METHODS.POST }, options.timeout),
-
-    request,
+type Options = {
+    method: Method;
+    data?: any;
 };
+
+export default class HTTPTransport {
+    static API_URL = 'https://ya-praktikum.tech/api/v2';
+
+    protected endpoint: string;
+
+    constructor(endpoint: string) {
+        this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
+    }
+
+    public get<Response>(path = '/'): Promise<Response> {
+        return this.request<Response>(this.endpoint + path);
+    }
+
+    public post<Response = void>(path: string, data?: unknown): Promise<Response> {
+        return this.request<Response>(this.endpoint + path, {
+            method: Method.Post,
+            data,
+        });
+    }
+
+    public put<Response = void>(path: string, data: unknown): Promise<Response> {
+        return this.request<Response>(this.endpoint + path, {
+            method: Method.Put,
+            data,
+        });
+    }
+
+    public patch<Response = void>(path: string, data: unknown): Promise<Response> {
+        return this.request<Response>(this.endpoint + path, {
+            method: Method.Patch,
+            data,
+        });
+    }
+
+    public delete<Response>(path: string): Promise<Response> {
+        return this.request<Response>(this.endpoint + path, {
+            method: Method.Delete,
+        });
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    private request<Response>(url: string, options: Options = { method: Method.Get }): Promise<Response> {
+        const { method, data } = options;
+
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open(method, url);
+
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            xhr.onreadystatechange = (e) => {
+
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status < 400) {
+                        resolve(xhr.response);
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
+            };
+
+            // eslint-disable-next-line prefer-promise-reject-errors
+            xhr.onabort = () => reject({ reason: 'abort' });
+            // eslint-disable-next-line prefer-promise-reject-errors
+            xhr.onerror = () => reject({ reason: 'network error' });
+            // eslint-disable-next-line prefer-promise-reject-errors
+            xhr.ontimeout = () => reject({ reason: 'timeout' });
+
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.withCredentials = true;
+            xhr.responseType = 'json';
+
+            if (method === Method.Get || !data) {
+                xhr.send();
+            } else {
+                xhr.send(JSON.stringify(data));
+            }
+        });
+    }
+}

@@ -116,6 +116,7 @@ class Block<T extends Object> {
         if (this.componentDidUpdate(oldProps, newProps)) {
             this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
         }
+
     }
 
     // eslint-disable-next-line

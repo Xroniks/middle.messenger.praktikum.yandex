@@ -1,10 +1,13 @@
 import Block from '../../utils/Block';
 import Link from '../../components/Link';
-import HTTPTransport from '../../utils/HTTPTransport';
+import HTTPTransport from '../../utils/HTTPTransport1';
 import InputAreaBlock from '../../components/InputAreaBlock';
 import template from './Registration.pug';
 import styles from './Registration.scss';
 import { validate } from '../../utils/forms';
+// eslint-disable-next-line import/no-named-as-default
+import AuthController from '../../controllers/AuthController';
+import { SignupData } from '../../api/AuthAPI';
 
 
 interface RegistrationPageProps {
@@ -44,7 +47,7 @@ export default class RegistrationPage extends Block<RegistrationPageProps> {
                         } else {
                             this.setProps({ errorForm: 'Какое-то поле введено не верно!' })
                         }
-
+                        AuthController.signup(form as SignupData);
                         // выводит в консоль форму типа ключ значение (Имя поля и его значение)
                         // eslint-disable-next-line
                         console.log(form);
