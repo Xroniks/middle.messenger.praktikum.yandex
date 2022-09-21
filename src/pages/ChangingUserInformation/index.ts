@@ -5,6 +5,10 @@ import template from './ChangingUserInformation.pug';
 import styles from './ChangingUserInformation.scss';
 import img from '../../../static/img/avatar.jpg';
 import { validate } from '../../utils/forms';
+// eslint-disable-next-line import/no-named-as-default
+import UserController from '../../controllers/UserController';
+import { UserUpData } from '../../api/UserAPI';
+
 
 interface ChangingUserInformationPageProps {
     title: string;
@@ -36,6 +40,7 @@ export default class ChangingUserInformationPage extends Block<ChangingUserInfor
 
                         // если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
                         if (isValid) {
+                            UserController.profile(form as UserUpData);
                             // document.location.pathname = '/src/pages/ProfileInformation/ProfileInformation.pug';
                         } else {
                             this.setProps({ errorForm: 'Какое-то поле введено не верно!' })
@@ -52,37 +57,44 @@ export default class ChangingUserInformationPage extends Block<ChangingUserInfor
         this.children.inputAreaBlock = [
             new InputAreaBlock({
                 nameInputText: 'Имя',
-                nameInput: 'name',
+                nameInput: 'first_name',
                 type: 'text',
                 placeholderText: 'Ваше имя',
                 validation: validationFirstLastName,
             }),
             new InputAreaBlock({
                 nameInputText: 'Фамилия',
-                nameInput: 'lastname',
+                nameInput: 'second_name',
                 type: 'text',
                 placeholderText: 'Ваша фамилия',
                 validation: validationFirstLastName,
             }),
             new InputAreaBlock({
                 nameInputText: 'Телефон',
-                nameInput: 'tel',
+                nameInput: 'phone',
                 type: 'text',
                 placeholderText: 'Ваш номер телефона',
                 validation: validationPhone,
             }),
             new InputAreaBlock({
                 nameInputText: 'Почта',
-                nameInput: 'mail',
+                nameInput: 'email',
                 type: 'text',
                 placeholderText: 'Адрес вашей почты',
                 validation: validationMail,
             }),
             new InputAreaBlock({
                 nameInputText: 'Логин',
-                nameInput: 'password',
+                nameInput: 'login',
                 type: 'text',
                 placeholderText: 'Введите логин',
+                validation: validationLogin,
+            }),
+            new InputAreaBlock({
+                nameInputText: 'Имя в чате',
+                nameInput: 'display_name',
+                type: 'text',
+                placeholderText: 'Введите имя в чате',
                 validation: validationLogin,
             }),
         ];

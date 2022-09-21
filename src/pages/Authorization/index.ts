@@ -4,6 +4,9 @@ import InputAreaBlock from '../../components/InputAreaBlock';
 import template from './Authorization.pug';
 import styles from './Authorization.scss';
 import { validate } from '../../utils/forms';
+// eslint-disable-next-line import/no-named-as-default
+import AuthController from '../../controllers/AuthController';
+import { SignupData } from '../../api/AuthAPI';
 
 
 interface AuthorizationPageProps {
@@ -24,16 +27,17 @@ export default class AuthorizationPage extends Block<AuthorizationPageProps> {
         this.children.button = [
             new Link({
                 label: 'Войти',
-                to: '/Chat',
+                to: '',
                 events: {
                     click: () => {
                         const { isValid, form } = validate(this.children.inputAreaBlock as InputAreaBlock[]);
 
                         // если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
                         if (isValid) {
-                            console.log('Ничего не произошло')
+                            // console.log('Ничего не произошло')
                             // this.props.router.go('Chat');
                             // document.location.pathname = 'Chat';
+                            AuthController.signin(form as SignupData);
                         } else {
                             this.setProps({ errorForm: 'Какое-то поле введено не верно!' })
                         }

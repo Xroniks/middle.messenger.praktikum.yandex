@@ -44,10 +44,11 @@ export default class RegistrationPage extends Block<RegistrationPageProps> {
                         if (isValid) {
                             // todo Перейти на строчные буквы в url
                             // document.location.pathname = 'Chat';
+                            AuthController.signup(form as SignupData);
                         } else {
                             this.setProps({ errorForm: 'Какое-то поле введено не верно!' })
                         }
-                        AuthController.signup(form as SignupData);
+
                         // выводит в консоль форму типа ключ значение (Имя поля и его значение)
                         // eslint-disable-next-line
                         console.log(form);
@@ -67,10 +68,11 @@ export default class RegistrationPage extends Block<RegistrationPageProps> {
             }),
         ];
 
+
         this.children.inputAreaBlock = [
             new InputAreaBlock({
                 nameInputText: 'Ваше имя',
-                nameInput: 'name',
+                nameInput: 'first_name',
                 type: 'text',
                 placeholderText: 'Имя',
 
@@ -79,7 +81,7 @@ export default class RegistrationPage extends Block<RegistrationPageProps> {
             }),
             new InputAreaBlock({
                 nameInputText: 'Ваша фамилия',
-                nameInput: 'lastname',
+                nameInput: 'second_name',
                 type: 'text',
                 placeholderText: 'Фамилия',
                 // eslint-disable-next-line no-useless-escape
@@ -87,7 +89,7 @@ export default class RegistrationPage extends Block<RegistrationPageProps> {
             }),
             new InputAreaBlock({
                 nameInputText: 'Ваш номер телефона',
-                nameInput: 'tel',
+                nameInput: 'phone',
                 type: 'tel',
                 placeholderText: 'Телефон',
                 // eslint-disable-next-line no-useless-escape
@@ -95,7 +97,7 @@ export default class RegistrationPage extends Block<RegistrationPageProps> {
             }),
             new InputAreaBlock({
                 nameInputText: 'Адрес вашей почты',
-                nameInput: 'mail',
+                nameInput: 'email',
                 type: 'text',
                 placeholderText: 'Почта',
                 // eslint-disable-next-line no-useless-escape

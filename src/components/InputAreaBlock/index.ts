@@ -21,7 +21,7 @@ export default class InputAreaBlock extends Block<InputAreaBlockProps> {
     }
 
     getName() {
-        return this.props.nameInputText;
+        return this.props.nameInput;
     }
 
     getValidationCheck() {

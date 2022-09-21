@@ -4,7 +4,9 @@ import ProfileInformationItem from '../../components/ProfileInformationItem';
 import template from './ProfileInformation.pug';
 import styles from './ProfileInformation.scss';
 import img from '../../../static/img/avatar.jpg';
-import store, { StoreEvents } from '../../utils/store';
+import { withStore } from '../../utils/store';
+// eslint-disable-next-line import/no-named-as-default
+import AuthController from '../../controllers/AuthController';
 
 interface ProfileInformationPageProps {
     title: string;
@@ -12,13 +14,13 @@ interface ProfileInformationPageProps {
 
 
 export default class ProfileInformationPage extends Block<ProfileInformationPageProps> {
-    constructor() {
-        super('div', store.getState());
+    constructor(props: ProfileInformationPageProps) {
+        super('div', props);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     componentDidUpdate(oldProps: any, newProps: any) {
-        const fieldsOrder = ['firstName', 'lastName'];
+        const fieldsOrder = ['first_name', 'second_name', 'phone', 'email', 'login'];
 
         fieldsOrder.forEach((field, index) => {
             (this.children.profileInformationItem as Block<ProfileInformationPageProps>[])[index].setProps({ textProfile: newProps[field] })
@@ -29,32 +31,28 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
 
     init() {
 
-        const { user } = store.getState();
-
-        store.on(StoreEvents.Updated, () => {
-            this.setProps(store.getState().user || {})
-        })
+        AuthController.fetchUser();
 
         this.children.profileInformationItem = [
             new ProfileInformationItem({
                 textConst: 'Имя',
-                textProfile: user.firstName,
+                textProfile: this.props.first_name,
             }),
             new ProfileInformationItem({
                 textConst: 'Фамилия',
-                textProfile: user.lastName,
+                textProfile: this.props.second_name,
             }),
             new ProfileInformationItem({
                 textConst: 'Телефон',
-                textProfile: '+79541171175',
+                textProfile: this.props.phone,
             }),
             new ProfileInformationItem({
                 textConst: 'Почта',
-                textProfile: 'Xroniks25@gmail.com',
+                textProfile: this.props.email,
             }),
             new ProfileInformationItem({
                 textConst: 'Логин',
-                textProfile: 'Xroniks',
+                textProfile: this.props.login,
             }),
         ];
 
@@ -83,6 +81,16 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
                     click: () => { },
                 },
             }),
+            new Link({
+                label: 'Выйти из аккаунта',
+                to: '',
+                events: {
+                    // eslint-disable-next-line
+                    click: () => {
+                        AuthController.logout();
+                    },
+                },
+            }),
         ];
     }
 
@@ -90,3 +98,7 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
         return this.compile(template, { ...this.props, img, styles });
     }
 }
+
+const withUser = withStore((state) => ({ ...state.user }))
+
+export const ProfilePage = withUser(ProfileInformationPage);

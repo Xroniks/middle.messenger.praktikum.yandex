@@ -1,15 +1,17 @@
 import AuthorizationPage from './pages/Authorization';
 import ChangingPasswordPage from './pages/ChangingPassword';
 import ChangingUserInformationPage from './pages/ChangingUserInformation';
-import ProfileInformationPage from './pages/ProfileInformation';
+import { ProfilePage } from './pages/ProfileInformation';
 import Error404Page from './pages/Error404';
 import Error500Page from './pages/Error500';
 import ChatPage from './pages/Chat';
 import RegistrationPage from './pages/Registration';
 import Router from './utils/Router';
+// eslint-disable-next-line import/no-named-as-default
+import AuthController from './controllers/AuthController';
 import store from './utils/store';
 
-window.store = store
+window.store = store;
 
 enum Routes {
     Index = '/',
@@ -24,20 +26,33 @@ enum Routes {
 }
 
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
     Router
         .use(Routes.Index, AuthorizationPage)
         .use(Routes.Authorization, AuthorizationPage)
         .use(Routes.Register, RegistrationPage)
-        .use(Routes.Profile, ProfileInformationPage)
+        .use(Routes.Profile, ProfilePage)
         .use(Routes.ChangingPassword, ChangingPasswordPage)
         .use(Routes.ChangingUserInformation, ChangingUserInformationPage)
         .use(Routes.Chat, ChatPage)
         .use(Routes.Error500, Error500Page)
         .use(Routes.Error404, Error404Page)
         .start();
-}
-)
+
+    try {
+        await AuthController.fetchUser();
+        Router.start();
+        if (window.location.pathname === '/' || window.location.pathname === '/Authorization' || window.location.pathname === '/Registration') {
+            Router.go('/ProfileInformation');
+        }
+    } catch {
+        Router.start();
+        if (!(window.location.pathname === '/' || window.location.pathname === '/Authorization' || window.location.pathname === '/Registration')) {
+            Router.go('/');
+        }
+
+    }
+})
 
 
 // window.addEventListener('DOMContentLoaded', () => {
