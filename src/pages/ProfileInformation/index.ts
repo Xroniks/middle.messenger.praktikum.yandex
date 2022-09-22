@@ -3,10 +3,12 @@ import Link from '../../components/Link';
 import ProfileInformationItem from '../../components/ProfileInformationItem';
 import template from './ProfileInformation.pug';
 import styles from './ProfileInformation.scss';
-import img from '../../../static/img/avatar.jpg';
+// import img from '../../../static/img/avatar.jpg';
 import { withStore } from '../../utils/store';
 // eslint-disable-next-line import/no-named-as-default
 import AuthController from '../../controllers/AuthController';
+// eslint-disable-next-line import/no-named-as-default
+import UserController from '../../controllers/UserController';
 
 interface ProfileInformationPageProps {
     title: string;
@@ -56,6 +58,24 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
             }),
         ];
 
+
+
+        this.children.buttonSendFile = new Link({
+            label: 'Загрузить',
+            to: '',
+            events: {
+                // eslint-disable-next-line
+                click: () => {
+                    const avatar = document.getElementById('avatar');
+                    const formData = new FormData();
+                    // @ts-ignore
+                    formData.append('avatar', avatar.files[0]);
+                    UserController.avatar(formData);
+                    this.setProps(this.props);
+                },
+            },
+        })
+
         this.children.button = [
             new Link({
                 label: 'Изменить информацию',
@@ -95,7 +115,7 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
     }
 
     render() {
-        return this.compile(template, { ...this.props, img, styles });
+        return this.compile(template, { ...this.props, img: `https://ya-praktikum.tech/api/v2/resources${this.props.avatar}`, styles, });
     }
 }
 

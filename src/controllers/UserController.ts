@@ -14,7 +14,8 @@ export class UserController {
     }
 
     async avatar(data: FormData) {
-        await this.api.avatar(data);
+        const avatar = await this.api.avatar(data);
+        store.set('user', avatar)
     }
 
     async password(data: PasswordUp) {
