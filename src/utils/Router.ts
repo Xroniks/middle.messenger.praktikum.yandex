@@ -15,6 +15,7 @@ function render(query: string, block: any) {
     root.innerHTML = '';
 
     root.append(block.getContent()!);
+    block.dispatchComponentDidMount();
 
     return root;
 }

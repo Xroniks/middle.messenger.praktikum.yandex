@@ -9,6 +9,8 @@ import { withStore } from '../../utils/store';
 import AuthController from '../../controllers/AuthController';
 // eslint-disable-next-line import/no-named-as-default
 import UserController from '../../controllers/UserController';
+import ChatController from '../../controllers/ChatController';
+import { GetChatsData } from '../../api/ChatAPI';
 
 interface ProfileInformationPageProps {
     title: string;
@@ -20,21 +22,10 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
         super('div', props);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    componentDidUpdate(oldProps: any, newProps: any) {
-        const fieldsOrder = ['first_name', 'second_name', 'phone', 'email', 'login'];
 
-        fieldsOrder.forEach((field, index) => {
-            (this.children.profileInformationItem as Block<ProfileInformationPageProps>[])[index].setProps({ textProfile: newProps[field] })
-        });
-
-        return true
-    }
-
-    init() {
-
+    render() {
+        debugger;
         AuthController.fetchUser();
-
         this.children.profileInformationItem = [
             new ProfileInformationItem({
                 textConst: 'Имя',
@@ -112,9 +103,13 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
                 },
             }),
         ];
-    }
 
-    render() {
+        const fieldsOrder = ['first_name', 'second_name', 'phone', 'email', 'login'];
+
+        fieldsOrder.forEach((field, index) => {
+            (this.children.profileInformationItem as Block<ProfileInformationPageProps>[])[index].setProps({ textProfile: this.props[field] })
+        });
+
         return this.compile(template, { ...this.props, img: `https://ya-praktikum.tech/api/v2/resources${this.props.avatar}`, styles, });
     }
 }

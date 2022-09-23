@@ -6,6 +6,9 @@ import styles from './Chat.scss';
 import InputAreaBlock from '../../components/InputAreaBlock';
 import img from '../../../static/img/avatar.jpg';
 import test from '../../../static/img/test.jpg';
+import { CreateChat, DeleteChat, GetChatsData } from '../../api/ChatAPI';
+import ChatController from '../../controllers/ChatController';
+import { withStore } from '../../utils/store';
 
 interface ChatPageProps {
     title: string;
@@ -16,7 +19,18 @@ export default class ChatPage extends Block<ChatPageProps> {
         super('div', props);
     }
 
-    init() {
+    componentDidMount(): void {
+        const data: GetChatsData = {
+            offset: 0,
+            limit: 5,
+            title: ''
+        }
+        ChatController.getChats(data)
+    }
+
+
+    render() {
+
         this.children.buttonBlockProfile = [
             new Link({
                 label: 'Мой профиль',
@@ -28,23 +42,62 @@ export default class ChatPage extends Block<ChatPageProps> {
             }),
         ];
 
-        this.children.buttonNameChat = [
+        this.children.buttonCreateChat = [
             new Link({
-                label: 'Название чата',
+                label: 'Добавить чат',
                 to: '',
                 events: {
                     // eslint-disable-next-line
-                    click: () => { },
+                    click: () => {
+                        // eslint-disable-next-line no-alert
+                        const sign = window.prompt('Введите название чата!');
+                        if (sign) {
+                            const data: CreateChat = {
+                                title: sign
+                            }
+                            ChatController.createChat(data);
+                        }
+                        // this.setProps(this.props);
+                    },
+                },
+            }),
+        ];
+        this.children.AddUserinChat = [
+            new Link({
+                label: 'Добавить участника',
+                to: '',
+                events: {
+                    // eslint-disable-next-line
+                    click: () => {
+                        // eslint-disable-next-line no-alert
+                        const sign = window.prompt('Введите название чата!');
+                        if (sign) {
+                            const data: CreateChat = {
+                                title: sign
+                            }
+                            ChatController.createChat(data);
+                        }
+                        // this.setProps(this.props);
+                    },
                 },
             }),
         ];
         this.children.buttonSettingsChat = [
             new Link({
-                label: 'Настройки',
+                label: 'Удалить чат',
                 to: '',
                 events: {
                     // eslint-disable-next-line
-                    click: () => { },
+                    click: () => {
+
+                        // eslint-disable-next-line no-alert
+                        const sign = window.prompt('Введите id чата который хотите удалить!');
+                        const data: DeleteChat = {
+                            chatId: Number(sign)
+                        }
+                        ChatController.deleteChat(data);
+                        // this.setProps(this.props);
+                    },
                 },
             }),
         ];
@@ -57,39 +110,6 @@ export default class ChatPage extends Block<ChatPageProps> {
                     // eslint-disable-next-line
                     click: () => { },
                 },
-            }),
-        ];
-
-        this.children.dialogItem = [
-            new DialogItem({
-                NameDialog: "Диалог №1",
-                message: "Я про тебя всё знаю!!!!!!!!!!!!!!",
-                time: "17:03",
-                counterMessage: 23,
-            }),
-            new DialogItem({
-                NameDialog: "Диалог №2",
-                message: "Разные сообщения тестим",
-                time: "19:03",
-                counterMessage: 3,
-            }),
-            new DialogItem({
-                NameDialog: "Диалог №3",
-                message: "Как вы думаете, я сдам?",
-                time: "12:12",
-                counterMessage: 5,
-            }),
-            new DialogItem({
-                NameDialog: "Диалог №4",
-                message: "Очень надеюсь, что сдам",
-                time: "13:13",
-                counterMessage: 11,
-            }),
-            new DialogItem({
-                NameDialog: "Диалог №5",
-                message: "Я устал очень!))",
-                time: "12:43",
-                counterMessage: 121,
             }),
         ];
 
@@ -149,9 +169,23 @@ export default class ChatPage extends Block<ChatPageProps> {
                 },
             }),
         ];
-    }
 
-    render() {
+        if (this.props.chats) {
+
+            this.children.dialogItem = this.props.chats.map((chat: any) => new DialogItem({
+                NameDialog: chat.title,
+                message: chat.last_message,
+                time: chat.id,
+                counterMessage: chat.unread_count
+            }))
+        }
+
+
         return this.compile(template, { ...this.props, styles, img, test });
     }
 }
+
+const withChat = withStore(state => ({ chats: [...(state.chats || [])] }))
+
+
+export const Messeger = withChat(ChatPage);

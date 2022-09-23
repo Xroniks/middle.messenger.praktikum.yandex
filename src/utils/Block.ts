@@ -201,6 +201,7 @@ class Block<T extends Object> {
             const value = target[prop];
             return typeof value === 'function' ? value.bind(target) : value;
         },
+
         set: (target, prop, value) => {
             const oldTarget = { ...target };
 

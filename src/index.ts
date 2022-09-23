@@ -4,12 +4,14 @@ import ChangingUserInformationPage from './pages/ChangingUserInformation';
 import { ProfilePage } from './pages/ProfileInformation';
 import Error404Page from './pages/Error404';
 import Error500Page from './pages/Error500';
-import ChatPage from './pages/Chat';
+import ChatPage, { Messeger } from './pages/Chat';
 import RegistrationPage from './pages/Registration';
 import Router from './utils/Router';
 // eslint-disable-next-line import/no-named-as-default
 import AuthController from './controllers/AuthController';
 import store from './utils/store';
+import ChatController from './controllers/ChatController';
+import { GetChatsData } from './api/ChatAPI';
 
 window.store = store;
 
@@ -34,7 +36,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         .use(Routes.Profile, ProfilePage)
         .use(Routes.ChangingPassword, ChangingPasswordPage)
         .use(Routes.ChangingUserInformation, ChangingUserInformationPage)
-        .use(Routes.Chat, ChatPage)
+        .use(Routes.Chat, Messeger)
         .use(Routes.Error500, Error500Page)
         .use(Routes.Error404, Error404Page)
         .start();
