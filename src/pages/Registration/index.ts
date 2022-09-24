@@ -5,10 +5,8 @@ import InputAreaBlock from '../../components/InputAreaBlock';
 import template from './Registration.pug';
 import styles from './Registration.scss';
 import { validate } from '../../utils/forms';
-// eslint-disable-next-line import/no-named-as-default
 import AuthController from '../../controllers/AuthController';
 import { SignupData } from '../../api/AuthAPI';
-
 
 interface RegistrationPageProps {
     title: string;
@@ -31,7 +29,6 @@ export default class RegistrationPage extends Block<RegistrationPageProps> {
     }
 
     init() {
-
         this.children.button = [
             new Link({
                 label: 'Зарегистрироваться',
@@ -43,7 +40,6 @@ export default class RegistrationPage extends Block<RegistrationPageProps> {
                         // если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
                         if (isValid) {
                             // todo Перейти на строчные буквы в url
-                            // document.location.pathname = 'Chat';
                             AuthController.signup(form as SignupData);
                         } else {
                             this.setProps({ errorForm: 'Какое-то поле введено не верно!' })
@@ -68,14 +64,12 @@ export default class RegistrationPage extends Block<RegistrationPageProps> {
             }),
         ];
 
-
         this.children.inputAreaBlock = [
             new InputAreaBlock({
                 nameInputText: 'Ваше имя',
                 nameInput: 'first_name',
                 type: 'text',
                 placeholderText: 'Имя',
-
                 // eslint-disable-next-line no-useless-escape
                 validation: validationFirstLastName,
             }),

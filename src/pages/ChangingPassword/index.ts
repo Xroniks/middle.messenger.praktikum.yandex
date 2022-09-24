@@ -5,7 +5,6 @@ import template from './ChangingPassword.pug';
 import styles from './ChangingPassword.scss';
 import img from '../../../static/img/avatar.jpg';
 import { validate } from '../../utils/forms';
-// eslint-disable-next-line import/no-named-as-default
 import UserController from '../../controllers/UserController';
 import { PasswordUp } from '../../api/UserAPI';
 
@@ -28,15 +27,13 @@ export default class ChangingPasswordPage extends Block<ChangingPasswordPageProp
                 events: {
                     click: () => {
                         const { isValid, form } = validate(this.children.inputAreaBlock as InputAreaBlock[]);
-
                         // если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
                         if (isValid) {
-                            // document.location.pathname = 'ProfileInformation';
+                            // document.location.pathname = 'settings';
                             UserController.password(form as PasswordUp);
                         } else {
                             this.setProps({ errorForm: 'Какое-то поле введено не верно!' });
                         }
-
                         // выводит в консоль форму типа ключ значение (Имя поля и его значение)
                         // eslint-disable-next-line
                         console.log(form);

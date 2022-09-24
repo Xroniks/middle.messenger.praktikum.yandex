@@ -8,6 +8,9 @@ interface DialogItemProps {
     message: string;
     time: string;
     counterMessage: number;
+    events: {
+        click: () => void;
+    };
 
 }
 

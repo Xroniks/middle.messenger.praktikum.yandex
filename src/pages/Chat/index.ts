@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import Block from '../../utils/Block';
 import Link from '../../components/Link';
 import DialogItem from '../../components/DialogItem';
@@ -6,15 +7,16 @@ import styles from './Chat.scss';
 import InputAreaBlock from '../../components/InputAreaBlock';
 import img from '../../../static/img/avatar.jpg';
 import test from '../../../static/img/test.jpg';
-import { CreateChat, DeleteChat, GetChatsData } from '../../api/ChatAPI';
+import { AddUserinChatData, CreateChat, DeleteChat, GetChatsData } from '../../api/ChatAPI';
 import ChatController from '../../controllers/ChatController';
-import { withStore } from '../../utils/store';
+import store, { withStore } from '../../utils/store';
+import DialogMessages from '../../components/DialogMesseges';
 
 interface ChatPageProps {
     title: string;
 }
 
-export default class ChatPage extends Block<ChatPageProps> {
+class ChatPage extends Block<ChatPageProps> {
     constructor(props: ChatPageProps) {
         super('div', props);
     }
@@ -28,13 +30,12 @@ export default class ChatPage extends Block<ChatPageProps> {
         ChatController.getChats(data)
     }
 
-
     render() {
 
         this.children.buttonBlockProfile = [
             new Link({
                 label: 'Мой профиль',
-                to: '/ProfileInformation',
+                to: '/settings',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -57,11 +58,11 @@ export default class ChatPage extends Block<ChatPageProps> {
                             }
                             ChatController.createChat(data);
                         }
-                        // this.setProps(this.props);
                     },
                 },
             }),
         ];
+
         this.children.AddUserinChat = [
             new Link({
                 label: 'Добавить участника',
@@ -69,19 +70,21 @@ export default class ChatPage extends Block<ChatPageProps> {
                 events: {
                     // eslint-disable-next-line
                     click: () => {
-                        // eslint-disable-next-line no-alert
-                        const sign = window.prompt('Введите название чата!');
-                        if (sign) {
-                            const data: CreateChat = {
-                                title: sign
+                        const user = window.prompt('Введите ID пользователя!');
+                        const chat = window.prompt('Введите ID чата!');
+                        if (user && chat) {
+                            const data: AddUserinChatData = {
+                                users: [Number(user)],
+                                chatId: Number(chat)
                             }
-                            ChatController.createChat(data);
+                            ChatController.AddUserinChat(data);
                         }
                         // this.setProps(this.props);
                     },
                 },
             }),
         ];
+
         this.children.buttonSettingsChat = [
             new Link({
                 label: 'Удалить чат',
@@ -124,6 +127,12 @@ export default class ChatPage extends Block<ChatPageProps> {
             }),
         ];
 
+        this.children.DialogMessages = [
+            new DialogMessages({
+                textMessage: "Бло сообщений>"
+            }),
+        ];
+
         this.children.inputAreaBlocMessageChat = [
             new InputAreaBlock({
                 nameInputText: '',
@@ -146,7 +155,7 @@ export default class ChatPage extends Block<ChatPageProps> {
             }),
             new Link({
                 label: 'Зарегистрироваться',
-                to: '/Registration',
+                to: '/sign-up',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -173,19 +182,22 @@ export default class ChatPage extends Block<ChatPageProps> {
         if (this.props.chats) {
 
             this.children.dialogItem = this.props.chats.map((chat: any) => new DialogItem({
-                NameDialog: chat.title,
+                NameDialog: this.props.activeChat.id === chat.id ? `${chat.title}Active` : chat.title,
                 message: chat.last_message,
                 time: chat.id,
-                counterMessage: chat.unread_count
+                counterMessage: chat.unread_count,
+                events: {
+                    // eslint-disable-next-line
+                    click: () => {
+                        store.set('activeChat', chat)
+                    },
+                },
             }))
         }
-
-
         return this.compile(template, { ...this.props, styles, img, test });
     }
 }
 
 const withChat = withStore(state => ({ chats: [...(state.chats || [])] }))
-
-
-export const Messeger = withChat(ChatPage);
+const withActiveChat = withStore(state => ({ activeChat: { ...state.activeChat }, }))
+export default withActiveChat(withChat(ChatPage));

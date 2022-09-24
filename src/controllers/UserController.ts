@@ -2,7 +2,7 @@ import API, { PasswordUp, UserAPI, UserSearch, UserUpData } from "../api/UserAPI
 import Router from "../utils/Router";
 import store from "../utils/store";
 
-export class UserController {
+class UserController {
     private readonly api: UserAPI;
 
     constructor() {
@@ -11,6 +11,8 @@ export class UserController {
 
     async profile(data: UserUpData) {
         await this.api.profile(data);
+
+        Router.go('/settings')
     }
 
     async avatar(data: FormData) {
@@ -21,7 +23,7 @@ export class UserController {
     async password(data: PasswordUp) {
         await this.api.password(data);
 
-        Router.go('/ProfileInformation')
+        Router.go('/settings')
     }
 
     async fetchUser(id: string) {

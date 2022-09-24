@@ -54,7 +54,7 @@ function isObject(yourVariable: any) {
 }
 
 export function isEqual(a: Record<string, any>, b: Record<string, any>): boolean {
-    if (a === null || b === null) {
+    if (!a || !b) {
         return false;
     }
     const lkeys = Object.keys(a);

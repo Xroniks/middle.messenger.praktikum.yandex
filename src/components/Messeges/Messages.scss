@@ -1,0 +1,40 @@
+$backgroundColorChatWindow: #c9c7c7;
+$backgroundColorDialogItem: #afd8ff;
+$backgroundColorMessage1: #afd8ff;
+$backgroundColorMessage2: #ddf589;
+$backgroundHeader: #80bef8;
+$borderColor: black;
+$textColorMessage: black;
+$backgroundMessagesBlockWindowChat: #f1cdcd;
+
+.message1 {
+  display: grid;
+  gap: 5px;
+  justify-self: end;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: $backgroundColorMessage1;
+  padding: 15px;
+  color: $textColorMessage;
+  font-size: 20px;
+  line-height: 0.5;
+  text-decoration: none;
+}
+
+.message2 {
+  display: grid;
+  gap: 5px;
+  justify-self: start;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: $backgroundColorMessage2;
+  padding: 15px;
+  color: $textColorMessage;
+  font-size: 20px;
+  line-height: 0.5;
+  text-decoration: none;
+}

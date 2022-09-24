@@ -16,7 +16,7 @@ export default class Error404Page extends Block<Error404Props> {
         this.children.button = [
             new Link({
                 label: 'Перейти обратно в ЧАТ',
-                to: '/Chat',
+                to: '/messenger',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },

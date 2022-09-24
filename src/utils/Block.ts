@@ -91,6 +91,7 @@ class Block<T extends Object> {
         this.init();
 
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+        this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
 
     // eslint-disable-next-line

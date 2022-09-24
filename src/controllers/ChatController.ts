@@ -1,5 +1,4 @@
-import API, { ChatAPI, CreateChat, DeleteChat, GetChatsData } from "../api/ChatAPI";
-import Router from "../utils/Router";
+import API, { AddUserinChatData, ChatAPI, CreateChat, DeleteChat, GetChatsData } from "../api/ChatAPI";
 import store from "../utils/store";
 
 export class UserController {
@@ -8,21 +7,6 @@ export class UserController {
     constructor() {
         this.api = API;
     }
-
-    // async profile(data: UserUpData) {
-    //     await this.api.profile(data);
-    // }
-
-    // async avatar(data: FormData) {
-    //     const avatar = await this.api.avatar(data);
-    //     store.set('user', avatar)
-    // }
-
-    // async password(data: PasswordUp) {
-    //     await this.api.password(data);
-
-    //     Router.go('/ProfileInformation')
-    // }
 
     async deleteChat(chatId: DeleteChat) {
 
@@ -33,8 +17,10 @@ export class UserController {
             title: ''
         }
         this.getChats(data);
+    }
 
-
+    async getTokenChat(idChat: string) {
+        return this.api.getTokenChat(idChat);
     }
 
     async createChat(title: CreateChat) {
@@ -47,8 +33,10 @@ export class UserController {
             title: ''
         }
         this.getChats(data);
+    }
 
-
+    async AddUserinChat(params: AddUserinChatData) {
+        await this.api.addUser(params);
     }
 
     async getChats(params: GetChatsData) {
@@ -57,10 +45,6 @@ export class UserController {
         store.set('chats', chats);
 
     }
-
-    // async search(login: UserSearch) {
-    //     await this.api.search(login);
-    // }
 }
 
 export default new UserController();

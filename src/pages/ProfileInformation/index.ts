@@ -3,28 +3,24 @@ import Link from '../../components/Link';
 import ProfileInformationItem from '../../components/ProfileInformationItem';
 import template from './ProfileInformation.pug';
 import styles from './ProfileInformation.scss';
-// import img from '../../../static/img/avatar.jpg';
 import { withStore } from '../../utils/store';
-// eslint-disable-next-line import/no-named-as-default
 import AuthController from '../../controllers/AuthController';
-// eslint-disable-next-line import/no-named-as-default
 import UserController from '../../controllers/UserController';
-import ChatController from '../../controllers/ChatController';
-import { GetChatsData } from '../../api/ChatAPI';
 
 interface ProfileInformationPageProps {
     title: string;
 }
-
 
 export default class ProfileInformationPage extends Block<ProfileInformationPageProps> {
     constructor(props: ProfileInformationPageProps) {
         super('div', props);
     }
 
+    componentDidMount(): void {
+        AuthController.fetchUser();
+    }
 
     render() {
-        debugger;
         AuthController.fetchUser();
         this.children.profileInformationItem = [
             new ProfileInformationItem({
@@ -49,8 +45,6 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
             }),
         ];
 
-
-
         this.children.buttonSendFile = new Link({
             label: 'Загрузить',
             to: '',
@@ -62,7 +56,6 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
                     // @ts-ignore
                     formData.append('avatar', avatar.files[0]);
                     UserController.avatar(formData);
-                    this.setProps(this.props);
                 },
             },
         })
@@ -85,8 +78,8 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
                 },
             }),
             new Link({
-                label: 'Выйти',
-                to: '/Chat',
+                label: 'Перейти к ЧАТУ',
+                to: '/messenger',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -105,7 +98,6 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
         ];
 
         const fieldsOrder = ['first_name', 'second_name', 'phone', 'email', 'login'];
-
         fieldsOrder.forEach((field, index) => {
             (this.children.profileInformationItem as Block<ProfileInformationPageProps>[])[index].setProps({ textProfile: this.props[field] })
         });

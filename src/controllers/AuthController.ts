@@ -2,7 +2,7 @@ import API, { AuthAPI, SigninData, SignupData } from "../api/AuthAPI";
 import Router from "../utils/Router";
 import store from "../utils/store";
 
-export class AuthController {
+class AuthController {
     private readonly api: AuthAPI;
 
     constructor() {
@@ -11,20 +11,24 @@ export class AuthController {
 
     async signin(data: SigninData) {
         await this.api.signin(data);
-        Router.go('/ProfileInformation')
+        await this.fetchUser();
+        Router.go('/settings')
     }
 
     async signup(data: SignupData) {
         await this.api.signup(data);
-
         await this.fetchUser();
-        Router.go('/ProfileInformation')
+        Router.go('/settings')
     }
 
     async fetchUser() {
         const user = await this.api.read();
-
         store.set('user', user);
+    }
+
+    async getUser() {
+        return this.api.read();
+
     }
 
     async logout() {

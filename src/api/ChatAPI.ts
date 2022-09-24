@@ -31,6 +31,11 @@ export interface GetChatsData {
     title: string;
 }
 
+export interface AddUserinChatData {
+    users: number[];
+    chatId: number;
+}
+
 export interface CreateChat {
     title: string;
 }
@@ -44,14 +49,13 @@ export class ChatAPI extends BaseAPI {
         super('/chats')
     }
 
-    // signin(data: SigninData) {
-    //     return this.http.post('/signin', data);
-    // }
+    getTokenChat(idChat: string) {
+        return this.http.post(`/token/${idChat}`);
+    }
 
-
-    // signup(data: SignupData) {
-    //     return this.http.post('/signup', data);
-    // }
+    addUser(params: AddUserinChatData) {
+        return this.http.put('/users', params);
+    }
 
     create(title: CreateChat) {
         return this.http.post('', title);
@@ -64,13 +68,6 @@ export class ChatAPI extends BaseAPI {
     read(params: GetChatsData) {
         return this.http.get('', params);
     }
-
-    // logout() {
-    //     return this.http.post('/logout');
-    // }
-
-
-
 
     update = undefined;
 }

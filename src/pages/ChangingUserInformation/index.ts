@@ -33,19 +33,16 @@ export default class ChangingUserInformationPage extends Block<ChangingUserInfor
         this.children.button = [
             new Link({
                 label: 'Сохранить',
-                href: '/ProfileInformation',
+                href: '/settings',
                 events: {
                     click: () => {
                         const { isValid, form } = validate(this.children.inputAreaBlock as InputAreaBlock[]);
-
                         // если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
                         if (isValid) {
                             UserController.profile(form as UserUpData);
-                            // document.location.pathname = '/src/pages/ProfileInformation/ProfileInformation.pug';
                         } else {
                             this.setProps({ errorForm: 'Какое-то поле введено не верно!' })
                         }
-
                         // выводит в консоль форму типа ключ значение (Имя поля и его значение)
                         // eslint-disable-next-line
                         console.log(form);
