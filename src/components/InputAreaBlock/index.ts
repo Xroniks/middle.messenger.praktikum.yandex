@@ -14,14 +14,13 @@ interface InputAreaBlockProps {
     value?: string;
 }
 
-export default class InputAreaBlock extends Block {
-    // private error: string;
+export default class InputAreaBlock extends Block<InputAreaBlockProps> {
     getValue() {
         return this.props.value;
     }
 
     getName() {
-        return this.props.nameInputText;
+        return this.props.nameInput;
     }
 
     getValidationCheck() {
@@ -30,8 +29,7 @@ export default class InputAreaBlock extends Block {
 
     constructor(props: InputAreaBlockProps) {
         super('div', props);
-        this.props.validationCheck = false;
-        // this.props.error = '';
+        this.setProps({ validationCheck: false })
     }
 
     init() {
@@ -44,17 +42,17 @@ export default class InputAreaBlock extends Block {
             validation: this.props.validation,
             validationCheck: this.props.validationCheck,
             events: {
-                // eslint-disable-next-line no-console
+                // eslint-disable-next-line
                 change: () => { console.error('Не определена функция change'); },
             },
             setValueInput: (value) => {
-                this.props.value = value;
+                this.setProps({ value });
             },
             setValidationCheck: (validationCheck) => {
-                this.props.validationCheck = validationCheck;
+                this.setProps({ validationCheck });
             },
             onError: (error) => {
-                this.props.error = error;
+                this.setProps({ error });
                 this.dispatchComponentDidMount();
             },
         });

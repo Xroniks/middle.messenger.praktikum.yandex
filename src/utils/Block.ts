@@ -2,7 +2,7 @@
 import { nanoid } from 'nanoid';
 import EventBus from './EventBus';
 
-class Block {
+class Block<T extends Object> {
     static EVENTS = {
         INIT: 'init',
         FLOW_CDM: 'flow:component-did-mount',
@@ -14,7 +14,7 @@ class Block {
 
     protected props: any;
 
-    public children: Record<string, Block | Block[]>;
+    public children: Record<string, Block<T> | Block<T>[]>;
 
     private eventBus: () => EventBus;
 
@@ -28,7 +28,7 @@ class Block {
        *
        * @returns {void}
        */
-    constructor(tagName = 'div', propsWithChildren: any = {}) {
+    constructor(tagName = 'div', propsWithChildren: T = {} as T) {
         const eventBus = new EventBus();
 
         const { props, children } = this.getChildrenAndProps(propsWithChildren);
@@ -91,6 +91,7 @@ class Block {
         this.init();
 
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+        this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
 
     // eslint-disable-next-line
@@ -116,6 +117,7 @@ class Block {
         if (this.componentDidUpdate(oldProps, newProps)) {
             this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
         }
+
     }
 
     // eslint-disable-next-line
@@ -168,7 +170,7 @@ class Block {
         // eslint-disable-next-line
         Object.entries(this.children).forEach(([_, component]) => {
             if (Array.isArray(component)) {
-                component.forEach((el: Block) => {
+                component.forEach((el: Block<T>) => {
                     const stub = temp.content.querySelector(`[data-id="${el.id}"]`);
                     if (!stub) return;
                     el.getContent()?.append(...Array.from(stub.childNodes));
@@ -194,28 +196,26 @@ class Block {
         return this.element;
     }
 
-    private makePropsProxy(props: any) {
-        const self = this;
+    // todo Привести к T
+    private makePropsProxy = (props: any) => new Proxy(props, {
+        get: (target, prop) => {
+            const value = target[prop];
+            return typeof value === 'function' ? value.bind(target) : value;
+        },
 
-        return new Proxy(props, {
-            get(target, prop) {
-                const value = target[prop];
-                return typeof value === 'function' ? value.bind(target) : value;
-            },
-            set(target, prop, value) {
-                const oldTarget = { ...target };
+        set: (target, prop, value) => {
+            const oldTarget = { ...target };
 
-                // eslint-disable-next-line no-param-reassign
-                target[prop] = value;
+            // eslint-disable-next-line no-param-reassign
+            target[prop] = value;
 
-                self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
-                return true;
-            },
-            deleteProperty() {
-                throw new Error('Нет доступа');
-            },
-        });
-    }
+            this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
+            return true;
+        },
+        deleteProperty: () => {
+            throw new Error('Нет доступа');
+        },
+    })
 
     // eslint-disable-next-line class-methods-use-this
     private createDocumentElement(tagName: string) {

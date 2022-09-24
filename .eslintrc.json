@@ -10,9 +10,9 @@
         ]
     },
     "ignorePatterns": [
-        "/dist",
-        "/node_modules",
-        "/parcel-cache"
+        "./dist",
+        "./node_modules",
+        "./parcel-cache"
     ],
     "rules": {}
 }

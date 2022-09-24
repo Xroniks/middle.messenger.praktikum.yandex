@@ -8,7 +8,8 @@ main
 
     .messagesBlockHeader
       .namechat
-        | !{buttonNameChat}
+        | !{buttonCreateChat}
+        | !{AddUserinChat}
       .settings
         | !{buttonSettingsChat}
 
@@ -16,11 +17,7 @@ main
       | !{dialogItem}  
 
     .messagesBlockWindowChat
-      .blockMessageItem 
-        .message1 У нас новое мероприятие, приходи!
-          img(src=test alt="test")
-        .message2 Хорошо, обязательно прийду!
-        .message1 Будем ждать!
+      | !{DialogMessages} 
 
       .blockMessageChat
         | !{inputAreaBlocMessageChat}

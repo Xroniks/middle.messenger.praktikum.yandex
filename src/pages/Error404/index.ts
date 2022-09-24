@@ -1,5 +1,5 @@
 import Block from '../../utils/Block';
-import Button from '../../components/Button';
+import Link from '../../components/Link';
 import template from './Error404.pug';
 import styles from './Error404.scss';
 
@@ -7,16 +7,16 @@ interface Error404Props {
     title: string;
 }
 
-export default class Error404Page extends Block {
+export default class Error404Page extends Block<Error404Props> {
     constructor(props: Error404Props) {
         super('div', props);
     }
 
     init() {
         this.children.button = [
-            new Button({
+            new Link({
                 label: 'Перейти обратно в ЧАТ',
-                href: '/src/pages/Chat/Chat.pug',
+                to: '/messenger',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },

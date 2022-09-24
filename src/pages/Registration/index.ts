@@ -1,49 +1,48 @@
 import Block from '../../utils/Block';
-import Button from '../../components/Button';
-import HTTPTransport from '../../utils/HTTPTransport';
+import Link from '../../components/Link';
+import HTTPTransport from '../../utils/HTTPTransport1';
 import InputAreaBlock from '../../components/InputAreaBlock';
-
 import template from './Registration.pug';
 import styles from './Registration.scss';
+import { validate } from '../../utils/forms';
+import AuthController from '../../controllers/AuthController';
+import { SignupData } from '../../api/AuthAPI';
 
 interface RegistrationPageProps {
     title: string;
     errorForm?: string;
 }
 
-export default class RegistrationPage extends Block {
+// eslint-disable-next-line no-useless-escape
+const validationFirstLastName: string = '^[А-ЯЁA-Z][а-яА-ЯёЁa-zA-Z\-]+$';
+const validationPassword: string = '(?=.*[0-9])(?=.*[A-ZА-ЯЁ])[0-9a-zа-яёA-ZА-ЯЁ!@#$%^&*]{8,40}';
+// eslint-disable-next-line no-useless-escape
+const validationPhone: string = '^[0-9\+][0-9]{9,15}';
+// eslint-disable-next-line no-useless-escape
+const validationMail: string = '[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])';
+// eslint-disable-next-line no-useless-escape
+const validationLogin: string = '^[a-zA-Z][a-zA-Z0-9\-\_]{2,20}$';
+
+export default class RegistrationPage extends Block<RegistrationPageProps> {
     constructor(props: RegistrationPageProps) {
         super('div', props);
     }
 
     init() {
         this.children.button = [
-            new Button({
+            new Link({
                 label: 'Зарегистрироваться',
-                href: '#',
+                to: '/Authorization',
                 events: {
                     click: () => {
-                        const inputs = this.children.inputAreaBlock as InputAreaBlock[];
-
-                        // собирает все значения в полях в форму (которую потом будет выводить)
-                        const form: Record<string, any> = {};
-                        inputs.forEach((element) => {
-                            form[element.getName()] = element.getValue();
-                        });
-
-                        // ещё раз проверяет у всех полей была ли пройдена валидация
-                        let chek = true;
-                        inputs.forEach((element) => {
-                            if (!element.getValidationCheck()) {
-                                chek = false;
-                            }
-                        });
+                        const { isValid, form } = validate(this.children.inputAreaBlock as InputAreaBlock[]);
 
                         // если все поля прошли валидацию переходить на страничку дальше, если нет то выводить сообщение о ошибке
-                        if (chek) {
-                            document.location.pathname = '/src/pages/Chat/Chat.pug';
+                        if (isValid) {
+                            // todo Перейти на строчные буквы в url
+                            AuthController.signup(form as SignupData);
                         } else {
-                            this.props.errorForm = 'Какое-то поле введено не верно!';
+                            this.setProps({ errorForm: 'Какое-то поле введено не верно!' })
                         }
 
                         // выводит в консоль форму типа ключ значение (Имя поля и его значение)
@@ -55,9 +54,9 @@ export default class RegistrationPage extends Block {
                     },
                 },
             }),
-            new Button({
+            new Link({
                 label: 'Войти',
-                href: '/src/pages/Authorization/Authorization.pug',
+                to: '/Authorization',
                 events: {
                     // eslint-disable-next-line
                     click: () => { },
@@ -68,36 +67,35 @@ export default class RegistrationPage extends Block {
         this.children.inputAreaBlock = [
             new InputAreaBlock({
                 nameInputText: 'Ваше имя',
-                nameInput: 'name',
+                nameInput: 'first_name',
                 type: 'text',
                 placeholderText: 'Имя',
-
                 // eslint-disable-next-line no-useless-escape
-                validation: '^[А-ЯЁA-Z][а-яА-ЯёЁa-zA-Z\-]+$',
+                validation: validationFirstLastName,
             }),
             new InputAreaBlock({
                 nameInputText: 'Ваша фамилия',
-                nameInput: 'lastname',
+                nameInput: 'second_name',
                 type: 'text',
                 placeholderText: 'Фамилия',
                 // eslint-disable-next-line no-useless-escape
-                validation: '^[А-ЯЁA-Z][а-яА-ЯёЁa-zA-Z\-]+$',
+                validation: validationFirstLastName,
             }),
             new InputAreaBlock({
                 nameInputText: 'Ваш номер телефона',
-                nameInput: 'tel',
+                nameInput: 'phone',
                 type: 'tel',
                 placeholderText: 'Телефон',
                 // eslint-disable-next-line no-useless-escape
-                validation: '^[0-9\+][0-9]{9,15}',
+                validation: validationPhone,
             }),
             new InputAreaBlock({
                 nameInputText: 'Адрес вашей почты',
-                nameInput: 'mail',
+                nameInput: 'email',
                 type: 'text',
                 placeholderText: 'Почта',
                 // eslint-disable-next-line no-useless-escape
-                validation: '[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])',
+                validation: validationMail,
             }),
             new InputAreaBlock({
                 nameInputText: 'Введите логин',
@@ -105,21 +103,21 @@ export default class RegistrationPage extends Block {
                 type: 'text',
                 placeholderText: 'Логин',
                 // eslint-disable-next-line no-useless-escape
-                validation: '^[a-zA-Z][a-zA-Z0-9\-\_]{2,20}$',
+                validation: validationLogin,
             }),
             new InputAreaBlock({
                 nameInputText: 'Введите пароль',
                 nameInput: 'password',
                 type: 'password',
                 placeholderText: 'Пароль',
-                validation: '(?=.*[0-9])(?=.*[A-ZА-ЯЁ])[0-9a-zа-яёA-ZА-ЯЁ!@#$%^&*]{8,40}',
+                validation: validationPassword,
             }),
             new InputAreaBlock({
                 nameInputText: 'Повторите пароль ещё раз',
                 nameInput: 'repeatPassword',
                 type: 'password',
                 placeholderText: 'Повторите пароль',
-                validation: '(?=.*[0-9])(?=.*[A-ZА-ЯЁ])[0-9a-zа-яёA-ZА-ЯЁ!@#$%^&*]{8,40}',
+                validation: validationPassword,
             }),
         ];
     }

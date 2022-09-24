@@ -18,7 +18,7 @@ interface InputProps {
     setValidationCheck?: (value: boolean) => void;
 }
 
-export default class Input extends Block {
+export default class Input extends Block<InputProps> {
     constructor(props: InputProps) {
         super('input', props);
         this.element!.classList.add('inputAreaWindow');
