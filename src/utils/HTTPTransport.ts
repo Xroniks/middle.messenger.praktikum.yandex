@@ -1,3 +1,5 @@
+import queryStringify from "./QueryStringify";
+
 export enum Method {
     Get = 'Get',
     Post = 'Post',
@@ -10,16 +12,6 @@ type Options = {
     method: Method;
     data?: any;
 };
-
-function queryStringify(url: string, data = {}) {
-    if (!Object.keys(data).length) {
-        return url
-    }
-    const path = Object.entries(data).map(([key, value]) => `${key}=${value}`).join("&");
-
-    return `?${path}`
-
-}
 
 export default class HTTPTransport {
     static API_URL = 'https://ya-praktikum.tech/api/v2';
@@ -62,7 +54,7 @@ export default class HTTPTransport {
         });
     }
 
-    // eslint-disable-next-line class-methods-use-this
+
     private request<Response>(url: string, options: Options = { method: Method.Get }): Promise<Response> {
         const { method, data } = options;
 
@@ -70,6 +62,8 @@ export default class HTTPTransport {
             const xhr = new XMLHttpRequest();
             xhr.open(method, url);
 
+
+            // @ts-ignore
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             xhr.onreadystatechange = (e) => {
 

@@ -1,4 +1,4 @@
-import BaseAPI from "./BaseAPI";
+import HTTPTransport from "../utils/HTTPTransport";
 
 export interface SigninData {
     login: string;
@@ -6,15 +6,6 @@ export interface SigninData {
 }
 
 export interface SignupData {
-    first_name: string;
-    second_name: string;
-    login: string;
-    email: string;
-    password: string;
-    phone: string;
-}
-
-export interface User {
     id: number;
     first_name: string;
     second_name: string;
@@ -25,17 +16,33 @@ export interface User {
     avatar: string;
 }
 
-export class AuthAPI extends BaseAPI {
+export interface SingupReturn {
+    id: number;
+}
+
+export interface User {
+    id: number;
+    first_name: string;
+    second_name: string;
+    display_name: string;
+    login: string;
+    avatar: string;
+    email: string;
+    phone: string;
+}
+
+export class AuthAPI {
+    private http: HTTPTransport;
+
     constructor() {
-        super('/auth')
+        this.http = new HTTPTransport('/auth');
     }
 
-    signin(data: SigninData) {
+    signin(data: SigninData): Promise<User> {
         return this.http.post('/signin', data);
     }
 
-
-    signup(data: SignupData) {
+    signup(data: SignupData): Promise<SingupReturn> {
         return this.http.post('/signup', data);
     }
 
@@ -43,7 +50,7 @@ export class AuthAPI extends BaseAPI {
         return this.http.get('/user');
     }
 
-    logout() {
+    logout(): Promise<void> {
         return this.http.post('/logout');
     }
 

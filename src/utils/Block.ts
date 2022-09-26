@@ -22,12 +22,6 @@ class Block<T extends Object> {
 
     private meta: { tagName: string; props: any; };
 
-    /** JSDoc
-       * @param {string} tagName
-       * @param {Object} props
-       *
-       * @returns {void}
-       */
     constructor(tagName = 'div', propsWithChildren: T = {} as T) {
         const eventBus = new EventBus();
 
@@ -47,7 +41,7 @@ class Block<T extends Object> {
 
         eventBus.emit(Block.EVENTS.INIT);
     }
-    // eslint-disable-next-line
+
     private getChildrenAndProps(childrenAndProps: any) {
         const props: Record<string, any> = {};
         const children: Record<string, any> = {};
@@ -94,14 +88,12 @@ class Block<T extends Object> {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
 
-    // eslint-disable-next-line
     protected init() { }
 
     private componentDidMountPrivate() {
         this.componentDidMount();
     }
 
-    // eslint-disable-next-line
     componentDidMount() { }
 
     public dispatchComponentDidMount() {
@@ -120,7 +112,7 @@ class Block<T extends Object> {
 
     }
 
-    // eslint-disable-next-line
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     protected componentDidUpdate(_oldProps: any, _newProps: any) {
         return true;
     }
@@ -149,7 +141,6 @@ class Block<T extends Object> {
         this.addEvents();
     }
 
-    // eslint-disable-next-line
     protected compile(template: (context: any) => string, context: any) {
         const contextAndStubs = { ...context };
 
@@ -167,7 +158,7 @@ class Block<T extends Object> {
 
         temp.innerHTML = html;
 
-        // eslint-disable-next-line
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         Object.entries(this.children).forEach(([_, component]) => {
             if (Array.isArray(component)) {
                 component.forEach((el: Block<T>) => {
@@ -187,7 +178,6 @@ class Block<T extends Object> {
         return temp.content;
     }
 
-    // eslint-disable-next-line
     protected render(): DocumentFragment {
         return new DocumentFragment();
     }
@@ -217,7 +207,6 @@ class Block<T extends Object> {
         },
     })
 
-    // eslint-disable-next-line class-methods-use-this
     private createDocumentElement(tagName: string) {
         return document.createElement(tagName);
     }

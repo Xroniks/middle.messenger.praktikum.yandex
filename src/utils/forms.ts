@@ -1,7 +1,6 @@
 import InputAreaBlock from "../components/InputAreaBlock";
 
-// eslint-disable-next-line import/prefer-default-export
-export function validate(inputs: InputAreaBlock[]) {
+export default function validate(inputs: InputAreaBlock[]) {
     // собирает все значения в полях в форму (которую потом будет выводить)
     const form: Record<string, any> = {};
     inputs.forEach((element) => {

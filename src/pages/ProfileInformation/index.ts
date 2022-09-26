@@ -21,7 +21,6 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
     }
 
     render() {
-        AuthController.fetchUser();
         this.children.profileInformationItem = [
             new ProfileInformationItem({
                 textConst: 'Имя',
@@ -49,7 +48,6 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
             label: 'Загрузить',
             to: '',
             events: {
-                // eslint-disable-next-line
                 click: () => {
                     const avatar = document.getElementById('avatar');
                     const formData = new FormData();
@@ -65,7 +63,6 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
                 label: 'Изменить информацию',
                 to: '/ChangingUserInformation',
                 events: {
-                    // eslint-disable-next-line
                     click: () => { },
                 },
             }),
@@ -73,7 +70,6 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
                 label: 'Изменить пароль',
                 to: '/ChangingPassword',
                 events: {
-                    // eslint-disable-next-line
                     click: () => { },
                 },
             }),
@@ -81,7 +77,6 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
                 label: 'Перейти к ЧАТУ',
                 to: '/messenger',
                 events: {
-                    // eslint-disable-next-line
                     click: () => { },
                 },
             }),
@@ -89,7 +84,6 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
                 label: 'Выйти из аккаунта',
                 to: '',
                 events: {
-                    // eslint-disable-next-line
                     click: () => {
                         AuthController.logout();
                     },

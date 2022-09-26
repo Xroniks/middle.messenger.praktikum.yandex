@@ -18,7 +18,6 @@ export default class Error404Page extends Block<Error404Props> {
                 label: 'Перейти обратно в ЧАТ',
                 to: '/messenger',
                 events: {
-                    // eslint-disable-next-line
                     click: () => { },
                 },
             }),

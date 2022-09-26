@@ -10,20 +10,32 @@ class AuthController {
     }
 
     async signin(data: SigninData) {
-        await this.api.signin(data);
-        await this.fetchUser();
-        Router.go('/settings')
+        try {
+            await this.api.signin(data);
+            await this.fetchUser();
+            Router.go('/settings')
+        } catch (e: any) {
+            console.error(e.message);
+        }
     }
 
     async signup(data: SignupData) {
-        await this.api.signup(data);
-        await this.fetchUser();
-        Router.go('/settings')
+        try {
+            await this.api.signup(data);
+            await this.fetchUser();
+            Router.go('/settings')
+        } catch (e: any) {
+            console.error(e.message);
+        }
     }
 
     async fetchUser() {
-        const user = await this.api.read();
-        store.set('user', user);
+        try {
+            const user = await this.api.read();
+            store.set('user', user);
+        } catch (e: any) {
+            console.error(e.message);
+        }
     }
 
     async getUser() {
@@ -32,8 +44,12 @@ class AuthController {
     }
 
     async logout() {
-        await this.api.logout();
-        Router.go('/Authorization')
+        try {
+            await this.api.logout();
+            Router.go('/Authorization')
+        } catch (e: any) {
+            console.error(e.message);
+        }
     }
 }
 

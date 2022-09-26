@@ -1,4 +1,4 @@
-import BaseAPI from "./BaseAPI";
+import HTTPTransport from "../utils/HTTPTransport";
 
 export interface SigninData {
     login: string;
@@ -43,29 +43,59 @@ export interface DeleteChat {
     chatId: number;
 }
 
+export interface GetChatsReturn {
+    id: number,
+    title: string,
+    avatar: string,
+    created_by: number,
+    unread_count: number,
+    last_message: any
+}
 
-export class ChatAPI extends BaseAPI {
+export interface GetTockenChatReutrn {
+    token: string,
+}
+
+export interface AddChatReturn {
+    id: number,
+}
+
+export interface DeleteChatReturnResult {
+    id: number,
+    title: string,
+    avatar: string,
+    created_by: number
+}
+
+export interface DeleteChatReturn {
+    result: DeleteChatReturnResult,
+    userId: number
+}
+
+export class ChatAPI {
+    private http: HTTPTransport;
+
     constructor() {
-        super('/chats')
+        this.http = new HTTPTransport('/chats');
     }
 
-    getTokenChat(idChat: string) {
+    getTokenChat(idChat: string): Promise<GetTockenChatReutrn> {
         return this.http.post(`/token/${idChat}`);
     }
 
-    addUser(params: AddUserinChatData) {
+    addUser(params: AddUserinChatData): Promise<void> {
         return this.http.put('/users', params);
     }
 
-    create(title: CreateChat) {
+    create(title: CreateChat): Promise<AddChatReturn> {
         return this.http.post('', title);
     }
 
-    delete(chatId: DeleteChat) {
+    delete(chatId: DeleteChat): Promise<DeleteChatReturn> {
         return this.http.delete('', chatId);
     }
 
-    read(params: GetChatsData) {
+    read(params: GetChatsData): Promise<GetChatsReturn[]> {
         return this.http.get('', params);
     }
 

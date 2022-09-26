@@ -21,7 +21,6 @@ enum Routes {
     Error404 = '/Error404'
 }
 
-
 window.addEventListener('DOMContentLoaded', async () => {
     Router
         .use(Routes.Index, AuthorizationPage)

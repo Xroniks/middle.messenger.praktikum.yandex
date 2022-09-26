@@ -14,5 +14,11 @@
         "./node_modules",
         "./parcel-cache"
     ],
-    "rules": {}
+    "rules": {
+        "no-console": "off",
+        "no-alert": "off",
+        "class-methods-use-this": "off",
+        "no-underscore-dangle": "off",
+        "no-useless-escape": "off"
+    }
 }

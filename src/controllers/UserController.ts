@@ -10,30 +10,57 @@ class UserController {
     }
 
     async profile(data: UserUpData) {
-        await this.api.profile(data);
+        try {
 
-        Router.go('/settings')
+            await this.api.profile(data);
+            Router.go('/settings')
+
+        } catch (e: any) {
+            console.error(e.message);
+        }
     }
 
     async avatar(data: FormData) {
-        const avatar = await this.api.avatar(data);
-        store.set('user', avatar)
+        try {
+
+            const avatar = await this.api.avatar(data);
+            store.set('user', avatar)
+
+        } catch (e: any) {
+            console.error(e.message);
+        }
     }
 
     async password(data: PasswordUp) {
-        await this.api.password(data);
+        try {
 
-        Router.go('/settings')
+            await this.api.password(data);
+            Router.go('/settings')
+
+        } catch (e: any) {
+            console.error(e.message);
+        }
     }
 
     async fetchUser(id: string) {
-        const user = await this.api.read(id);
+        try {
 
-        store.set('user', user);
+            const user = await this.api.read(id);
+            store.set('user', user);
+
+        } catch (e: any) {
+            console.error(e.message);
+        }
     }
 
     async search(login: UserSearch) {
-        await this.api.search(login);
+        try {
+
+            await this.api.search(login);
+
+        } catch (e: any) {
+            console.error(e.message);
+        }
     }
 }
 

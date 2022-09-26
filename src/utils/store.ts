@@ -1,5 +1,4 @@
 /* eslint-disable max-classes-per-file */
-/* eslint-disable import/prefer-default-export */
 import Block from "./Block";
 import EventBus from "./EventBus";
 import { isEqual, set } from "./helpers";

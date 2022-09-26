@@ -18,7 +18,6 @@ export default class Error500Page extends Block<Error500Props> {
                 label: 'Перейти обратно в ЧАТ',
                 to: '/messenger',
                 events: {
-                    // eslint-disable-next-line
                     click: () => { },
                 },
             }),

@@ -15,6 +15,11 @@ interface InputAreaBlockProps {
 }
 
 export default class InputAreaBlock extends Block<InputAreaBlockProps> {
+    constructor(props: InputAreaBlockProps) {
+        super('div', props);
+        this.setProps({ validationCheck: false })
+    }
+
     getValue() {
         return this.props.value;
     }
@@ -27,11 +32,6 @@ export default class InputAreaBlock extends Block<InputAreaBlockProps> {
         return this.props.validationCheck;
     }
 
-    constructor(props: InputAreaBlockProps) {
-        super('div', props);
-        this.setProps({ validationCheck: false })
-    }
-
     init() {
         this.children.input = new Input({
             nameInputText: this.props.nameInputText,
@@ -42,7 +42,6 @@ export default class InputAreaBlock extends Block<InputAreaBlockProps> {
             validation: this.props.validation,
             validationCheck: this.props.validationCheck,
             events: {
-                // eslint-disable-next-line
                 change: () => { console.error('Не определена функция change'); },
             },
             setValueInput: (value) => {

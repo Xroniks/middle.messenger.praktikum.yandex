@@ -9,14 +9,17 @@ export class UserController {
     }
 
     async deleteChat(chatId: DeleteChat) {
-
-        await this.api.delete(chatId);
-        const data: GetChatsData = {
-            offset: 0,
-            limit: 5,
-            title: ''
+        try {
+            await this.api.delete(chatId);
+            const data: GetChatsData = {
+                offset: 0,
+                limit: 5,
+                title: ''
+            }
+            this.getChats(data);
+        } catch (e: any) {
+            console.error(e.message);
         }
-        this.getChats(data);
     }
 
     async getTokenChat(idChat: string) {
@@ -24,26 +27,35 @@ export class UserController {
     }
 
     async createChat(title: CreateChat) {
+        try {
+            await this.api.create(title);
 
-        await this.api.create(title);
-
-        const data: GetChatsData = {
-            offset: 0,
-            limit: 5,
-            title: ''
+            const data: GetChatsData = {
+                offset: 0,
+                limit: 5,
+                title: ''
+            }
+            this.getChats(data);
+        } catch (e: any) {
+            console.error(e.message);
         }
-        this.getChats(data);
     }
 
-    async AddUserinChat(params: AddUserinChatData) {
-        await this.api.addUser(params);
+    async addUserinChat(params: AddUserinChatData) {
+        try {
+            await this.api.addUser(params);
+        } catch (e: any) {
+            console.error(e.message);
+        }
     }
 
     async getChats(params: GetChatsData) {
-
-        const chats = await this.api.read(params);
-        store.set('chats', chats);
-
+        try {
+            const chats = await this.api.read(params);
+            store.set('chats', chats);
+        } catch (e: any) {
+            console.error(e.message);
+        }
     }
 }
 
