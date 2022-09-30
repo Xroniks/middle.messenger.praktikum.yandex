@@ -2,7 +2,6 @@ import Block from '../../utils/Block';
 import Link from '../../components/Link';
 import DialogItem from '../../components/DialogItem';
 import template from './Chat.pug';
-import styles from './Chat.scss';
 import InputAreaBlock from '../../components/InputAreaBlock';
 import img from '../../../static/img/avatar.jpg';
 import test from '../../../static/img/test.jpg';
@@ -12,6 +11,8 @@ import store, { withStore } from '../../utils/store';
 import DialogMessages from '../../components/DialogMesseges';
 import AuthController from '../../controllers/AuthController';
 import ValidationSettings from '../../utils/Validation';
+
+const styles = require('./Chat.scss');
 
 interface ChatPageProps {
     title: string;

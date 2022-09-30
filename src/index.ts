@@ -7,7 +7,7 @@ import Error500Page from './pages/Error500';
 import ChatPage from './pages/Chat';
 import RegistrationPage from './pages/Registration';
 import Router from './utils/Router';
-import AuthController from './controllers/AuthController';
+//import AuthController from './controllers/AuthController';
 
 enum Routes {
     Index = '/',
@@ -34,17 +34,17 @@ window.addEventListener('DOMContentLoaded', async () => {
         .use(Routes.Error404, Error404Page)
         .start();
 
-    try {
-        AuthController.fetchUser();
-        Router.start();
-        if (window.location.pathname === '/' || window.location.pathname === '/Authorization' || window.location.pathname === '/sign-up') {
-            Router.go('/settings');
-        }
-    } catch {
-        Router.start();
-        if (!(window.location.pathname === '/' || window.location.pathname === '/Authorization' || window.location.pathname === '/sign-up')) {
-            Router.go('/');
-        }
+    // try {
+    //     AuthController.fetchUser();
+    //     Router.start();
+    //     if (window.location.pathname === '/' || window.location.pathname === '/Authorization' || window.location.pathname === '/sign-up') {
+    //         Router.go('/settings');
+    //     }
+    // } catch {
+    //     Router.start();
+    //     if (!(window.location.pathname === '/' || window.location.pathname === '/Authorization' || window.location.pathname === '/sign-up')) {
+    //         Router.go('/');
+    //     }
 
-    }
+    // }
 })

@@ -2,11 +2,12 @@ import Block from '../../utils/Block';
 import Link from '../../components/Link';
 import InputAreaBlock from '../../components/InputAreaBlock';
 import template from './Authorization.pug';
-import styles from './Authorization.scss';
 import validate from '../../utils/forms';
 import AuthController from '../../controllers/AuthController';
 import { SignupData } from '../../api/AuthAPI';
 import ValidationSettings from '../../utils/Validation';
+
+const styles = require('./Authorization.scss');
 
 interface AuthorizationPageProps {
     title: string;

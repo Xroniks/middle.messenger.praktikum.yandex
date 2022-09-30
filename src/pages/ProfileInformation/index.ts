@@ -2,10 +2,11 @@ import Block from '../../utils/Block';
 import Link from '../../components/Link';
 import ProfileInformationItem from '../../components/ProfileInformationItem';
 import template from './ProfileInformation.pug';
-import styles from './ProfileInformation.scss';
 import { withStore } from '../../utils/store';
 import AuthController from '../../controllers/AuthController';
 import UserController from '../../controllers/UserController';
+
+const styles = require('./ProfileInformation.scss');
 
 interface ProfileInformationPageProps {
     title: string;

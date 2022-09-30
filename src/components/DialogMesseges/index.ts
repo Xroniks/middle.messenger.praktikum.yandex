@@ -2,7 +2,8 @@
 import Block from '../../utils/Block';
 import Messages from '../Messeges';
 import template from './DialogMessages.pug';
-import styles from './DialogMessages.scss';
+
+const styles = require('./DialogMessages.scss');
 
 interface BasseDialogMessagesProps {
   mesages: Record<string, any>

@@ -1,6 +1,7 @@
 import Block from '../../utils/Block';
 import template from './profileInformationItem.pug';
-import styles from './profileInformationItem.scss';
+
+const styles = require('./profileInformationItem.scss');
 
 interface ProfileInformationItemProps {
   textConst: string;
