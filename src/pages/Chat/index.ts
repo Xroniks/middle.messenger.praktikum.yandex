@@ -11,6 +11,7 @@ import store, { withStore } from '../../utils/store';
 import DialogMessages from '../../components/DialogMesseges';
 import AuthController from '../../controllers/AuthController';
 import ValidationSettings from '../../utils/Validation';
+import LinkSettings from '../../components/LinkSettings';
 
 const styles = require('./Chat.scss');
 
@@ -80,13 +81,30 @@ class ChatPage extends Block<ChatPageProps> {
 
         this.children.buttonBlockProfile = [
             new Link({
-                label: 'Мой профиль',
-                to: '/settings',
+                label: 'Найти',
+                to: '',
                 events: {
-                    click: () => { },
+                    click: () => {
+                        const nameChat = (this.children.searchChat as InputAreaBlock).getValue();
+                        const datachats: GetChatsData = {
+                            offset: 0,
+                            limit: 5,
+                            title: nameChat
+                        }
+                        console.log(nameChat)
+                        ChatController.getChats(datachats)
+                    },
                 },
             }),
         ];
+
+        this.children.searchChat = new InputAreaBlock({
+            nameInputText: '',
+            nameInput: 'searchChat',
+            type: 'text',
+            placeholderText: 'Название чата',
+            validation: ValidationSettings('message'),
+        });
 
         this.children.buttonCreateChat = [
             new Link({
@@ -121,6 +139,52 @@ class ChatPage extends Block<ChatPageProps> {
                             }
                             ChatController.addUserinChat(data);
                         }
+                    },
+                },
+            }),
+        ];
+
+
+        this.children.profile = [
+            new LinkSettings({
+                label: 'Мой профиль',
+                to: '/settings',
+                events: {
+                    click: () => { },
+                },
+            }),
+        ];
+
+
+        this.children.addChat = [
+            new LinkSettings({
+                label: 'Добавить чат',
+                to: '',
+                events: {
+                    click: () => {
+                        const sign = window.prompt('Введите название чата!');
+                        if (sign) {
+                            const data: CreateChat = {
+                                title: sign
+                            }
+                            ChatController.createChat(data);
+                        }
+                    },
+                },
+            }),
+        ];
+
+        this.children.deleteChat = [
+            new LinkSettings({
+                label: 'Удалить чат',
+                to: '',
+                events: {
+                    click: () => {
+                        const sign = window.prompt('Введите id чата который хотите удалить!');
+                        const data: DeleteChat = {
+                            chatId: Number(sign)
+                        }
+                        ChatController.deleteChat(data);
                     },
                 },
             }),
@@ -161,16 +225,6 @@ class ChatPage extends Block<ChatPageProps> {
             }),
         ];
 
-        this.children.inputAreaBlockChat = [
-            new InputAreaBlock({
-                nameInputText: '',
-                nameInput: 'searchChat',
-                type: 'text',
-                placeholderText: 'Название чата',
-                validation: ValidationSettings('message'),
-            }),
-        ];
-
         this.children.DialogMessages = [
             new DialogMessages({
                 mesages: this.props.mesages
@@ -186,37 +240,6 @@ class ChatPage extends Block<ChatPageProps> {
                 placeholderText: 'Введите сообщение',
                 validation: ValidationSettings('message'),
             })
-
-        this.children.buttonBlockMenu = [
-            new Link({
-                label: 'Войти',
-                to: '/Authorization',
-                events: {
-                    click: () => { },
-                },
-            }),
-            new Link({
-                label: 'Зарегистрироваться',
-                to: '/sign-up',
-                events: {
-                    click: () => { },
-                },
-            }),
-            new Link({
-                label: 'Ошибка 404',
-                to: '/Error404',
-                events: {
-                    click: () => { },
-                },
-            }),
-            new Link({
-                label: 'Ошибка 500',
-                to: '/Error500',
-                events: {
-                    click: () => { },
-                },
-            }),
-        ];
 
         if (this.props.chats) {
 

@@ -1,15 +1,18 @@
 main
   .chatWindow
-    .menuChat 
-      | !{buttonBlockMenu}
     .dialogsBlockHeader
-      | !{buttonBlockProfile}
-      | !{inputAreaBlockChat}
+      .dialogsBlockHeaderSearch
+        | !{buttonBlockProfile}
+        | !{searchChat}
+      .dialogsBlockHeaderSettings 
+        | !{profile}
+        | !{addChat}
+        | !{deleteChat}
 
     .messagesBlockHeader
       .namechat
-        | !{buttonCreateChat}
         | !{AddUserinChat}
+
       .settings
         | !{buttonSettingsChat}
 
