@@ -21,7 +21,12 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
         AuthController.fetchUser();
     }
 
+    init() {
+
+    }
+
     render() {
+
         this.children.profileInformationItem = [
             new ProfileInformationItem({
                 textConst: 'Имя',

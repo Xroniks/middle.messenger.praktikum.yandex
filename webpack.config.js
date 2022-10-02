@@ -58,7 +58,6 @@ module.exports = {
         port: 3000,
         historyApiFallback: true,
     },
-    // devtool: isDev ? 'source-map' : '',
     plugins: [
         new HTMLWebpackPlugin({
             template: './index.html',
@@ -117,18 +116,6 @@ module.exports = {
                     }
                 }]
             },
-            // {
-            //     test: /\.tsx$/,
-            //     use: [
-            //         {
-            //             loader: 'ts-loader',
-            //             options: {
-            //                 configFile: path.resolve(__dirname, 'tsconfig.json'),
-            //             },
-            //         },
-            //     ],
-            //     exclude: /(node_modules)/
-            // }
         ]
     }
 }; 
