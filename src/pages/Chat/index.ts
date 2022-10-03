@@ -12,6 +12,7 @@ import DialogMessages from '../../components/DialogMesseges';
 import AuthController from '../../controllers/AuthController';
 import ValidationSettings from '../../utils/Validation';
 import LinkSettings from '../../components/LinkSettings';
+import ActiveDialogItem from '../../components/ActiveDialogItem';
 
 const styles = require('./Chat.scss');
 
@@ -126,7 +127,7 @@ class ChatPage extends Block<ChatPageProps> {
 
         this.children.AddUserinChat = [
             new Link({
-                label: 'Добавить участника',
+                label: 'Добавить пользователя в чат',
                 to: '',
                 events: {
                     click: () => {
@@ -190,22 +191,6 @@ class ChatPage extends Block<ChatPageProps> {
             }),
         ];
 
-        this.children.buttonSettingsChat = [
-            new Link({
-                label: 'Удалить чат',
-                to: '',
-                events: {
-                    click: () => {
-                        const sign = window.prompt('Введите id чата который хотите удалить!');
-                        const data: DeleteChat = {
-                            chatId: Number(sign)
-                        }
-                        ChatController.deleteChat(data);
-                    },
-                },
-            }),
-        ];
-
         this.children.buttonMessageSend = [
             new Link({
                 label: 'Отправить',
@@ -244,7 +229,7 @@ class ChatPage extends Block<ChatPageProps> {
         if (this.props.chats) {
 
             this.children.dialogItem = this.props.chats.map((chat: any) => new DialogItem({
-                NameDialog: this.props.activeChat.id === chat.id ? `${chat.title}Active` : chat.title,
+                NameDialog: this.props.activeChat.id === chat.id ? `${chat.title} Active` : chat.title,
                 message: 'Последнее сообщение',
                 time: chat.id,
                 counterMessage: chat.unread_count,
@@ -254,6 +239,13 @@ class ChatPage extends Block<ChatPageProps> {
                     },
                 },
             }))
+
+            if (this.props.activeChat.id) {
+                this.children.activeDialogItem =
+                new ActiveDialogItem({
+                    NameDialog: this.props.activeChat.title,
+                })
+            }
         }
         return this.compile(template, { ...this.props, styles, img, test });
     }
