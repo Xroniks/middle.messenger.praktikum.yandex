@@ -1,7 +1,7 @@
 import AuthorizationPage from './pages/Authorization';
 import ChangingPasswordPage from './pages/ChangingPassword';
 import ChangingUserInformationPage from './pages/ChangingUserInformation';
-import { ProfilePage } from './pages/ProfileInformation';
+import {ProfilePage} from './pages/ProfileInformation';
 import Error404Page from './pages/Error404';
 import Error500Page from './pages/Error500';
 import ChatPage from './pages/Chat';
@@ -9,6 +9,8 @@ import RegistrationPage from './pages/Registration';
 import Router from './utils/Router';
 import AuthController from './controllers/AuthController';
 import store from './utils/store';
+
+window.store = store;
 
 enum Routes {
     Index = '/',

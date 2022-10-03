@@ -8,13 +8,13 @@ $textColorMessage: black;
 $backgroundMessagesBlockWindowChat: #f1cdcd;
 
 body {
-  margin: 0;
-
+  
   .chatWindow {
     display: grid;
     height: 100vh;
+    
     grid-template-rows: 100px 1fr;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 400px 1fr;
     /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
     grid-template-areas: "b c""d e";
     background-color: $backgroundColorChatWindow;

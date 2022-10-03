@@ -22,7 +22,7 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
     }
 
     init() {
-
+        console.log(this.props)
     }
 
     render() {
