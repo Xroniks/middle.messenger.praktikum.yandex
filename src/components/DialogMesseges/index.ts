@@ -1,7 +1,5 @@
-
-import AuthController from '../../controllers/AuthController';
 import Block from '../../utils/Block';
-import store, { withStore } from '../../utils/store';
+import { withStore } from '../../utils/store';
 import Messages from '../Messeges';
 import template from './DialogMessages.pug';
 

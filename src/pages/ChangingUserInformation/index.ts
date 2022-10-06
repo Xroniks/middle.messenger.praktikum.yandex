@@ -8,7 +8,6 @@ import UserController from '../../controllers/UserController';
 import { UserUpData } from '../../api/UserAPI';
 import ValidationSettings from '../../utils/Validation';
 import { withStore } from '../../utils/store';
-import AuthController from '../../controllers/AuthController';
 
 const styles = require('./ChangingUserInformation.scss');
 

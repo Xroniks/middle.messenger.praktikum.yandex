@@ -13,9 +13,8 @@ import AuthController from '../../controllers/AuthController';
 import ValidationSettings from '../../utils/Validation';
 import LinkSettings from '../../components/LinkSettings';
 import ActiveDialogItem from '../../components/ActiveDialogItem';
-import MessagesController from '../../controllers/MessagesController';
+import styles from './Chat.scss'
 
-const styles = require('./Chat.scss');
 
 interface ChatPageProps {
     title: string;
