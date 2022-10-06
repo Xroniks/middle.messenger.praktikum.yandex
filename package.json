@@ -14,13 +14,13 @@
     "stylelint": "stylelint \"./src/**/*.{css,scss}\"",
     "stylelint:fix": "stylelint \"./src/**/*.{css,scss}\" --fix"
   },
-    "husky": {
-      "hooks": {
-        "pre-commit": "npm-run-all test lint:all",
-        "pre-push": "npm run other command",
-        "...": "..."
-      }
-    },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm-run-all test lint:all",
+      "pre-push": "npm run other command",
+      "...": "..."
+    }
+  },
   "browserslist": "> 0.25%, not dead",
   "repository": {
     "type": "git",

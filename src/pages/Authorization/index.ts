@@ -21,7 +21,7 @@ export default class AuthorizationPage extends Block<AuthorizationPageProps> {
     init() {
         this.children.button = [
             new Link({
-                label: 'Войти',
+                label: 'Войти1',
                 to: '',
                 events: {
                     click: () => {
