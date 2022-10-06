@@ -13,6 +13,7 @@ import AuthController from '../../controllers/AuthController';
 import ValidationSettings from '../../utils/Validation';
 import LinkSettings from '../../components/LinkSettings';
 import ActiveDialogItem from '../../components/ActiveDialogItem';
+import MessagesController from '../../controllers/MessagesController';
 
 const styles = require('./Chat.scss');
 
@@ -209,11 +210,11 @@ class ChatPage extends Block<ChatPageProps> {
                 },
             }),
         ];
-
+        
+        
         this.children.DialogMessages = [
             new DialogMessages({
                 mesages: this.props.mesages
-
             }),
         ];
 

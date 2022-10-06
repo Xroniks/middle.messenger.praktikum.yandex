@@ -12,14 +12,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "stylelint": "stylelint \"./src/**/*.{css,scss}\"",
-    "stylelint:fix": "stylelint \"./src/**/*.{css,scss}\" --fix"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm-run-all test lint:all",
-      "pre-push": "npm run other command",
-      "...": "..."
-    }
+    "stylelint:fix": "stylelint \"./src/**/*.{css,scss}\" --fix",
+    "prepare": "husky install"
   },
   "browserslist": "> 0.25%, not dead",
   "repository": {
