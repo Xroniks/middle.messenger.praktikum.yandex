@@ -10,6 +10,8 @@ import Router from './utils/Router';
 import AuthController from './controllers/AuthController';
 import store from './utils/store';
 
+window.store = store;
+
 enum Routes {
     Index = '/',
     Authorization = '/Authorization',

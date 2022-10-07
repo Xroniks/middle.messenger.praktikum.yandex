@@ -6,7 +6,7 @@ import template from './DialogMessages.pug';
 const styles = require('./DialogMessages.scss');
 
 interface BasseDialogMessagesProps {
-  mesages: Record<string, any>;
+  messages: Record<string, any>;
 }
 
 class BasseDialogMessages extends Block<BasseDialogMessagesProps> {
@@ -16,13 +16,11 @@ class BasseDialogMessages extends Block<BasseDialogMessagesProps> {
   }
 
   render() {
-    console.log('render')
-    console.log(this.props.mesages)
     
-    if (this.props.mesages) {
-      this.children.Messages = this.props.mesages.map((mesage: any) => new Messages({
-        Message: mesage.content,
-        who: this.props.id === mesage.user_id
+    if (this.props.messages) {
+      this.children.Messages = this.props.messages.map((messages: any) => new Messages({
+        Message: messages.content,
+        who: this.props.id === messages.user_id
       }))
     }
 

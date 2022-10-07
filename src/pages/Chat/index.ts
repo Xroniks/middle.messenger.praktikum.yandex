@@ -13,7 +13,7 @@ import AuthController from '../../controllers/AuthController';
 import ValidationSettings from '../../utils/Validation';
 import LinkSettings from '../../components/LinkSettings';
 import ActiveDialogItem from '../../components/ActiveDialogItem';
-import styles from './Chat.scss'
+import * as styles from './Chat.scss'
 
 
 interface ChatPageProps {
@@ -30,21 +30,21 @@ class ChatPage extends Block<ChatPageProps> {
     async componentDidMount(): Promise<void> {
         const datachats: GetChatsData = {
             offset: 0,
-            limit: 5,
+            limit: 7,
             title: ''
         }
         ChatController.getChats(datachats)
     }
 
+
     componentDidUpdate(_oldProps: any, _newProps: any): boolean {
         if (_newProps.activeChat.id !== _oldProps.activeChat.id && this.socket) {
             this.socket = undefined;
-            // to do Закрыть предидущий сокет
         }
         if (_newProps.activeChat.id && !this.socket) {
             (async () => {
-
-                store.set('mesages', []);
+                
+                store.set('messages', []);
                 const user = await AuthController.getUser();
                 const token: any = await ChatController.getTokenChat(_newProps.activeChat.id);
                 this.socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${user.id}/${_newProps.activeChat.id}/${token.token}`);
@@ -65,14 +65,15 @@ class ChatPage extends Block<ChatPageProps> {
                 this.socket.addEventListener('message', event => {
                     try {
                         console.log('Получено сообщение', JSON.parse(event.data));
-                        const { mesages } = store.getState();
+                        const { messages } = store.getState();
                         const data = JSON.parse(event.data);
-                        store.set('mesages', [...(mesages || []), ...(Array.isArray(data) ? data : [data])])
+                        store.set('messages', [...(messages || []), ...(Array.isArray(data) ? data : [data])])
                     } catch (e: any) {
                         console.error(e.message);
                     }
                 });
             })()
+
         }
         return true
 
@@ -199,6 +200,7 @@ class ChatPage extends Block<ChatPageProps> {
                     click: () => {
                         const message = (this.children.inputAreaBlocMessageChat as InputAreaBlock).getValue();
                         console.log(message)
+
                         if (this.socket) {
                             this.socket.send(JSON.stringify({
                                 content: message,
@@ -210,10 +212,9 @@ class ChatPage extends Block<ChatPageProps> {
             }),
         ];
         
-        
         this.children.DialogMessages = [
             new DialogMessages({
-                mesages: this.props.mesages
+                messages: this.props.messages
             }),
         ];
 
@@ -253,6 +254,7 @@ class ChatPage extends Block<ChatPageProps> {
 
 const withChat = withStore(state => ({ chats: [...(state.chats || [])] }))
 const withActiveChat = withStore(state => ({ activeChat: { ...state.activeChat }, }))
-const withDialogMessages = withStore(state => ({ mesages: [...(state.mesages || [])] })
-)
-export default withDialogMessages(withActiveChat(withChat(ChatPage)));
+const withDialogMessages = withStore(state => ({ messages: [...(state.messages || [])] }))
+
+
+export default withActiveChat(withDialogMessages(withChat(ChatPage)));

@@ -1,6 +1,5 @@
 import API, { AddUserinChatData, ChatAPI, CreateChat, DeleteChat, GetChatsData } from "../api/ChatAPI";
 import store from "../utils/store";
-import MessagesController from "./MessagesController";
 
 export class UserController {
     private readonly api: ChatAPI;
@@ -33,7 +32,7 @@ export class UserController {
 
             const data: GetChatsData = {
                 offset: 0,
-                limit: 5,
+                limit: 7,
                 title: ''
             }
             this.getChats(data);
@@ -53,12 +52,6 @@ export class UserController {
     async getChats(params: GetChatsData) {
         try {
             const chats = await this.api.read(params);
-
-            chats.map(async (chat) => {
-                const token: any = await this.getTokenChat(chat.id);
-                await MessagesController.connect(chat.id, token.token);
-              });
-
             store.set('chats', chats);
         } catch (e: any) {
             console.error(e.message);
