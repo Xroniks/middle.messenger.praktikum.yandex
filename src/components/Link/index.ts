@@ -5,11 +5,11 @@ import { PropsWithRouter, withRouter } from '../hocs/withRouter';
 const styles = require('./button.scss');
 
 interface LinkProps extends PropsWithRouter {
-    label: string;
-    events: {
+    label?: string;
+    events?: {
         click: () => void;
     };
-    to: string;
+    to?: string;
 }
 
 class Link extends Block<LinkProps> {
