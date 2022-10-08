@@ -1,3 +1,4 @@
+/* eslint-disable */
 const Pug = require('pug');
 const fs = require('fs');
 const { JSDOM } = require('jsdom');
@@ -14,7 +15,7 @@ global.DocumentFragment = window.DocumentFragment;
 require.extensions['.pug'] = function (module, filename) {
     const contents = fs.readFileSync(filename, 'utf-8');
 
-    module.exports = () => ({});
+    module.exports = Pug.compile(contents);
 }
 
 require.extensions['.scss'] = function (module) {

@@ -1,6 +1,7 @@
+/* eslint-disable */
 import { expect } from 'chai';
 import sinon from 'sinon';
-import Link from '../../components/Link';
+import Link from ".";
 import Router from '../../utils/Router';
 
 describe('Link', () => {
@@ -10,7 +11,7 @@ describe('Link', () => {
 
     it('element should return span', () => {
         const link = new Link({ to: '/' });
-        const element = link.element;
+        const {element} = link;
     
         expect(element).to.be.instanceof(window.HTMLSpanElement)
       });

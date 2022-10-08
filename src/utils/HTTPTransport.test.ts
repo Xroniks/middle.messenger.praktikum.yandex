@@ -1,6 +1,6 @@
 import sinon, { SinonFakeXMLHttpRequest, SinonFakeXMLHttpRequestStatic } from 'sinon';
-import HTTPTransport from './HTTPTransport';
 import { expect } from 'chai';
+import HTTPTransport from './HTTPTransport';
 
 describe('HTTPTransport', () => {
   let xhr: SinonFakeXMLHttpRequestStatic;
@@ -32,7 +32,7 @@ describe('HTTPTransport', () => {
     expect(request.method).to.eq('Get');
   });
 
-  it('.get() should send DELETE request', () => {
+  it('.delete() should send DELETE request', () => {
     instance.delete('/user');
 
     const [request] = requests;

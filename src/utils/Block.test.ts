@@ -1,3 +1,4 @@
+/* eslint-disable */
 import proxyquire from 'proxyquire';
 import { expect } from 'chai';
 import sinon from 'sinon';
@@ -12,6 +13,7 @@ const { default: Block } = proxyquire('./Block', {
   './EventBus': {
     default: class {
       emit = eventBusMock.emit;
+
       on = eventBusMock.on;
     }
   }
