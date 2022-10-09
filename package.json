@@ -9,7 +9,7 @@
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "startprod": "npm run build && node ./src/server.js",
     "start": "npm run dev && node ./src/server.js",
-    "lint": "eslint .",
+    "lint": "eslint ./src",
     "lint:fix": "eslint . --fix",
     "stylelint": "stylelint \"./src/**/*.{css,scss}\"",
     "stylelint:fix": "stylelint \"./src/**/*.{css,scss}\" --fix",
