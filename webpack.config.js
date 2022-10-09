@@ -2,9 +2,9 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-//const OptimizeCssAssetWebpackPlugin = require('css-minimizer-webpack-plugin')
+// const OptimizeCssAssetWebpackPlugin = require('css-minimizer-webpack-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
-const PugPlugin = require('pug-plugin');
+// const PugPlugin = require('pug-plugin');
 
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = !isDev
@@ -18,7 +18,7 @@ const optimization = () => {
 
     if (isProd) {
         config.minimizer = [
-           //new OptimizeCssAssetWebpackPlugin(),
+           // new OptimizeCssAssetWebpackPlugin(),
             new TerserWebpackPlugin()
         ]
     }
@@ -81,7 +81,7 @@ module.exports = {
             },
             {
                 test: /\.pug$/,
-                loader: PugPlugin.loader
+                loader: 'pug-loader'
             },
             {
                 test: /\.s[ac]ss$/,
