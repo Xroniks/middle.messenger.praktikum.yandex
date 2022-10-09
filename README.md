@@ -15,7 +15,7 @@
 
 Команды для запуска:
 - npm run start - запуск (порт 3000)
-- npm run startdev - запустить development сборку
+- npm run starprod - запустить production сборку
 - npm run devserver - запустить девсервер от Webpack
 - npm run test - запустить тесты
 
