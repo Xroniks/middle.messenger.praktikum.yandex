@@ -1,8 +1,7 @@
 import Block from '../../utils/Block';
 import Link from '../../components/Link';
 import template from './Error500.pug';
-
-const styles = require('./Error500.scss');
+import * as styles from './Error500.scss'
 
 interface Error500Props {
     title: string;

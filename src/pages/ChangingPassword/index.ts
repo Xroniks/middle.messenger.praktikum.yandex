@@ -7,8 +7,7 @@ import validate from '../../utils/forms';
 import UserController from '../../controllers/UserController';
 import { PasswordUp } from '../../api/UserAPI';
 import ValidationSettings from '../../utils/Validation';
-
-const styles = require('./ChangingPassword.scss');
+import * as styles from './ChangingPassword.scss'
 
 interface ChangingPasswordPageProps {
     title: string;

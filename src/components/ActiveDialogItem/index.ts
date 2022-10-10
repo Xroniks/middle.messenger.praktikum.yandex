@@ -1,8 +1,7 @@
 import Block from '../../utils/Block';
 import template from './ActiveDialogItem.pug';
 import img from '../../../static/img/avatarTest.jpg';
-
-const styles = require('./ActiveDialogItem.scss');
+import * as styles from './ActiveDialogItem.scss'
 
 interface ActiveDialogItemProps {
     NameDialog: string;

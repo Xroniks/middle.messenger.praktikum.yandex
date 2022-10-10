@@ -42,12 +42,10 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     if (pathIsAuth && user) {
         Router.go('/settings');
-        console.log('Должен перейти к профилю')
     }
 
     if (!pathIsAuth && !user) {
         Router.go('/');
-        console.log('Не должен перейти к профилю')
     }
 
 

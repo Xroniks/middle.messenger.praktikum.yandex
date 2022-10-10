@@ -5,8 +5,7 @@ import template from './ProfileInformation.pug';
 import { withStore } from '../../utils/store';
 import AuthController from '../../controllers/AuthController';
 import UserController from '../../controllers/UserController';
-
-const styles = require('./ProfileInformation.scss');
+import * as styles from './ProfileInformation.scss'
 
 interface ProfileInformationPageProps {
     title: string;
@@ -19,10 +18,6 @@ export default class ProfileInformationPage extends Block<ProfileInformationPage
 
     componentDidMount(): void {
         AuthController.fetchUser();
-    }
-
-    init() {
-        console.log(this.props)
     }
 
     render() {

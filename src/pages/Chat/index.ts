@@ -93,7 +93,6 @@ class ChatPage extends Block<ChatPageProps> {
                             limit: 5,
                             title: nameChat
                         }
-                        console.log(nameChat)
                         ChatController.getChats(datachats)
                     },
                 },
@@ -199,7 +198,6 @@ class ChatPage extends Block<ChatPageProps> {
                 events: {
                     click: () => {
                         const message = (this.children.inputAreaBlocMessageChat as InputAreaBlock).getValue();
-                        console.log(message)
 
                         if (this.socket) {
                             this.socket.send(JSON.stringify({

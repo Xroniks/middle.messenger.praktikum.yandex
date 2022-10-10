@@ -6,8 +6,7 @@ import validate from '../../utils/forms';
 import AuthController from '../../controllers/AuthController';
 import { SignupData } from '../../api/AuthAPI';
 import ValidationSettings from '../../utils/Validation';
-
-const styles = require('./Registration.scss');
+import * as styles from './Registration.scss'
 
 interface RegistrationPageProps {
     title: string;

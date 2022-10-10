@@ -1,8 +1,7 @@
 import Block from '../../utils/Block';
 import Link from '../../components/Link';
 import template from './Error404.pug';
-
-const styles = require('./Error404.scss');
+import * as styles from './Error404.scss'
 
 interface Error404Props {
     title: string;

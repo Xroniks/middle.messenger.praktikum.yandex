@@ -1,8 +1,7 @@
 import Block from '../../utils/Block';
 import template from './button.pug';
 import { PropsWithRouter, withRouter } from '../hocs/withRouter';
-
-const styles = require('./button.scss');
+import * as styles from './button.scss'
 
 interface LinkProps extends PropsWithRouter {
     label?: string;

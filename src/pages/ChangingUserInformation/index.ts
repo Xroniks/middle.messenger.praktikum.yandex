@@ -8,8 +8,7 @@ import UserController from '../../controllers/UserController';
 import { UserUpData } from '../../api/UserAPI';
 import ValidationSettings from '../../utils/Validation';
 import { withStore } from '../../utils/store';
-
-const styles = require('./ChangingUserInformation.scss');
+import * as styles from './ChangingUserInformation.scss'
 
 
 interface ChangingUserInformationPageProps {
@@ -93,7 +92,6 @@ class BaseChangingUserInformationPage extends Block<ChangingUserInformationPageP
                 validation: ValidationSettings('display_name'),
             }),
         ];
-        console.log(this.props)
         return this.compile(template, { ...this.props, img, styles });
     }
 }

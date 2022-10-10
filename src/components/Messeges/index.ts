@@ -1,7 +1,6 @@
 import Block from '../../utils/Block';
 import template from './Messages.pug';
-
-const styles = require('./Messages.scss');
+import * as styles from './Messages.scss'
 
 interface MessagesProps {
   Message: string;

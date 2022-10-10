@@ -2,8 +2,7 @@ import Block from '../../utils/Block';
 import { withStore } from '../../utils/store';
 import Messages from '../Messeges';
 import template from './DialogMessages.pug';
-
-const styles = require('./DialogMessages.scss');
+import * as styles from './DialogMessages.scss'
 
 interface BasseDialogMessagesProps {
   messages: Record<string, any>;

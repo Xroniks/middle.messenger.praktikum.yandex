@@ -1,7 +1,6 @@
 import Block from '../../utils/Block';
 import template from './inputArea.pug';
-
-const styles = require('./inputArea.scss');
+import * as styles from './inputArea.scss'
 
 interface InputProps {
     nameInputText: string;
